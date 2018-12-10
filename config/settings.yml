@@ -6,6 +6,7 @@ default: &defaults
   custom_stylesheet_url:
   enable_custom_javascript: false
   custom_javascript_url:
+  enable_attachment_thumbnails: true
 
 development:
   <<: *defaults
