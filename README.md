@@ -1,4 +1,4 @@
-Brimir [![Build Status](https://travis-ci.org/ivaldi/brimir.png)](https://travis-ci.org/ivaldi/brimir) [![Coverage Status](https://coveralls.io/repos/ivaldi/brimir/badge.png)](https://coveralls.io/r/ivaldi/brimir)
+Brimir
 ======
 Brimir is a simple helpdesk system that can be used to handle support requests via incoming email.
 
