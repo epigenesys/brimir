@@ -57,7 +57,7 @@ gem 'devise_ldap_authenticatable', "~> 0.8"
 gem 'mail', '~> 2.6', '!= 2.7.0'
 
 # omniauth
-gem 'omniauth-google-oauth2', "~> 0.4"
+gem 'omniauth-google-oauth2', "~> 0.5.4"
 
 # authorization
 gem 'cancancan', '~> 2.1', '>= 2.1.4'
