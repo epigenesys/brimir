@@ -1,7 +1,8 @@
 Brimir [![Build Status](https://travis-ci.org/ivaldi/brimir.png)](https://travis-ci.org/ivaldi/brimir) [![Coverage Status](https://coveralls.io/repos/ivaldi/brimir/badge.png)](https://coveralls.io/r/ivaldi/brimir)
 ======
-[Brimir](http://getbrimir.com/) is a simple helpdesk system that can be used to handle support requests
-via incoming email. Brimir is currently used in production at [Ivaldi](http://ivaldi.nl/).
+Brimir is a simple helpdesk system that can be used to handle support requests via incoming email.
+
+Brimir was originally developed and maintained by [Ivaldi](http://ivaldi.nl/) until [December 2018](https://github.com/ivaldi/brimir/commit/35ead7a12471c8f1d1881c7c5ebdb00587198691).
 
 Installation
 ------------
