@@ -89,7 +89,11 @@ class TicketMailer < ActionMailer::Base
     to_addresses = email.to.join ',' unless email.to.nil?
     cc_addresses = email.cc.join ',' unless email.cc.nil?
     unless email.reply_to.blank?
-      from_address = email.reply_to.first
+      if email.reply_to.is_a? Array
+        from_address = email.reply_to.first
+      else
+        from_address = email.reply_to
+      end
     end
 
     if response_to
