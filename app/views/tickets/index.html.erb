@@ -65,6 +65,16 @@
           <%= t :merge %>
         </button>
       </li>
+      <li class="tickets-order has-dropdown">
+        <a data-dropdown="ticketOrder" aria-controls="ticketOrder" aria-expanded="false" class="button">
+          <%= t("order.#{params[:order].present? ? params[:order] : :default}") %>
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <ul id="ticketOrder" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+          <li><a href="<%= root_path(params.to_unsafe_h.merge(order: nil)) %>">Latest updated (default)</a></li>
+          <li><a href="<%= root_path(params.to_unsafe_h.merge(order: :priority)) %>">Priority Order</a></li>
+        </ul>
+      </li>
     </ul>
     <% @tickets.each do |ticket| %>
       <div class="priority-<%= ticket.priority %> <%= ticket.is_unread?(current_user) ? 'unread' : '' %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
@@ -92,10 +102,10 @@
         </div>
         <div class="medium-1 v-middle columns">
           <% if ticket.replies.size > 0 %>
-             <span class="ba label radius right alt text-secondary" title="<%= ticket.replies.size %> <%= t(:replies) %>">
-               <i class="fa fa-comment "></i>
-               <%= ticket.replies.size %>
-             </span>
+            <span class="ba label radius right alt text-secondary" title="<%= ticket.replies.size %> <%= t(:replies) %>">
+              <i class="fa fa-comment "></i>
+              <%= ticket.replies.size %>
+            </span>
           <% else %>
             <span>&nbsp;</span>
           <% end %>

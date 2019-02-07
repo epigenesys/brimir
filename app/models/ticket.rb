@@ -95,8 +95,12 @@ class Ticket < ApplicationRecord
     end
   }
 
-  scope :ordered, -> {
-    order(:updated_at).reverse_order
+  scope :ordered, ->(order_by = nil) {
+    if order_by.present?
+      order(order_by, :updated_at).reverse_order
+    else
+      order(:updated_at).reverse_order
+    end
   }
 
   scope :viewable_by, ->(user) {
