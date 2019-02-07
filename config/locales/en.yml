@@ -106,6 +106,7 @@ en:
 # tickets/_change_assignee_form
   change_assignee: Assign ticket
   assign: Assign
+  assign_to_me: Assign to me
 
 # tickets/_change_subject_form
   change_subject: Rename ticket

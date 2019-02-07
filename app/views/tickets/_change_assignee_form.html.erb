@@ -6,6 +6,7 @@
       <%= f.select :assignee_id, options_from_collection_for_select(@agents.ordered, 'id', 'email', ticket.assignee_id), { include_blank: t(:unassigned) }, { class: 'select2' } %>
     </p>
     <%= f.submit t(:assign), class: 'small success no-m button' %>
+    <%= f.submit t(:assign_to_me), name: 'assign_to_me', class: 'small secondary no-m button' %>
   <% end %>
 
   <a class="close-reveal-modal">&#215;</a>
