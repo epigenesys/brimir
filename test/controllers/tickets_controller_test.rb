@@ -1082,6 +1082,35 @@ class TicketsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tickets)
   end
 
+  test 'should allow ordering of tickets' do
+    sign_in users(:alice)
+    
+    high_priority = tickets(:high_priority)
+    medium_priority = tickets(:medium_priority)
+    low_priority = tickets(:problem)
+    no_priority = tickets(:daves_problem)
+
+    get :index, params: { order: :priority }
+
+    assert_equal [high_priority, medium_priority, low_priority, no_priority], assigns(:tickets)
+  end
+
+  test 'should respond with a default ordering of the last updated at if no order param is provided' do
+    sign_in users(:alice)
+    
+    low_priority = tickets(:problem)
+    low_priority.update(updated_at: 1.day.ago)
+    no_priority = tickets(:daves_problem)
+    no_priority.update(updated_at: 2.days.ago)
+    high_priority = tickets(:high_priority)
+    high_priority.update(updated_at: 3.days.ago)
+    medium_priority = tickets(:medium_priority)
+    medium_priority.update(updated_at: 4.days.ago)
+
+    get :index
+    assert_equal [low_priority, no_priority, high_priority, medium_priority], assigns(:tickets)
+  end
+
   test 'should show ticket' do
     sign_in users(:alice)
 

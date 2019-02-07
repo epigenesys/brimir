@@ -21,3 +21,21 @@ daves_problem:
   content: Dave has a problem with his computer
   user: dave
   message_id: 'test125@test125'
+
+high_priority:
+  subject: This is a high priority problem
+  content: I cannot do anything
+  user: bob
+  assignee: alice
+  priority: high
+  message_id: 'test123@test123'
+  to_email_address: brimir
+
+medium_priority:
+  subject: This is a medium-ish priority problem
+  content: I can load the computer, but beyond that no hope
+  user: bob
+  assignee: alice
+  priority: medium
+  message_id: 'test123@test123'
+  to_email_address: brimir
