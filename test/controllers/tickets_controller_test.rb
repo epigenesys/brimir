@@ -1208,6 +1208,56 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
 
+  test 'should allow the ticket to be assigned to the currently logged in user if the logged in user has chosen to assign to self' do
+    sign_in users(:alice)
+
+    put :update, params: {
+      id: @ticket.id, assign_to_me: 'Assign to me', ticket: { assignee_id: "" }
+    }
+
+    assert_equal(@ticket.reload.assignee, users(:alice))
+  end
+
+  test 'should allow the ticket to be assigned to self even if the ticket is currently assigned to someone else on the form as an override' do
+    sign_in users(:alice)
+
+    put :update, params: {
+      id: @ticket.id, assign_to_me: 'Assign to me', ticket: { assignee_id: users(:charlie).id }
+    }
+
+    assert_equal(@ticket.reload.assignee, users(:alice))
+  end
+
+  test 'it allows the ticket to be assigned to another user' do
+    sign_in users(:alice)
+
+    put :update, params: {
+      id: @ticket.id, ticket: { assignee_id: users(:charlie).id }
+    }
+
+    assert_equal(@ticket.reload.assignee, users(:charlie))
+  end
+
+  test 'should not allow me to assign a ticket if I am not an agent' do
+    sign_in users(:bob)
+
+    put :update, params: {
+      id: @ticket.id, ticket: { assignee_id: users(:charlie).id }
+    }
+
+    assert_equal(@ticket.reload.assignee, users(:alice))
+  end
+
+  test 'should not allow me to assign a ticket to myself if I am not an agent' do
+    sign_in users(:bob)
+
+    put :update, params: {
+      id: @ticket.id, assign_to_me: 'Assign to me', ticket: { assignee_id: "" }
+    }
+
+    assert_equal(@ticket.reload.assignee, users(:alice))
+  end
+
   test 'should not show duplicate tickets to agents' do
     sign_in users(:alice)
 
