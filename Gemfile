@@ -16,9 +16,12 @@ gem 'jquery-visibility-rails'
 # foundation form errors
 gem 'foundation_rails_helper', "~> 2.0"
 
-# to use debugger
-gem 'byebug', '~> 10.0', group: [:development, :test]
-gem 'pry', "~> 0.11", group: [:development, :test]
+# Testing
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'byebug', '~> 10.0'
+  gem 'pry', "~> 0.11"
+end
 
 # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
 gem 'rails-controller-testing', group: [:test]
@@ -40,6 +43,13 @@ group :test do
   gem 'coveralls', "~> 0.8"
 
   gem 'timecop', "~> 0.9"
+
+  gem 'factory_bot_rails'
+
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 # Optional PostgreSQL for production
