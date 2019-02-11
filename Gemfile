@@ -20,10 +20,6 @@ gem 'foundation_rails_helper', "~> 2.0"
 gem 'byebug', '~> 10.0', group: [:development, :test]
 gem 'pry', "~> 0.11", group: [:development, :test]
 
-# We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
-gem 'rails-controller-testing', group: [:test]
-
-
 group :development do
   # Spring application pre-loader
   gem 'spring', "~> 2.0"
@@ -40,6 +36,12 @@ group :test do
   gem 'coveralls', "~> 0.8"
 
   gem 'timecop', "~> 0.9"
+
+  # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
+  gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 # Optional PostgreSQL for production
