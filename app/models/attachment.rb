@@ -39,7 +39,7 @@ class Attachment < ApplicationRecord
 
   def thumbnail?
 
-    return false if disable_thumbnail_generation
+    return false if disable_thumbnail_generation || !AppSettings.enable_attachment_thumbnails
 
     unless file_content_type.nil?
 
