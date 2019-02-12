@@ -8,20 +8,20 @@ describe(RulesController) do
   it("should get index") do
     sign_in(alice)
     get(:index)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   #TODO why shouldn't it. These tests could do with a proper text to describe what's going on
   it("should not get index") do
     sign_in(bob)
     get(:index)
-    assert_response(:unauthorized)
+    expect(response).to have_http_status(:unauthorized)
   end
 
   it("should get edit") do
     sign_in(alice)
     get(:edit, :params => ({ :id => (rule) }))
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   it("should update") do
@@ -34,7 +34,7 @@ describe(RulesController) do
   it("should get new") do
     sign_in(alice)
     get(:new)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   it("should create") do
