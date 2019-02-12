@@ -19,18 +19,18 @@ RSpec.describe(TicketsController, :type => :controller) do
   it("should get new as customer") do
     sign_in(bob)
     get(:new)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   it("should get new as agent") do
     sign_in(alice)
     get(:new)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   it("should get new as anonymous") do
     get(:new)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   it("acceptable mail hooks (for extra safety)") do
@@ -42,7 +42,7 @@ RSpec.describe(TicketsController, :type => :controller) do
 
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to change{Ticket.count}.from(1).to(2)
 
     expect(ActionMailer::Base.deliveries.size).to eq 1
@@ -56,7 +56,7 @@ RSpec.describe(TicketsController, :type => :controller) do
 
     expect do
       post(:create, :params => ({ :hook => "mailgun", :mail_key => (TicketsController::MAIL_KEY), :"message-url" => (@mailgun_message_url), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to change{ Ticket.count }
 
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -69,7 +69,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect do
       expect do
         post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_base64_email), :format => :json }))
-        assert_response(:success)
+        expect(response).to have_http_status(:success)
       end.to change { Ticket.count }
     end.to change{ActionMailer::Base.deliveries.size}
   end
@@ -107,7 +107,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     sign_in(alice)
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "invalid", :content => "", :subject => "" }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to_not change{ Ticket.count }
 
     expect(ActionMailer::Base.deliveries.size).to eq(0)
@@ -117,7 +117,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   it("should create ticket when not signed in and captcha") do
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      # assert_response(:success)
+      # expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
 
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -128,7 +128,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect do
       expect do
         post(:create, :params => ({ :ticket => ({ :from => "invalid", :content => "", :subject => "" }) }))
-        assert_response(:success)
+        expect(response).to have_http_status(:success)
       end.to_not(change { Ticket.count })
     end.to_not(change { ActionMailer::Base.deliveries.size })
     expect(assigns(:ticket).notified_users.count).to(eq(0))
@@ -159,7 +159,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect do
       expect do
         post(:create, :params => ({ :ticket => ({ :from => "invalid", :content => "", :subject => "" }) }))
-        assert_response(:success)
+        expect(response).to have_http_status(:success)
       end.to_not(change { Ticket.count })
     end.to_not(change { ActionMailer::Base.deliveries.size })
     Recaptcha.configuration.secret_key = secret_key
@@ -175,7 +175,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      # assert_response(:success)
+      # expect(response).to have_http_status(:success)
     end.to(change { Ticket.count }.by(1))
     Recaptcha.configuration.secret_key = secret_key
     Recaptcha.configuration.site_key = site_key
@@ -191,7 +191,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "invalid", :content => "", :subject => "" }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to_not(change { Ticket.count })
     Recaptcha.configuration.secret_key = secret_key
     Recaptcha.configuration.site_key = site_key
@@ -207,7 +207,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(agent.schedule).to(be_nil)
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
@@ -220,7 +220,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(agent.schedule_enabled).to be_falsey
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -243,7 +243,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -266,7 +266,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
@@ -293,7 +293,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
@@ -315,7 +315,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -329,7 +329,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(agent.schedule).to(be_nil)
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
@@ -343,7 +343,7 @@ RSpec.describe(TicketsController, :type => :controller) do
 
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
 
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -367,7 +367,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
@@ -390,7 +390,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
@@ -418,7 +418,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(ActionMailer::Base.deliveries.size).to eq(0)
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     #TODO Should this be creating an email or not? The wording of the title is confusing
     expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -441,7 +441,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
@@ -585,14 +585,14 @@ RSpec.describe(TicketsController, :type => :controller) do
   it("should get index") do
     sign_in(alice)
     get(:index)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     expect(assigns(:tickets)).to_not(be_nil)
   end
   
   it("should get csv index") do
     sign_in(alice)
     get(:index, :format => :csv)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     expect(assigns(:tickets)).to_not(be_nil)
   end
 
@@ -621,7 +621,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   xit("should show ticket") do
     sign_in(alice)
     get(:show, :params => ({ :id => ticket.id }))
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     assert_select("[data-labelings]")
     assert_select("[data-labeling-id='#{ticket.labelings.first.id}']")
     assert_select("[id=reply-#{ticket.replies.first.id}]")
@@ -686,7 +686,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     ticket.labels.create!(:name => "test1")
     ticket.labels.create!(:name => "test2")
     get(:index)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     tickets = assigns(:tickets)
     expect(tickets.pluck(:id)).to(eq(tickets.pluck(:id).uniq))
   end
@@ -698,7 +698,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     label = ticket.labels.create!(:name => "test2")
     (charlie.labels << label)
     get(:index)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     tickets = assigns(:tickets)
     expect(tickets.pluck(:id)).to(eq(tickets.pluck(:id).uniq))
   end
@@ -708,7 +708,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect do
       expect do
         post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => email, :format => :json }))
-        assert_response(:success)
+        expect(response).to have_http_status(:success)
       end.to(change { Ticket.count })
     end.to_not(change { ActionMailer::Base.deliveries.size })
   end
@@ -726,7 +726,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   it("should get new ticket form in correct language") do
     I18n.locale = :nl
     get(:new)
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     refute_match(I18n.t("activerecord.attributes.ticket.from", :locale => :nl), response.body)
   end
 
@@ -737,7 +737,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     ticket.save!
     ticket.reload
     get(:show, :params => ({ :id => ticket.id, :format => :eml }))
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
   end
 
   #TODO view test
@@ -747,14 +747,14 @@ RSpec.describe(TicketsController, :type => :controller) do
     ticket.locked_at = Time.now
     ticket.save!
     get(:show, :params => ({ :id => ticket.id }))
-    assert_response(:success)
+    expect(response).to have_http_status(:success)
     expect(response.body).to(match(FactoryBot.build(:reply).content))
   end
 
   it("should mark new ticket from MTA as unread for all users") do
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
       ticket = Ticket.last
       expect(ticket.unread_users.nil?).to_not(be_nil)
     end.to(change { Ticket.count })
@@ -763,7 +763,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   it("should mark new ticket as unread for all users") do
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
       ticket = Ticket.last
       expect(ticket.unread_users.nil?).to_not(be_nil)
     end.to(change { Ticket.count })
@@ -772,7 +772,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   it("should mark new ticket as unread for all users when posted from MTA") do
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
       ticket = Ticket.last
       expect(ticket.unread_users).to_not(be_nil)
     end.to(change { Ticket.count })
@@ -787,7 +787,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       expect(ticket.unread_users).to_not(be_nil)
       expect(user.unread_tickets).to_not(be_nil)
       get(:show, :params => ({ :id => ticket.id }))
-      assert_response(:success)
+      expect(response).to have_http_status(:success)
       expect(ticket.unread_users).not_to include(user)
     end.to(change { Ticket.last.unread_users.count }.by(-1))
   end
