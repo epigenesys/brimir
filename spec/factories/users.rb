@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    email { 'alice@xxxx.com' }
+    sequence(:email) { |i| "alice#{i}@xxxx.com" }
     signature { 'Greets, Alice' }
     notify { false }
     authentication_token { 'blabla' }

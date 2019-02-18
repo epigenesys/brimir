@@ -7,7 +7,7 @@ describe EmailAddress, :type => :model do
   it("should use correct default address") do
     email_address.update(verification_token: nil)
     Tenant.current_domain = Tenant.first.domain
-    expect(EmailAddress.default_email).to(eq("outgoing@support.bla"))
+    expect(EmailAddress.default_email).to(eq(email_address.email))
     EmailAddress.destroy_all
     expect(EmailAddress.default_email).to(eq("support@test.host"))
   end
