@@ -9,7 +9,7 @@ describe Reply, :type => :model do
   let!(:label) { FactoryBot.create(:label, name: 'bug') }
   let!(:ticket) { FactoryBot.create(:ticket, user: bob, assignee: alice, labels: [label]) }
   let!(:daves_label) { FactoryBot.create(:labeling, label: label, labelable: dave) }
-  let!(:daves_ticket) { FactoryBot.create(:ticket, user: dave, assignee: nil) }
+  let!(:daves_ticket) { FactoryBot.create(:ticket, user: dave, assignee: nil, notifications: [FactoryBot.build(:notification, user: bob), FactoryBot.build(:notification, user: charlie)]) }
 
   before { Tenant.current_domain = tenant.domain }
 
@@ -40,7 +40,6 @@ describe Reply, :type => :model do
     expect(reply.notified_users.include?(alice)).to(eq(false))
     expect(reply.notified_users.include?(charlie)).to(eq(false))
     expect(reply.notified_users.include?(dave)).to(eq(true))
-    # TODO why would it include bob when bob is a random user?
     expect(reply.notified_users.include?(bob)).to(eq(true))
   end
 
@@ -99,7 +98,7 @@ describe Reply, :type => :model do
     expect(reply_of_client2.notified_users.include?(agent)).to(eq(true))
     expect((not reply_of_client2.notified_users.include?(client1))).to(be_truthy)
   end
-  
+
   it("should sync the message ids of notifications") do
     ticket = daves_ticket
     reply = ticket.replies.create(:user => alice, :content => "This is the solution.")

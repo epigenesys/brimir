@@ -1,8 +1,13 @@
 require("rails_helper")
 RSpec.describe(Ticket, :type => :model) do
+  let!(:dave) { FactoryBot.create(:user, name: 'Dave', email: 'dave@xxxx.com', current_sign_in_at: Time.zone.now) }
+  let!(:label) { FactoryBot.create(:label, name: 'bug') }
+  let!(:ticket) { FactoryBot.create(:ticket, labels: [label]) }
+  let!(:daves_label) { FactoryBot.create(:labeling, label: label, labelable: dave) }
+  let!(:daves_ticket) { FactoryBot.create(:ticket, user: dave, subject: "Dave has a problem %@#_", assignee: nil) }
+
   after { Timecop.return }
   it("should return accessible tickets for customer") do
-    dave = users(:dave)
     tickets = Ticket.viewable_by(dave)
     expect(tickets.count).to(eq(2))
     tickets.each do |ticket|
@@ -10,7 +15,6 @@ RSpec.describe(Ticket, :type => :model) do
     end
   end
   it("should store status changes") do
-    ticket = tickets(:problem)
     expect do
       ticket.status = "waiting"
       ticket.save
@@ -25,6 +29,7 @@ RSpec.describe(Ticket, :type => :model) do
     last = ticket.status_changes.last
     expect(last.updated_at).to(eq(last.created_at))
   end
+
   it("should escape special char search") do
     expect(Ticket.search("%").count).to(eq(1))
     expect(Ticket.search("_").count).to(eq(1))

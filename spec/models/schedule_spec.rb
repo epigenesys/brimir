@@ -1,7 +1,7 @@
 require("rails_helper")
 RSpec.describe(Schedule, :type => :model) do
   it("should parse and write start") do
-    schedule = schedules(:empty)
+    schedule = FactoryBot.create(:empty_schedule)
     expect(schedule.start).to(be_nil)
     schedule.start = "08:00"
     schedule.save!
@@ -10,7 +10,7 @@ RSpec.describe(Schedule, :type => :model) do
     expect(8).to(eq(schedule.start.hour))
   end
   it("should parse and write end") do
-    schedule = schedules(:empty)
+    schedule = FactoryBot.create(:empty_schedule)
     expect(schedule.end).to(be_nil)
     schedule.end = "18:00"
     schedule.save!

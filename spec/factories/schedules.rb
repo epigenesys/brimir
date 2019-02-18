@@ -18,6 +18,14 @@ FactoryBot.define do
     friday { false }
     saturday { false }
   end
+
+  factory :empty_schedule, class: Schedule do
+    sunday { false }
+    monday { false }
+    tuesday { false }
+    wednesday { false }
+    thursday { false }
+    friday { false }
+    saturday { false }
+  end
 end
-
-
