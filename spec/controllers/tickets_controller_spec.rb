@@ -4,7 +4,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   let!(:bob) { FactoryBot.create(:user, name: 'Bob', email: 'bob@xxxx.com') }
   let!(:charlie) { FactoryBot.create(:user, :with_agent, name: 'Charlie', email: 'charlie@xxxx.com', schedule_enabled: false) }
   let!(:ticket) { FactoryBot.create(:ticket, :with_to_email_address, user: bob, assignee: alice) }
-  
+
   before do
     @simple_email = File.new("test/fixtures/ticket_mailer/simple").read
     @simple_base64_email = File.new("test/fixtures/ticket_mailer/simple_base64").read
@@ -86,7 +86,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   #   Tenant.current_tenant.save!
   #   refute_match(/<input[^>]+ticket\[name\]/, get(:new).body)
   # end
-  
+
   it("should write email and name to user") do
     sign_in(alice)
     post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :name => "Tester", :content => "Foobar", :subject => "Foobar" }) }))
@@ -172,7 +172,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     site_key = Recaptcha.configuration.site_key
     Recaptcha.configuration.secret_key = ""
     Recaptcha.configuration.site_key = ""
-    
+
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
       # expect(response).to have_http_status(:success)
@@ -188,7 +188,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     site_key = Recaptcha.configuration.site_key
     Recaptcha.configuration.secret_key = ""
     Recaptcha.configuration.site_key = ""
-    
+
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "invalid", :content => "", :subject => "" }) }))
       expect(response).to have_http_status(:success)
@@ -424,7 +424,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
   end
-  
+
   it("should not notify agent with schedule enabled and time not within range working hours when ticked created") do
     agent = charlie
     agent.schedule_enabled = true
@@ -549,7 +549,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
       # assert_redirected_to(ticket_url(assigns(:ticket)))
     end.to(change { Ticket.count })
-    expect(ActionMailer::Base.deliveries.size).to eq(1)    
+    expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
   end
 
@@ -572,7 +572,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
       # assert_redirected_to(ticket_url(assigns(:ticket)))
     end.to(change { Ticket.count })
-    expect(ActionMailer::Base.deliveries.size).to eq(1)    
+    expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
   end
 
@@ -588,7 +588,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(response).to have_http_status(:success)
     expect(assigns(:tickets)).to_not(be_nil)
   end
-  
+
   it("should get csv index") do
     sign_in(alice)
     get(:index, :format => :csv)
@@ -608,7 +608,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       get(:index, :params => ({ :order => :priority }))
       expect(assigns(:tickets)).to match_array([high_priority, medium_priority, low_priority, no_priority])
     end
-    
+
     it("should respond with a default ordering of the last updated at if no order param is provided") do
       sign_in(alice)
       ticket.destroy
@@ -664,7 +664,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       assert_redirected_to(ticket_path(ticket))
     end.to_not(change { ActionMailer::Base.deliveries.size })
   end
-  
+
   it("should not email assignee if status of ticket is changed by himself") do
     sign_in(alice)
     expect do
@@ -672,7 +672,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       assert_redirected_to(ticket_path(ticket))
     end.to_not(change { ActionMailer::Base.deliveries.size })
   end
-  
+
   it("should not email assignee if priority of ticket is changed by himself") do
     sign_in(alice)
     expect do
@@ -690,7 +690,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     tickets = assigns(:tickets)
     expect(tickets.pluck(:id)).to(eq(tickets.pluck(:id).uniq))
   end
-  
+
   it("should not show duplicate tickets to customers") do
     sign_in(charlie)
     label = ticket.labels.create!(:name => "test1")
@@ -702,7 +702,7 @@ RSpec.describe(TicketsController, :type => :controller) do
     tickets = assigns(:tickets)
     expect(tickets.pluck(:id)).to(eq(tickets.pluck(:id).uniq))
   end
-  
+
   it("should not notify when a bounce message is received") do
     email = File.new("test/fixtures/ticket_mailer/bounce").read
     expect do
@@ -768,7 +768,7 @@ RSpec.describe(TicketsController, :type => :controller) do
       expect(ticket.unread_users.nil?).to_not(be_nil)
     end.to(change { Ticket.count })
   end
-  
+
   it("should mark new ticket as unread for all users when posted from MTA") do
     expect do
       post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => (@simple_email), :format => :json }))

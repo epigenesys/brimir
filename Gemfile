@@ -48,8 +48,10 @@ group :test do
 
   gem 'shoulda-matchers'
   gem 'capybara'
-  gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'launchy'
 end
 
 # Optional PostgreSQL for production
