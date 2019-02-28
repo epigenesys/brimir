@@ -33,6 +33,8 @@ group :development do
 
   # open sent emails in the browser
   gem 'letter_opener', "~> 1.4"
+
+  gem 'annotate'
 end
 
 group :test do

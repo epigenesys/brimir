@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: rules
+#
+#  id               :integer          not null, primary key
+#  action_operation :integer          default("assign_label"), not null
+#  action_value     :string
+#  filter_field     :string
+#  filter_operation :integer          default("contains"), not null
+#  filter_value     :string
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #

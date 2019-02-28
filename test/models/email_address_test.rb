@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: email_addresses
+#
+#  id                 :integer          not null, primary key
+#  default            :boolean          default(FALSE)
+#  email              :string
+#  name               :string
+#  verification_token :string
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 require 'test_helper'
 
 class EmailAddressTest < ActiveSupport::TestCase
