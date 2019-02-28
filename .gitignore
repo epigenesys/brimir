@@ -44,3 +44,6 @@ coverage
 # ignore rubymine
 .idea
 .byebug_history
+
+.vscode
+.rspec-examples

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: status_changes
+#
+#  id         :integer          not null, primary key
+#  status     :integer          default("open"), not null
+#  created_at :datetime
+#  updated_at :datetime
+#  ticket_id  :integer
+#
+# Indexes
+#
+#  index_status_changes_on_ticket_id  (ticket_id)
+#
+
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #

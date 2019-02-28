@@ -194,8 +194,9 @@ concern :ReplyNotifications do
 
   def users_to_notify_based_on_ticket_assignment
     if Tenant.current_tenant.first_reply_ignores_notified_agents? &&
-         reply_to.is_a?(Ticket) &&
-         reply_to.assignee.present?
+      reply_to.is_a?(Ticket) &&
+      reply_to.assignee.present?
+
       return reply_to.notified_users - User.agents +
           [reply_to.user, reply_to.assignee] - users_not_to_notify
     else
