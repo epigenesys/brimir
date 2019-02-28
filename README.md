@@ -4,6 +4,8 @@ Brimir is a simple helpdesk system that can be used to handle support requests v
 
 Brimir was originally developed and maintained by [Ivaldi](http://ivaldi.nl/) until [December 2018](https://github.com/ivaldi/brimir/commit/35ead7a12471c8f1d1881c7c5ebdb00587198691).
 
+[epiGenesys](https://www.epigenesys.org.uk/) have used Brimir for their helpdeskfor some time and as such have continued to maintain this fork.
+
 Installation
 ------------
 Brimir is a rather simple Ruby on Rails application. The only difficulty in setting things up is how to get incoming email to work. See the next section for details.

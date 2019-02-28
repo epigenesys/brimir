@@ -6,8 +6,8 @@ RSpec.describe(TicketsController, :type => :controller) do
   let!(:ticket) { FactoryBot.create(:ticket, :with_to_email_address, user: bob, assignee: alice) }
 
   before do
-    @simple_email = File.new("test/fixtures/ticket_mailer/simple").read
-    @simple_base64_email = File.new("test/fixtures/ticket_mailer/simple_base64").read
+    @simple_email = file_fixture('ticket_mailer/simple').read
+    @simple_base64_email = file_fixture('ticket_mailer/simple_base64').read
     @mailgun_message_url = "https://storage.mailgun.net/v3/domains/mg.test.com/messages/eyJwIjpmYWxzZSwiafI6IjJhZGNhMzkxLWVhMTItNDc4OS1iZjg5LTliNjQ1NDEyZWMyMCIsInMiOiJiYmFjNzc1YmIzIiwiYyI6InRhbmtiIn0="
   end
 
@@ -51,7 +51,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   end
 
   it("should create ticket when posted from Mailgun") do
-    eval("      class RestClient::Resource\n        def initialize(url, user:, password:, headers:)\n          fail \"bad url\" unless url == '#{@mailgun_message_url}'\n          fail \"bad user\" unless user == 'api'\n          fail \"bad headers\" unless headers == { accept: 'message/rfc2822' }\n        end\n\n        def get\n          OpenStruct.new(body: File.new('test/fixtures/ticket_mailer/mailgun').read)\n        end\n      end\n")
+    eval("      class RestClient::Resource\n        def initialize(url, user:, password:, headers:)\n          fail \"bad url\" unless url == '#{@mailgun_message_url}'\n          fail \"bad user\" unless user == 'api'\n          fail \"bad headers\" unless headers == { accept: 'message/rfc2822' }\n        end\n\n        def get\n          OpenStruct.new(body: File.read(Rails.root.join('spec/fixtures/files/ticket_mailer/mailgun')))\n        end\n      end\n")
     I18n.locale = :nl
 
     expect do
@@ -73,19 +73,6 @@ RSpec.describe(TicketsController, :type => :controller) do
       end.to change { Ticket.count }
     end.to change{ActionMailer::Base.deliveries.size}
   end
-
-  # it("should render name input for new tickets if told so by tenant settings") do
-  #   sign_in(alice)
-  #   tenant = FactoryBot.create(:tenant)
-  #   Tenant.current_domain = tenant.domain
-  #   Tenant.current_tenant.ask_for_name = true
-  #   Tenant.current_tenant.save!
-  #   debugger
-  #   expect(get(:new).body).to(match(/<input[^>]+ticket\[name\]/))
-  #   Tenant.current_tenant.ask_for_name = false
-  #   Tenant.current_tenant.save!
-  #   refute_match(/<input[^>]+ticket\[name\]/, get(:new).body)
-  # end
 
   it("should write email and name to user") do
     sign_in(alice)
@@ -470,8 +457,6 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(agent.schedule_enabled).to be_falsey
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      # TODO find a way of doin this
-      # assert_redirected_to(ticket_url(assigns(:ticket)))
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
@@ -519,7 +504,6 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      # assert_redirected_to(ticket_url(assigns(:ticket)))
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(ActionMailer::Base.deliveries.last.subject).to(match("New ticket"))
@@ -547,7 +531,6 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      # assert_redirected_to(ticket_url(assigns(:ticket)))
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
@@ -570,7 +553,6 @@ RSpec.describe(TicketsController, :type => :controller) do
     expect(Time.now).to(eq(new_time))
     expect do
       post(:create, :params => ({ :ticket => ({ :from => "test@test.nl", :content => ticket.content, :subject => ticket.subject }) }))
-      # assert_redirected_to(ticket_url(assigns(:ticket)))
     end.to(change { Ticket.count })
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(assigns(:ticket).notified_users.count).to_not(eq(0))
@@ -615,19 +597,6 @@ RSpec.describe(TicketsController, :type => :controller) do
       get(:index)
       expect(assigns(:tickets)).to match_array([low_priority, no_priority, high_priority, medium_priority])
     end
-  end
-
-  #TODO should be a view test
-  xit("should show ticket") do
-    sign_in(alice)
-    get(:show, :params => ({ :id => ticket.id }))
-    expect(response).to have_http_status(:success)
-    assert_select("[data-labelings]")
-    assert_select("[data-labeling-id='#{ticket.labelings.first.id}']")
-    assert_select("[id=reply-#{ticket.replies.first.id}]")
-    assert_select("aside ul li span")
-    assert_select(("option[selected=\"selected\"]" + "[value=\"#{email_addresses(:brimir).id}\"]"))
-    assert_select("[data-notified-users]")
   end
 
   it("should email assignee if ticket is assigned by somebody else") do
@@ -704,7 +673,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   end
 
   it("should not notify when a bounce message is received") do
-    email = File.new("test/fixtures/ticket_mailer/bounce").read
+    email = file_fixture('ticket_mailer/bounce').read
     expect do
       expect do
         post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => email, :format => :json }))
@@ -714,7 +683,7 @@ RSpec.describe(TicketsController, :type => :controller) do
   end
 
   it("should not save invalid") do
-    email = File.new("test/fixtures/ticket_mailer/invalid").read
+    email = file_fixture('ticket_mailer/invalid').read
     expect do
       expect do
         post(:create, :params => ({ :hook => "post-mail", :mail_key => (TicketsController::MAIL_KEY), :message => email, :format => :json }))
@@ -730,25 +699,13 @@ RSpec.describe(TicketsController, :type => :controller) do
     refute_match(I18n.t("activerecord.attributes.ticket.from", :locale => :nl), response.body)
   end
 
-  # TODO fix file upload
-  xit("should get raw message") do
+  it("should get raw message") do
     sign_in(alice)
-    ticket.raw_message = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'ticket_mailer', 'simple'))
+    ticket.raw_message = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'ticket_mailer', 'simple'))
     ticket.save!
     ticket.reload
     get(:show, :params => ({ :id => ticket.id, :format => :eml }))
     expect(response).to have_http_status(:success)
-  end
-
-  #TODO view test
-  xit("should show replies even when ticket is locked") do
-    sign_in(alice)
-    ticket.locked_by = charlie
-    ticket.locked_at = Time.now
-    ticket.save!
-    get(:show, :params => ({ :id => ticket.id }))
-    expect(response).to have_http_status(:success)
-    expect(response.body).to(match(FactoryBot.build(:reply).content))
   end
 
   it("should mark new ticket from MTA as unread for all users") do

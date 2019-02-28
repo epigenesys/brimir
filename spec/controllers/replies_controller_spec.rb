@@ -35,7 +35,7 @@ RSpec.describe(RepliesController, :type => :controller) do
 
   it("reply should have attachments") do
     expect do
-      post(:create, :params => ({ :reply => ({ :content => "**this is in bold**", :ticket_id => ticket.id, :notified_user_ids => ([bob.id]), :attachments_attributes => ({ :"0" => ({ :file => fixture_file_upload(Rails.root.join('spec', 'fixtures', 'ticket_mailer', 'simple')) }), :"1" => ({ :file => fixture_file_upload(Rails.root.join('spec', 'fixtures', 'ticket_mailer', 'simple')) }) }) }) }))
+      post(:create, :params => ({ :reply => ({ :content => "**this is in bold**", :ticket_id => ticket.id, :notified_user_ids => ([bob.id]), :attachments_attributes => ({ :"0" => ({ :file => fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'ticket_mailer', 'simple')) }), :"1" => ({ :file => fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'ticket_mailer', 'simple')) }) }) }) }))
     end.to(change { Attachment.count }.by(2))
   end
 
@@ -59,8 +59,8 @@ RSpec.describe(RepliesController, :type => :controller) do
   end
 
   it("should get raw message") do
-    
-    reply.raw_message = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'ticket_mailer', 'simple'))
+
+    reply.raw_message = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'ticket_mailer', 'simple'))
     reply.save!
     reply.reload
     get(:show, :params => ({ :id => reply.id, :format => :eml }))

@@ -10,7 +10,7 @@ RSpec.describe(AttachmentsController, :type => :controller) do
     before do
       sign_in(alice)
       Tenant.current_domain = Tenant.first.domain
-      attachment.update_attributes!(:file => fixture_file_upload(Rails.root.join('spec', 'attachments', 'default-testpage.jpg'), "image/jpeg"))
+      attachment.update_attributes!(:file => fixture_file_upload(Rails.root.join('spec', 'fixtures', 'attachments', 'default-testpage.jpg'), "image/jpeg"))
     end
 
     it("should get new") do
@@ -34,7 +34,7 @@ RSpec.describe(AttachmentsController, :type => :controller) do
     before do
       sign_in(charlie)
       Tenant.current_domain = Tenant.first.domain
-      attachment.update_attributes!(:file => fixture_file_upload(Rails.root.join('spec', 'attachments', 'default-testpage.pdf'), "application/pdf"))
+      attachment.update_attributes!(:file => fixture_file_upload(Rails.root.join('spec', 'fixtures', 'attachments', 'default-testpage.pdf'), "application/pdf"))
     end
 
     it("should get new") do

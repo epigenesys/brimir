@@ -1,7 +1,7 @@
 require("rails_helper")
 RSpec.describe(TicketMailer, :type => :mailer) do
   let!(:brimir_email_address) { FactoryBot.create(:brimir_email) }
-  let(:simple_email) { read_fixture("simple").join }
+  let(:simple_email) { file_fixture("ticket_mailer/simple").read }
 
   let(:agent) { FactoryBot.create(:user, :with_agent) }
 
@@ -19,8 +19,8 @@ RSpec.describe(TicketMailer, :type => :mailer) do
 
   it("email threads are recognized correctly and assignee is notified") do
     Tenant.current_domain = 'support.host'
-    thread_start = read_fixture("thread_start").join
-    thread_reply = read_fixture("thread_reply").join
+    thread_start = file_fixture("ticket_mailer/thread_start").read
+    thread_reply = file_fixture("ticket_mailer/thread_reply").read
 
     expect do
       expect do
@@ -41,19 +41,19 @@ RSpec.describe(TicketMailer, :type => :mailer) do
   end
 
   it("email with attachments work") do
-    attachments = read_fixture("attachments").join
+    attachments = file_fixture("ticket_mailer/attachments").read
     expect do
       expect { TicketMailer.receive(attachments) }.to(change { Attachment.count }.by(2))
     end.to(change { Ticket.count })
   end
 
   it("email with unkown reply_to") do
-    unknown_reply_to = read_fixture("unknown_reply_to").join
+    unknown_reply_to = file_fixture("ticket_mailer/unknown_reply_to").read
     expect { TicketMailer.receive(unknown_reply_to) }.to(change { Ticket.count })
   end
 
   it("email with capitalized from address") do
-    capitalized = read_fixture("capitalized").join
+    capitalized = file_fixture("ticket_mailer/capitalized").read
     expect do
       TicketMailer.receive(capitalized)
       TicketMailer.receive(capitalized)
@@ -63,12 +63,12 @@ RSpec.describe(TicketMailer, :type => :mailer) do
   it("should verify email address") do
     unverified_address = FactoryBot.create(:email_address)
     unverified_address.update(verification_token: 'qeECnGA3DO7djolZ')
-    verification = read_fixture("verification").join
+    verification = file_fixture("ticket_mailer/verification").read
     expect { TicketMailer.receive(verification) }.to(change { EmailAddress.where(:verification_token => nil).count })
   end
 
   it("reply to is used for incoming mail") do
-    email = read_fixture("reply_to").join
+    email = file_fixture("ticket_mailer/reply_to").read
     expect { expect { TicketMailer.receive(email) }.to(change { User.count }) }.to(change { Ticket.count })
     expect(User.last.email).to(eq("reply@address.com"))
   end

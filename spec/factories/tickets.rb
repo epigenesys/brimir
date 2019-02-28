@@ -36,12 +36,9 @@
 
 FactoryBot.define do
   factory :ticket do
-    subject { "I have a problem" }
-    content { "My computer doesn't start anymore" }
-    association :user, factory: :user
-    association :assignee, factory: :user
-    priority { :low }
-    message_id { 'test123@test123' }
+    sequence(:subject) { |n| "Problem #{n}" }
+    sequence(:content) { |n| "I have computer problem #{n}. Please help." }
+    association :user
 
     trait :with_to_email_address do
       association :to_email_address, factory: :email_address, name: 'Brimir'

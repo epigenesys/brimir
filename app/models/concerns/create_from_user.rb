@@ -38,7 +38,6 @@ module CreateFromUser
     end
 
     def from
-      # TODO: Use "user&.email" as Ruby 2.2 has reached EOL on 2018-03-31?
       user.email if user
     end
 

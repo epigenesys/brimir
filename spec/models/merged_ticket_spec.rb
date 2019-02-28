@@ -112,8 +112,8 @@ RSpec.describe(TicketMerge, :type => :model) do
   it("accessing attachment file for merged ticket") do
     ticket1 = ticket
     ticket2 = daves_ticket
-    ticket1.attachments.create!(:file => File.open("test/fixtures/attachments/default-testpage.pdf"))
-    ticket2.attachments.create!(:file => File.open("test/fixtures/attachments/default-testpage.pdf"))
+    ticket1.attachments.create!(:file => File.open("spec/fixtures/attachments/default-testpage.pdf"))
+    ticket2.attachments.create!(:file => File.open("spec/fixtures/attachments/default-testpage.pdf"))
     expect(File.file?(ticket1.attachments.first.file.path(:original))).to(eq(true))
     expect(File.file?(ticket2.attachments.first.file.path(:original))).to(eq(true))
     merged_ticket = MergedTicket.from([ticket1, ticket2])
@@ -131,7 +131,7 @@ RSpec.describe(TicketMerge, :type => :model) do
     ticket2 = ticket
     ticket2.update!(:created_at => 30.minutes.ago)
     ticket2.replies.first.update!(:created_at => 15.minutes.ago)
-    ticket2.replies.first.attachments.create!(:file => File.open("test/fixtures/attachments/default-testpage.pdf"))
+    ticket2.replies.first.attachments.create!(:file => File.open("spec/fixtures/attachments/default-testpage.pdf"))
     expect(File.file?(ticket2.replies.first.attachments.first.file.path(:original))).to(eq(true))
     merged_ticket = MergedTicket.from([ticket1, ticket2])
     expect(ticket1.message_id).to(eq(merged_ticket.message_id))
@@ -144,8 +144,8 @@ RSpec.describe(TicketMerge, :type => :model) do
   it("accessing raw message for merged ticket") do
     ticket1 = ticket
     ticket2 = daves_ticket
-    ticket1.update!(:raw_message => File.open("test/fixtures/attachments/default-testpage.pdf"))
-    ticket2.update!(:raw_message => File.open("test/fixtures/attachments/default-testpage.pdf"))
+    ticket1.update!(:raw_message => File.open("spec/fixtures/attachments/default-testpage.pdf"))
+    ticket2.update!(:raw_message => File.open("spec/fixtures/attachments/default-testpage.pdf"))
     expect(File.file?(ticket1.raw_message.path(:original))).to(eq(true))
     expect(File.file?(ticket2.raw_message.path(:original))).to(eq(true))
     merged_ticket = MergedTicket.from([ticket1, ticket2])
@@ -159,7 +159,7 @@ RSpec.describe(TicketMerge, :type => :model) do
     ticket2 = ticket
     ticket2.update!(:created_at => 30.minutes.ago)
     ticket2.replies.first.update!(:created_at => 15.minutes.ago)
-    ticket2.replies.first.update!(:raw_message => File.open("test/fixtures/attachments/default-testpage.pdf"))
+    ticket2.replies.first.update!(:raw_message => File.open("spec/fixtures/attachments/default-testpage.pdf"))
     expect(File.file?(ticket2.replies.first.raw_message.path(:original))).to(eq(true))
     merged_ticket = MergedTicket.from([ticket1, ticket2])
     expect(File.file?(merged_ticket.replies.order(:created_at).last.raw_message.path(:original))).to(eq(true))

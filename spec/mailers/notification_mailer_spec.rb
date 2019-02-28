@@ -3,7 +3,7 @@ RSpec.describe(NotificationMailer, :type => :mailer) do
   let(:tenant) { FactoryBot.create(:tenant) }
   let!(:brimir_email_address) { FactoryBot.create(:email_address) }
   let!(:agent)  { FactoryBot.create(:user, :with_agent) }
-  let!(:ticket) { FactoryBot.create(:ticket, to_email_address: brimir_email_address) }
+  let!(:ticket) { FactoryBot.create(:ticket, to_email_address: brimir_email_address, assignee: agent) }
 
   let(:reply) { FactoryBot.create(:reply, content: 'My first text reply', ticket: ticket) }
 
