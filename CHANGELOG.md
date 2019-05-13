@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ability to rename tickets. Contributed by @fiedl.
 - Canned replies. Contributed by @svoop.
 - Support for incoming mail from Mailgun. Contributed by @svoop.<br>:warning: If you are already using the `post-mail` script, you must update the `aliases` file of your MTA according to the example mentioned in the README!
+- Support for disabling thumbnail generation.
 
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.

@@ -46,3 +46,4 @@ coverage
 .byebug_history
 
 .vscode
+.rspec-examples
