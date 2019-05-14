@@ -58,6 +58,9 @@ class Attachment < ApplicationRecord
   attr_accessor :disable_thumbnail_generation
 
   def thumbnail?
+    # There seems to be significant issues with the thumbnail generation, but Paperclip
+    # will need to be replaced with a more modern solution so we'll work around it
+    # in the short-term.
 
     return false if disable_thumbnail_generation || !AppSettings.enable_attachment_thumbnails
 
@@ -69,6 +72,7 @@ class Attachment < ApplicationRecord
         return true
       end
 
+      return false if Rails.env.test?
       if !file_content_type.match(/pdf$/).nil? &&
           system('which gs', out: '/dev/null')
 

@@ -44,6 +44,7 @@ FactoryBot.define do
     authentication_token { 'blabla' }
     association :schedule, factory: :schedule
     current_sign_in_at { Time.now.to_s }
+    sign_in_count { 2 } # Prevents joyride being shown in tests
 
     trait :with_agent do
       agent { true }
