@@ -41,10 +41,6 @@ RSpec.configure do |config|
   # Let's us do login_as(user)
   config.include Warden::Test::Helpers
   config.include Rails.application.routes.url_helpers
-
-  config.include Shoulda::Matchers::ActiveRecord
-  config.include Shoulda::Matchers::ActiveModel
-  config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :controller
 
   # Ensure our database is definitely empty before running the suite
@@ -56,13 +52,7 @@ RSpec.configure do |config|
   # Use transactions for non-javascript tests as it is much faster than truncation
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.start
     ActionMailer::Base.deliveries.clear
-  end
-
-  config.after(:each) do
-    Warden.test_reset!
-    DatabaseCleaner.clean
   end
 
   # Can't use transaction strategy with Javascript tests because they are run in
@@ -71,8 +61,13 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation, { pre_count: true, reset_ids: false }
   end
 
-  config.after(:each, js: true) do
-    expect(current_path).to eq current_path
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    Warden.test_reset!
+    DatabaseCleaner.clean
   end
 
   # Use this to test real error pages (e.g. epiSupport)
@@ -133,10 +128,3 @@ Capybara.asset_host = 'http://localhost:3000'
 # This takes care of custom radios where the radio itself is not actually visible.
 # Also works for checkboxes.
 Capybara.automatic_label_click = true
-
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
-end

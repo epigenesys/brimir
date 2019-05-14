@@ -1,61 +1,63 @@
-.tickets{
-	-webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
-	transform-style: preserve-3d;
+.tickets {
 
-	input[type="checkbox"]{
-	    -webkit-appearance: none;
-		border: 1px solid $body-font-color;
-		width: 15px;
-		height: 15px;
-		background-color: #fff;
+  input {
+    &[type='checkbox'] {
+      -webkit-appearance: none;
+      border: 1px solid $body-font-color;
+      width: 15px;
+      height: 15px;
+      background-color: #fff;
 
-		&:checked{
-			background-color: $body-font-color;
-		}
-	}
-	.ticket{
-		overflow: hidden;
-		position: relative;
-		border-left-width: 3px;
-		border-left-style: solid;
-		-webkit-transition: background-color 0.25s;
-		-ms-transition: background-color 0.25s;
-		-o-transition: background-color 0.25s;
-		transition: background-color 0.25s;
-
-		p {
-			line-height: 1.3;
-		}
-
-		&:hover{
-			background: darken($white, 3);
-		}
-
-		&.highlight{
-			background-color: rgba(255,255,128,0.25);
-		}
-
-		input[type="checkbox"]{
-			position: absolute;
-			left: 12px;
-			top: 50%;
-			margin-top: -8px;
-		}
-
-		.label.alt{
-			color: $body-font-color;
-		}
+      &:checked {
+        background-color: $body-font-color;
+      }
+    }
   }
+
+  .ticket {
+    overflow: hidden;
+    position: relative;
+    border-left-width: 3px;
+    border-left-style: solid;
+    transition: background-color 0.25s;
+
+    p {
+      line-height: 1.3;
+    }
+
+    &:hover {
+      background: darken($white, 3);
+    }
+
+    &.highlight {
+      background-color: rgba(255,255,128,0.25);
+    }
+
+    input {
+      &[type='checkbox'] {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        margin-top: -8px;
+      }
+    }
+
+    .label.alt {
+      color: $body-font-color;
+    }
+  }
+
   .tickets-order {
-    display: flex;
     align-items: center;
+    display: flex;
     float: right;
     padding: 8px 12px;
+
     .button {
       padding: 6px 12px;
       font-size: 0.9rem;
       margin: 0;
+
       .fa {
         padding-left: 0.4rem;
       }
@@ -64,5 +66,5 @@
 }
 
 .unread {
-	background: #f4f4f4;
+  background: #f4f4f4;
 }

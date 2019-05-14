@@ -66,13 +66,13 @@
         </button>
       </li>
       <li class="tickets-order has-dropdown">
-        <a data-dropdown="ticketOrder" aria-controls="ticketOrder" aria-expanded="false" class="button">
+        <a id="select-order-dropdown" data-dropdown="ticketOrder" aria-controls="ticketOrder" aria-expanded="false" class="button" title="Select ticket order">
           <%= t("order.#{params[:order].present? ? params[:order] : :default}") %>
           <i class="fa fa-caret-down"></i>
         </a>
         <ul id="ticketOrder" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
           <li><a href="<%= root_path(params.to_unsafe_h.merge(order: nil)) %>">Latest updated (default)</a></li>
-          <li><a href="<%= root_path(params.to_unsafe_h.merge(order: :priority)) %>">Priority Order</a></li>
+          <li><a href="<%= root_path(params.to_unsafe_h.merge(order: :priority)) %>">Priority order</a></li>
         </ul>
       </li>
     </ul>
