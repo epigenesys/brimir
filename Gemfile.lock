@@ -332,7 +332,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.13)
     sshkit (1.16.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -415,7 +414,6 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   spring (~> 2.0)
-  sqlite3 (~> 1.3)
   timecop (~> 0.9)
   trix (~> 0.10, >= 0.10.1)
   uglifier (~> 3.0.0)

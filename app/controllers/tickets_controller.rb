@@ -109,7 +109,13 @@ class TicketsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @ticket.update_attributes(ticket_params)
+      @ticket.assign_attributes(ticket_params)
+
+      if current_user.agent? && params[:assign_to_me].present?
+        @ticket.assignee = current_user
+      end
+
+      if @ticket.save
 
         # assignee set and not same as user who modifies
         if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id

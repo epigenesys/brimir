@@ -4,9 +4,9 @@ describe LabelsController, type: :controller do
   let!(:alice) { FactoryBot.create(:user, :with_agent, name: 'Alice', email: 'alice@xxxx.com', notify: true) }
   let!(:change_label) { FactoryBot.create(:label, name: 'Feature request') }
   let!(:bug_label) { FactoryBot.create(:label, name: 'Bug') }
-  
+
   before { sign_in(alice) }
-  
+
   render_views
   #TODO make this a view test instead, to get rid of the above "render_views"
   it("should get select2 json") do
