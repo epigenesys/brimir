@@ -54,7 +54,7 @@ class Tenant < ApplicationRecord
   end
 
   # force tenants table from postgresql public schema
-  self.table_name = 'public.tenants' if postgresql?
+  # self.table_name = 'public.tenants' if postgresql?
 
   def self.current_domain=(domain)
     # new tenant?
@@ -73,10 +73,10 @@ class Tenant < ApplicationRecord
     else
       @@current = Tenant.find_by!(domain: domain)
     end
-
-    if postgresql? && available_schemas.include?(domain)
-      ActiveRecord::Base.connection.schema_search_path = "\"#{domain}\",public"
-    end
+    #
+    # if postgresql? && available_schemas.include?(domain)
+    #   ActiveRecord::Base.connection.schema_search_path = "\"#{domain}\",public"
+    # end
 
     ActionMailer::Base.default_url_options = { host: "#{domain}" }
     Rails.configuration.devise.mailer_sender = EmailAddress.default_email
@@ -120,12 +120,13 @@ class Tenant < ApplicationRecord
 
   protected
   def self.available_schemas
-    if postgresql?
-      sql = "SELECT nspname FROM pg_namespace WHERE nspname !~ '^pg_.*' AND
-          nspname != 'public' AND nspname != 'information_schema'"
-      ActiveRecord::Base.connection.query(sql).flatten
-    else
-      []
-    end
+    []
+    # if postgresql?
+    #   sql = "SELECT nspname FROM pg_namespace WHERE nspname !~ '^pg_.*' AND
+    #       nspname != 'public' AND nspname != 'information_schema'"
+    #   ActiveRecord::Base.connection.query(sql).flatten
+    # else
+    #   []
+    # end
   end
 end

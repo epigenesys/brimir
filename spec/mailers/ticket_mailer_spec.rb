@@ -18,6 +18,7 @@ RSpec.describe(TicketMailer, :type => :mailer) do
   end
 
   it("email threads are recognized correctly and assignee is notified") do
+    Tenant.delete_all
     Tenant.current_domain = 'support.host'
     thread_start = file_fixture("ticket_mailer/thread_start").read
     thread_reply = file_fixture("ticket_mailer/thread_reply").read

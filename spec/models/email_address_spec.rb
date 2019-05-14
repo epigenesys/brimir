@@ -14,6 +14,8 @@
 require("rails_helper")
 
 describe EmailAddress, :type => :model do
+  before { Tenant.delete_all }
+
   let!(:tenant) { FactoryBot.create(:tenant) }
   let!(:email_address) { FactoryBot.create(:email_address, :with_default) }
 
