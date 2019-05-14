@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: email_templates
+#
+#  id         :integer          not null, primary key
+#  draft      :boolean          default(TRUE), not null
+#  kind       :integer          not null
+#  message    :text
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class EmailTemplate < ApplicationRecord
 
   enum kind: [:user_welcome, :ticket_received, :canned_reply]

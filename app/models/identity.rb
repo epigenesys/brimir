@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: identities
+#
+#  id       :integer          not null, primary key
+#  provider :string
+#  uid      :string
+#  user_id  :integer
+#
+# Indexes
+#
+#  index_identities_on_user_id  (user_id)
+#
+
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #

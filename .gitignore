@@ -12,6 +12,7 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
 /log
@@ -45,5 +46,7 @@ coverage
 .idea
 .byebug_history
 
-# ignore visual studio code
 .vscode
+.rspec-examples
+
+config/database.yml

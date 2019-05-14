@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.datetime "updated_at"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.string "content_id"
     t.index ["attachable_id"], name: "index_attachments_on_attachable_id"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.boolean "draft", default: false, null: false
     t.string "raw_message_file_name"
     t.string "raw_message_content_type"
-    t.integer "raw_message_file_size"
+    t.bigint "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.boolean "internal", default: false, null: false
     t.string "type"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.datetime "locked_at"
     t.string "raw_message_file_name"
     t.string "raw_message_content_type"
-    t.integer "raw_message_file_size"
+    t.bigint "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.string "orig_to"
     t.string "orig_cc"

@@ -16,9 +16,12 @@ gem 'jquery-visibility-rails'
 # foundation form errors
 gem 'foundation_rails_helper', "~> 2.0"
 
-# to use debugger
-gem 'byebug', '~> 10.0', group: [:development, :test]
-gem 'pry', "~> 0.11", group: [:development, :test]
+# Testing
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'byebug', '~> 10.0'
+  gem 'pry', "~> 0.11"
+end
 
 group :development do
   # Spring application pre-loader
@@ -26,9 +29,13 @@ group :development do
 
   # open sent emails in the browser
   gem 'letter_opener', "~> 1.4"
+
+  gem 'annotate'
 end
 
 group :test do
+  gem 'puma'
+
   # for travis-ci
   gem 'rake', "~> 12.0"
 
@@ -39,17 +46,20 @@ group :test do
 
   # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
   gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+
+  gem 'shoulda-matchers'
   gem 'capybara'
-  gem 'poltergeist'
-  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'launchy'
 end
 
 # Optional PostgreSQL for production
 gem 'pg', "~> 0.19", group: :postgresql
 # Optional MySQL for production
 gem 'mysql2', "~> 0.4", group: :mysql
-# Optional SQLite for development
-gem 'sqlite3', "~> 1.3", group: :sqlite
 
 # authentication
 gem 'devise', "~> 4.2"
