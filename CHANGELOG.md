@@ -2,29 +2,31 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Brimir unreleased (to be announced)
+## Brimir 0.8.0 (2019-05-14)
 ### Added
+- Ability to order tickets by priority. Contributed by @EdwardJFox and @antnettleship
+- Ability to self-assign a ticket at the click of a button. Contributed by @EdwardJFox
 - Ability to import .eml files for mails sent to wrong email address. Contributed by @fiedl.
 - Ability to rename tickets. Contributed by @fiedl.
 - Canned replies. Contributed by @svoop.
 - Support for incoming mail from Mailgun. Contributed by @svoop.<br>:warning: If you are already using the `post-mail` script, you must update the `aliases` file of your MTA according to the example mentioned in the README!
-- Support for disabling thumbnail generation.
+- Support for disabling thumbnail generation. Contributed by @jamgregory
 
 ### Changed
+- Testing framework migrated from Minitest to RSpec. Contributed by @EdwardJFox and @neb2000
+- Addition of E2E testing with Selenium and Capybara. Contributed by @antnettleship and @neb2000
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
 - Better coverage for ticket creation, now covering situations with captcha. Contributed by @git-jls.
-- Moved Brimir to Rails version 5.0.0.1. Contributed by @git-jls.
 - Only add "New reply: " to subject of agent mails.
 - Return-Path is now filled with Tenant from address, to capture bounce mails when using aliases.
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Unread ticket status resulted in a big performance regression #345.
 
 ### Security
+- Rails bump to 5.1.6.2. Contributed by @antnettleship
+- jQuery bump to 2.2.4 from 1.x. This is the highest supported by Foundation5. Contributed by @antnettleship
+
 
 ## Brimir 0.7.3 (2016-12-19)
 ### Added
@@ -56,9 +58,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Optional emails and templates when a user account has been created and when a ticket has been received. Contributed by @git-jls.
 - Optional replaced tinymce with trix (WYSIWYG editor). Contributed by @git-jls.
 
-
 ### Fixed
 - Posting an empty reply will no longer result in an error.
+
 
 ## Brimir 0.7.1 (2016-06-10)
 ### Added
