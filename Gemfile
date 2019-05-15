@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '5.1.6.2'
 
 gem 'sass-rails', "~> 5.0.0"
 gem 'coffee-rails', "~> 4.2.0"
@@ -10,7 +10,7 @@ gem 'uglifier', "~> 3.0.0"
 gem 'compass-rails', '~> 3.0.0'
 gem 'foundation-rails', '~> 5.5.0'
 
-gem 'jquery-rails', "~> 4.2"
+gem 'jquery-rails', "~> 4.3"
 gem 'jquery-visibility-rails'
 
 # foundation form errors
