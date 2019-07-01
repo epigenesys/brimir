@@ -8,3 +8,4 @@ test:
   adapter: mysql2
   database: brimir_test
   username: root
+<% end %>
