@@ -1,4 +1,4 @@
-Brimir
+Brimir [![Build Status](https://travis-ci.com/epigenesys/brimir.svg?branch=master)](https://travis-ci.com/epigenesys/brimir)
 ======
 Brimir is a simple helpdesk system that can be used to handle support requests via incoming email.
 
