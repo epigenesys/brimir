@@ -1,9 +1,12 @@
+dist: trusty
+
 language: ruby
 cache: bundler
 bundler_args: --without development --jobs 4
 sudo: false
 
 addons:
+  chrome: stable
   apt:
     packages:
       - imagemagick

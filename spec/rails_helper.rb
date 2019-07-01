@@ -10,6 +10,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require 'webdrivers'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -109,16 +111,18 @@ Capybara.configure do |config|
   config.match  = :prefer_exact
 end
 
-# Headless Chrome is faster than the firefox driver
 Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(no-sandbox headless disable-gpu window-size=1920,1080) }
-  )
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    desired_capabilities: capabilities
-  )
+  chrome_options = Selenium::WebDriver::Chrome::Options.new
+  chrome_options.add_argument('--headless') unless ENV['SHOW_CHROME']
+  chrome_options.add_argument('--no-sandbox')
+  chrome_options.add_argument('--disable-gpu')
+  chrome_options.add_argument('--disable-dev-shm-usage')
+  chrome_options.add_argument('--disable-infobars')
+  chrome_options.add_argument('--disable-extensions')
+  chrome_options.add_argument('--disable-popup-blocking')
+  chrome_options.add_argument('--window-size=1920,1080')
+
+  Capybara::Selenium::Driver.new app, browser: :chrome, options: chrome_options
 end
 Capybara.javascript_driver = :headless_chrome
 

@@ -36,13 +36,8 @@ end
 group :test do
   gem 'puma'
 
-  # for travis-ci
-  gem 'rake', "~> 12.0"
-
-  # for coveralls
-  gem 'coveralls', "~> 0.8"
-
-  gem 'timecop', "~> 0.9"
+  gem 'timecop'
+  gem 'simplecov'
 
   # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
   gem 'rails-controller-testing'
@@ -52,7 +47,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'launchy'
 end
 
