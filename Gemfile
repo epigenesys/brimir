@@ -2,23 +2,23 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.1.6.2'
 
-gem 'sass-rails', "~> 5.0.0"
-gem 'coffee-rails', "~> 4.2.0"
+gem 'sass-rails', '~> 5.0.7'
+gem 'coffee-rails', '~> 4.2.2'
 
 gem 'uglifier', "~> 3.0.0"
 
-gem 'compass-rails', '~> 3.0.0'
-gem 'foundation-rails', '~> 5.5.0'
+gem 'compass-rails', '~> 3.0.2'
+gem 'foundation-rails', '~> 5.5.3', '>= 5.5.3.2'
 
-gem 'jquery-rails', "~> 4.3"
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-visibility-rails'
 
 # foundation form errors
-gem 'foundation_rails_helper', "~> 2.0"
+gem 'foundation_rails_helper', '~> 2.0', '>= 2.0.0'
 
 # Testing
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.8.2'
   gem 'byebug', '~> 10.0'
   gem 'pry', "~> 0.11"
 end
@@ -40,14 +40,14 @@ group :test do
   gem 'simplecov'
 
   # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
-  gem 'rails-controller-testing'
-  gem 'factory_bot_rails'
+  gem 'rails-controller-testing', '>= 1.0.4'
+  gem 'factory_bot_rails', '>= 5.0.2'
 
   gem 'shoulda-matchers'
-  gem 'capybara'
+  gem 'capybara', '>= 3.25.0'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'webdrivers', '>= 4.0.1'
   gem 'launchy'
 end
 
@@ -57,8 +57,8 @@ gem 'pg', "~> 0.19", group: :postgresql
 gem 'mysql2', "~> 0.4", group: :mysql
 
 # authentication
-gem 'devise', "~> 4.2"
-gem 'devise_ldap_authenticatable', "~> 0.8"
+gem 'devise', '~> 4.4', '>= 4.4.3'
+gem 'devise_ldap_authenticatable', '~> 0.8', '>= 0.8.6'
 
 # 2.7.0 appears to have regressions that are fixed in 2.7.1
 gem 'mail', '~> 2.6', '!= 2.7.0'
@@ -78,20 +78,20 @@ gem 'paperclip', "~> 6.1"
 # select2 replacement for selectboxes
 gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
 
-gem 'font-awesome-rails', '~> 4.7'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
 
 # for language detection
 gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
-gem 'rails-i18n', "~> 5.0"
-gem 'devise-i18n', "~> 1.1"
+gem 'rails-i18n', '~> 5.1', '>= 5.1.1'
+gem 'devise-i18n', '~> 1.6', '>= 1.6.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.6'
 
 # fancybox for showing image in lightbox
-gem 'fancybox2-rails', "~> 0.2"
+gem 'fancybox2-rails', '~> 0.2', '>= 0.2.7'
 
 # gravatar for user avatar images
 gem 'gravatar_image_tag', "~> 1.2"
@@ -106,10 +106,10 @@ gem 'rest-client', '~> 2.0'
 gem 'digest-sha3'
 
 # Trix WYSIWYG editor
-gem 'trix', "~> 0.10", ">= 0.10.1"
+gem 'trix', '~> 0.11', '>= 0.11.1'
 
 # React support
-gem 'react-rails', "~> 1.10"
+gem 'react-rails', '~> 1.11', '>= 1.11.0'
 
 # Capistrano for deployment
 group :development do
