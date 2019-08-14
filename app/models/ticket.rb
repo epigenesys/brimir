@@ -126,8 +126,11 @@ class Ticket < ApplicationRecord
     if !term.nil?
       term.gsub!(/[\\%_]/) { |m| "!#{m}" }
       term = "%#{term.downcase}%"
-      where('LOWER(subject) LIKE ? ESCAPE ? OR LOWER(content) LIKE ? ESCAPE ?',
-          term, '!', term, '!')
+      joins(:user).
+      where('LOWER(subject) LIKE :term ESCAPE :escaped_characters 
+          OR LOWER(content) LIKE :term ESCAPE :escaped_characters
+          OR LOWER(users.email) LIKE :term ESCAPE :escaped_characters',
+          term: term, escaped_characters: '!')
     end
   }
 
