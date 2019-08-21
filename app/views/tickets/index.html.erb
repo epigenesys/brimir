@@ -3,9 +3,9 @@
     <div class="medium-6 columns">
       <h3 class="filter-title no-m pts plm">
         <% if params[:q].present? %>
-          <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
+          <%= t(:count_tickets_containing, count: @tickets.count, status: params[:status]) %> '<em><%= params[:q].to_s %></em>'
         <% else %>
-          <%= t(:count_tickets, count: @tickets.count) %>
+          <%= t(:count_tickets, count: @tickets.count, status: params[:status]) %>
         <% end %>
       </h3>
     </div>

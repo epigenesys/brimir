@@ -120,6 +120,10 @@ We appreciate all contributions! If you would like to contribute, please follow 
 - Make your changes in the branch.
 - Submit a pull-request to merge your feature-branch in our master branch.
 
+Development
+------------
+- If importing live data, update Tenant domain to 'localhost'
+
 Localization
 ------------
 English (en) is the primary and default locale which should always be up-to-date and contain all translation keys currently in use. To keep the other locale files up to date, use the `locales:completeness` task to diff the translation keys of all available locales against English. Here's a commented example:
