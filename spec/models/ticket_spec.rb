@@ -66,8 +66,33 @@ RSpec.describe(Ticket, :type => :model) do
     expect(last.updated_at).to(eq(last.created_at))
   end
 
-  it("should escape special char search") do
-    expect(Ticket.search("%").count).to(eq(1))
-    expect(Ticket.search("_").count).to(eq(1))
+  describe '.search' do
+    it("should escape special char search") do
+      expect(Ticket.search("%").count).to(eq(1))
+      expect(Ticket.search("_").count).to(eq(1))
+    end
+
+    context 'with tickets in the system' do
+      let!(:alice)              { FactoryBot.create(:user, name: 'Alice', email: 'alice@xxxx.com', current_sign_in_at: Time.zone.now) }
+      let!(:subject_ticket)     { FactoryBot.create(:ticket, user: dave, subject: "A unique subject", assignee: nil) }
+      let!(:content_ticket)     { FactoryBot.create(:ticket, user: dave, subject: "A subject", content: 'Some unique content', assignee: nil) }
+      let!(:searching_by_email) { FactoryBot.create(:ticket, user: alice, subject: "A subject", content: 'Some content', assignee: nil) }
+
+      it 'searches by the tickets subject' do
+        expect(Ticket.search('A unique subject')).to eq([subject_ticket])
+      end
+
+      it 'searches by the tickets content' do
+        expect(Ticket.search('Some unique content')).to eq([content_ticket])
+      end
+
+      it 'searches by the tickets user email' do
+        expect(Ticket.search('alice@xxxx.com')).to eq([searching_by_email])
+      end
+
+      it 'returns an empty collection if there are no matches' do
+        expect(Ticket.search('Something not in the system')).to eq([])
+      end
+    end
   end
 end

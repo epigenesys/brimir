@@ -56,12 +56,12 @@ en:
 # tickets/index
   count_tickets:
     zero: 'No tickets'
-    one: '%{count} ticket'
-    other: '%{count} tickets'
+    one: '%{count} %{status} ticket'
+    other: '%{count} %{status} tickets'
   count_tickets_containing:
     zero: 'No tickets containing'
-    one: '%{count} ticket containing'
-    other: '%{count} tickets containing'
+    one: '%{count} %{status} ticket containing'
+    other: '%{count} %{status} tickets containing'
   priority: Priority
   replies: replies
   no_subject: No subject

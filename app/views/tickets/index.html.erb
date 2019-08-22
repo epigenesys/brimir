@@ -3,9 +3,9 @@
     <div class="medium-6 columns">
       <h3 class="filter-title no-m pts plm">
         <% if params[:q].present? %>
-          <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
+          <%= t(:count_tickets_containing, count: @tickets.count, status: params[:status]) %> '<em><%= params[:q].to_s %></em>'
         <% else %>
-          <%= t(:count_tickets, count: @tickets.count) %>
+          <%= t(:count_tickets, count: @tickets.count, status: params[:status]) %>
         <% end %>
       </h3>
     </div>
@@ -77,7 +77,7 @@
       </li>
     </ul>
     <% @tickets.each do |ticket| %>
-      <div class="priority-<%= ticket.priority %> <%= ticket.is_unread?(current_user) ? 'unread' : '' %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
+      <div id="ticket_<%= ticket.id%>" class="priority-<%= ticket.priority %> <%= ticket.is_unread?(current_user) ? 'unread' : '' %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
         <div class="medium-6 plxxl v-middle columns">
           <input type="checkbox" value="<%= ticket.id %>" name="id[]" class="no-mb" data-toggle-check />
           <%= user_avatar ticket.user, class: 'avatar left mrl mts mlm', size: 30 %>
