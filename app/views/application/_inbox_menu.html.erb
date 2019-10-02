@@ -25,7 +25,7 @@
   <li class='unassigned-tickets-item'>
     <%= active_elem_if :a, params[:assignee_id] == 0,
         href: tickets_path(assignee_id: 0), class: 'plxxl' do %>
-      <%= status_icon 'user-times', assigned_to_me: true %>
+      <%= fa_icon 'user-times', assigned_to_me: true %>
       <%= t(:unassigned) %>
       <span class="right heading-six bubble pls prs">
         <%= Ticket.viewable_by(current_user).open.filter_by_assignee_id(0).count %>
