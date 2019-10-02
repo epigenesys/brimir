@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20181011140158) do
 
-  create_table "attachments", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "attachments", id: :serial, force: :cascade do |t|
     t.integer "attachable_id"
     t.string "attachable_type"
     t.datetime "created_at"
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["attachable_id"], name: "index_attachments_on_attachable_id"
   end
 
-  create_table "email_addresses", force: :cascade do |t|
+  create_table "email_addresses", id: :serial, force: :cascade do |t|
     t.string "email"
     t.boolean "default", default: false
     t.datetime "created_at"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.string "name"
   end
 
-  create_table "email_templates", force: :cascade do |t|
+  create_table "email_templates", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "message"
     t.integer "kind", null: false
@@ -43,14 +46,14 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.boolean "draft", default: true, null: false
   end
 
-  create_table "identities", force: :cascade do |t|
+  create_table "identities", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "uid"
     t.string "provider"
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
-  create_table "labelings", force: :cascade do |t|
+  create_table "labelings", id: :serial, force: :cascade do |t|
     t.integer "label_id"
     t.string "labelable_type"
     t.integer "labelable_id"
@@ -61,14 +64,14 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
   end
 
-  create_table "labels", force: :cascade do |t|
+  create_table "labels", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "color"
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", id: :serial, force: :cascade do |t|
     t.string "notifiable_type"
     t.integer "notifiable_id"
     t.integer "user_id"
@@ -79,8 +82,8 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "replies", force: :cascade do |t|
-    t.text "content", limit: 1073741823
+  create_table "replies", id: :serial, force: :cascade do |t|
+    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "ticket_id"
@@ -99,7 +102,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
-  create_table "rules", force: :cascade do |t|
+  create_table "rules", id: :serial, force: :cascade do |t|
     t.string "filter_field"
     t.integer "filter_operation", default: 0, null: false
     t.string "filter_value"
@@ -109,7 +112,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.datetime "updated_at"
   end
 
-  create_table "schedules", force: :cascade do |t|
+  create_table "schedules", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "start"
@@ -123,7 +126,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.boolean "sunday", default: false, null: false
   end
 
-  create_table "status_changes", force: :cascade do |t|
+  create_table "status_changes", id: :serial, force: :cascade do |t|
     t.integer "ticket_id"
     t.integer "status", default: 0, null: false
     t.datetime "created_at"
@@ -131,7 +134,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["ticket_id"], name: "index_status_changes_on_ticket_id"
   end
 
-  create_table "tenants", force: :cascade do |t|
+  create_table "tenants", id: :serial, force: :cascade do |t|
     t.string "domain"
     t.string "from"
     t.datetime "created_at", null: false
@@ -153,9 +156,9 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["email_template_id"], name: "index_tenants_on_email_template_id"
   end
 
-  create_table "tickets", force: :cascade do |t|
+  create_table "tickets", id: :serial, force: :cascade do |t|
     t.string "subject"
-    t.text "content", limit: 1073741823
+    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "assignee_id"
@@ -187,7 +190,7 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.integer "user_id", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "email", default: "", null: false
@@ -218,4 +221,16 @@ ActiveRecord::Schema.define(version: 20181011140158) do
     t.index ["schedule_id"], name: "index_users_on_schedule_id"
   end
 
+  add_foreign_key "identities", "users"
+  add_foreign_key "labelings", "labels"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "replies", "tickets"
+  add_foreign_key "replies", "users"
+  add_foreign_key "status_changes", "tickets"
+  add_foreign_key "tenants", "email_templates"
+  add_foreign_key "tickets", "email_addresses", column: "to_email_address_id"
+  add_foreign_key "tickets", "users"
+  add_foreign_key "tickets", "users", column: "assignee_id"
+  add_foreign_key "tickets", "users", column: "locked_by_id"
+  add_foreign_key "users", "schedules"
 end

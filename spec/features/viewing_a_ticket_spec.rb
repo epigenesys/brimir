@@ -22,7 +22,7 @@ feature 'Viewing a ticket' do
       scenario 'I can assign the ticket to me', js: true do
         expect(ticket.assignee).to be_nil
         visit ticket_path(ticket)
-        click_link 'Unassigned'
+        within(:css, '.ticket-toolbar') { click_link 'Unassigned' }
         click_button 'Assign to me'
         sleep 0.1
         expect(ticket.reload.assignee).to eq agent
