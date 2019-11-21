@@ -12,6 +12,10 @@
 #
 #  index_status_changes_on_ticket_id  (ticket_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (ticket_id => tickets.id)
+#
 
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/

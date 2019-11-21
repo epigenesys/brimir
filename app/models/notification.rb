@@ -15,6 +15,10 @@
 #  index_notifications_on_user_id                            (user_id)
 #  unique_notification                                       (notifiable_id,notifiable_type,user_id) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/

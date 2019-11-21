@@ -3,7 +3,7 @@
 # Table name: replies
 #
 #  id                       :integer          not null, primary key
-#  content                  :text(1073741823)
+#  content                  :text
 #  content_type             :string           default("html")
 #  draft                    :boolean          default(FALSE), not null
 #  internal                 :boolean          default(FALSE), not null
@@ -23,6 +23,11 @@
 #  index_replies_on_message_id  (message_id)
 #  index_replies_on_ticket_id   (ticket_id)
 #  index_replies_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (ticket_id => tickets.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
 class SystemReply < Reply

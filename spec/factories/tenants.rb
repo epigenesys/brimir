@@ -26,6 +26,10 @@
 #  index_tenants_on_domain             (domain) UNIQUE
 #  index_tenants_on_email_template_id  (email_template_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (email_template_id => email_templates.id)
+#
 
 FactoryBot.define do
   factory :tenant do

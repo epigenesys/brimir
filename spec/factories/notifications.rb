@@ -15,6 +15,10 @@
 #  index_notifications_on_user_id                            (user_id)
 #  unique_notification                                       (notifiable_id,notifiable_type,user_id) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 
 FactoryBot.define do
   factory :notification do
