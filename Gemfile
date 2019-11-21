@@ -106,7 +106,7 @@ gem 'rest-client', '~> 2.0'
 gem 'digest-sha3'
 
 # Trix WYSIWYG editor
-gem 'trix', '~> 0.11', '>= 0.11.1'
+gem 'trix-rails', '~> 0.11', '>= 0.11.1', require: 'trix'
 
 # React support
 gem 'react-rails', '~> 1.11', '>= 1.11.0'
