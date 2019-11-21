@@ -3,7 +3,7 @@
 # Table name: tickets
 #
 #  id                       :integer          not null, primary key
-#  content                  :text(1073741823)
+#  content                  :text
 #  content_type             :string           default("html")
 #  locked_at                :datetime
 #  orig_cc                  :string
@@ -32,6 +32,13 @@
 #  index_tickets_on_status               (status)
 #  index_tickets_on_to_email_address_id  (to_email_address_id)
 #  index_tickets_on_user_id              (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (assignee_id => users.id)
+#  fk_rails_...  (locked_by_id => users.id)
+#  fk_rails_...  (to_email_address_id => email_addresses.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
 FactoryBot.define do

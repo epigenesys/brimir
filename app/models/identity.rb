@@ -11,6 +11,10 @@
 #
 #  index_identities_on_user_id  (user_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/

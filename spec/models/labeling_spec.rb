@@ -15,6 +15,10 @@
 #  index_labelings_on_labelable_type_and_labelable_id  (labelable_type,labelable_id)
 #  unique_labeling_label                               (label_id,labelable_id,labelable_type) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (label_id => labels.id)
+#
 
 require("rails_helper")
 

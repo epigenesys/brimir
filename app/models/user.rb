@@ -35,6 +35,10 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_schedule_id           (schedule_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (schedule_id => schedules.id)
+#
 
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/

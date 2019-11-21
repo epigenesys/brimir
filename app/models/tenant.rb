@@ -26,6 +26,10 @@
 #  index_tenants_on_domain             (domain) UNIQUE
 #  index_tenants_on_email_template_id  (email_template_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (email_template_id => email_templates.id)
+#
 
 # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
