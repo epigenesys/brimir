@@ -18,7 +18,7 @@ gem 'foundation_rails_helper', '~> 2.0', '>= 2.0.0'
 
 # Testing
 group :development, :test do
-  gem 'rspec-rails', '>= 3.8.2'
+  gem 'rspec-rails', '>= 3.9.0'
   gem 'byebug', '~> 10.0'
   gem 'pry', "~> 0.11"
 end
@@ -41,13 +41,13 @@ group :test do
 
   # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
   gem 'rails-controller-testing', '>= 1.0.4'
-  gem 'factory_bot_rails', '>= 5.0.2'
+  gem 'factory_bot_rails', '>= 5.1.1'
 
   gem 'shoulda-matchers'
-  gem 'capybara', '>= 3.25.0'
+  gem 'capybara', '>= 3.28.0'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
-  gem 'webdrivers', '>= 4.0.1'
+  gem 'webdrivers', '>= 4.1.2'
   gem 'launchy'
 end
 
@@ -85,7 +85,7 @@ gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
 gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
-gem 'devise-i18n', '~> 1.8', '>= 1.8.1'
+gem 'devise-i18n', '~> 1.8', '>= 1.8.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.6'
