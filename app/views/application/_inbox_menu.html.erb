@@ -1,8 +1,7 @@
 <li>
   <%= active_elem_if :a, params[:status] == 'open' &&
-      params[:assignee_id].to_i == 0,
+      params[:assignee_id].nil?,
       href: root_path do %>
-
     <%= status_icon 'open' %>
     <%= t(:inbox) %>
     <span class="right heading-six bubble pls prs">
