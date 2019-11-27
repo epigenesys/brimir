@@ -127,7 +127,7 @@ class Ticket < ApplicationRecord
       term.gsub!(/[\\%_]/) { |m| "!#{m}" }
       term = "%#{term.downcase}%"
       joins(:user).
-      where('LOWER(subject) LIKE :term ESCAPE :escaped_characters 
+      where('LOWER(subject) LIKE :term ESCAPE :escaped_characters
           OR LOWER(content) LIKE :term ESCAPE :escaped_characters
           OR LOWER(users.email) LIKE :term ESCAPE :escaped_characters',
           term: term, escaped_characters: '!')
@@ -136,7 +136,7 @@ class Ticket < ApplicationRecord
 
   scope :ordered, ->(order_by = nil) {
     if order_by.present?
-      order(order_by, :updated_at).reverse_order
+      order(order_by, 'created_at DESC').reverse_order
     else
       order(:updated_at).reverse_order
     end

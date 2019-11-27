@@ -72,6 +72,8 @@
         </a>
         <ul id="ticketOrder" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
           <li><a href="<%= root_path(params.to_unsafe_h.merge(order: nil)) %>">Latest updated (default)</a></li>
+          <li><a href="<%= root_path(params.to_unsafe_h.merge(order: :created_at)) %>">Newest first</a></li>
+          <li><a href="<%= root_path(params.to_unsafe_h.merge(order: 'created_at DESC')) %>">Oldest first</a></li>
           <li><a href="<%= root_path(params.to_unsafe_h.merge(order: :priority)) %>">Priority order</a></li>
         </ul>
       </li>
@@ -94,6 +96,7 @@
             <span class="block">
               <%= t(:ticket_id_created_by_at, id: ticket.id, user: link_to(ticket.user.email, user_tickets_path(user_id: ticket.user)),
                   at: l(ticket.created_at.in_time_zone(current_user.time_zone), format: :short)).html_safe %>
+              (<%= time_ago_as_phrase(ticket.created_at.in_time_zone(current_user.time_zone), format: :short) %>)
             </span>
             <% if ticket.locked?(current_user) %>
               <em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>

@@ -124,6 +124,8 @@ en:
 # tickets/order
   order:
     default: Latest updated
+    created_at: Newest first
+    "created_at DESC": Oldest first
     priority: Priority Order
 
 # email_imports/new
