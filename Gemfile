@@ -34,7 +34,7 @@ group :development do
 end
 
 group :test do
-  gem 'puma'
+  gem 'puma', '>= 4.3.1'
 
   gem 'timecop'
   gem 'simplecov'
