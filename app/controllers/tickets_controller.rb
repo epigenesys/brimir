@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
   skip_authorization_check only: :create
 
   # allow ticket creation using json posts
-  skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
+  skip_before_action :verify_authenticity_token, only: :create, if: -> { request.format.json? }
 
   def show
     @users = User.actives
