@@ -5,21 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : "Brimir" %></title>
-    <%= favicon_link_tag 'favicon.png' %>
+    <%= favicon_link_tag '/favicon.png' %>
     <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,600italic' %>
 
-    <% if @rtl %>
-      <%= stylesheet_link_tag 'application-rtl' %>
-    <% else %>
-      <%= stylesheet_link_tag 'application' %>
-    <% end %>
-    <%= stylesheet_link_tag 'application-print', media: 'print' %>
+    <%= stylesheet_pack_tag 'styles' %>
     <%= custom_stylesheet_link_tag %>
 
     <%= csrf_meta_tags %>
   </head>
-
- <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(' ') %>" style="<%= 'direction: rtl' if @rtl %>">
+  <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(' ') %>" style="<%= 'direction: rtl' if @rtl %>">
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
@@ -76,7 +70,7 @@
       </nav>
     <% end %>
 
-    <div class="row collapse side-bar-list">
+    <main class="row">
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
           <div class="new-ticket ptm plxl prxl pbm">
@@ -110,7 +104,7 @@
         <%= yield %>
 
       </div>
-    </div>
+    </main>
 
     <div class="reveal-modal" data-reveal>
       <article>
@@ -118,7 +112,7 @@
       <a class="close-reveal-modal">&#215;</a>
     </div>
 
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
     <%= custom_javascript_include_tag %>
 
   </body>

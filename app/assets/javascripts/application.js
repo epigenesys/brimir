@@ -15,7 +15,6 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require foundation
 //= require select2
 //= require trix
 //= require tickets

@@ -50,6 +50,10 @@ coverage
 .rspec-examples
 
 config/database.yml
-node_modules
 
-vendor/webdrivers
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
