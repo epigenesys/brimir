@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6" lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <!--<![endif]-->
+<html lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
 
+    <title><%= content_for?(:title) ? yield(:title) : "Brimir" %></title>
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,600italic' %>
 
@@ -19,11 +16,10 @@
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
     <%= custom_stylesheet_link_tag %>
 
-    <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
   </head>
 
-  <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(' ') %>" style="<%= 'direction: rtl' if @rtl %>">
+ <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(' ') %>" style="<%= 'direction: rtl' if @rtl %>">
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
@@ -124,38 +120,6 @@
 
     <%= javascript_include_tag 'application' %>
     <%= custom_javascript_include_tag %>
-
-    <% if user_signed_in? && @show_joyride %>
-      <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
-        <li data-id="joyride-tickets" data-text="<%= t('joyride.next') %>" data-options="prev_button: false; tip_location: top;">
-          <h4><%= t(:new_ticket) %></h4>
-          <p><%= t('joyride.tickets') %></p>
-        </li>
-        <li data-id="joyride-settings" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
-          <h4><%= t(:personal_settings) %></h4>
-          <p><%= t('joyride.personal_settings') %></p>
-        </li>
-        <li data-id="joyride-labels" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: top;">
-          <h4><%= t(:labels) %></h4>
-          <p><%= t('joyride.labels') %></p>
-        </li>
-        <li data-id="joyride-rules" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
-          <h4><%= t(:rules) %></h4>
-          <p><%= t('joyride.rules') %></p>
-        </li>
-        <li data-id="joyride-users" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
-          <h4><%= t(:users) %></h4>
-          <p><%= t('joyride.users') %></p>
-        </li>
-        <li data-button="<%= t('joyride.end') %>" data-prev-text="<%= t('joyride.previous') %>">
-          <h4><%= t('joyride.final') %></h4>
-          <p>&nbsp;</p>
-        </li>
-      </ol>
-      <script>
-       jQuery(document).foundation('joyride','start');
-      </script>
-    <% end %>
 
   </body>
 </html>
