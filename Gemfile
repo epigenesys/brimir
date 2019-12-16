@@ -2,17 +2,15 @@ source 'https://rubygems.org'
 
 gem 'rails', '6.0.1'
 
-gem 'sassc-rails', '~> 2.1.2'
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'webpacker', '~> 4.0'
+
 gem 'coffee-rails', '~> 4.2.2'
-gem 'foundation-rails', '~> 6.0'
 
 gem 'uglifier', "~> 3.0.0"
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'jquery-visibility-rails'
-
-# foundation form errors
-gem 'foundation_rails_helper', github: 'sgruhier/foundation_rails_helper'
 
 # Testing
 group :development, :test do
@@ -79,8 +77,6 @@ gem 'paperclip', "~> 6.1"
 
 # select2 replacement for selectboxes
 gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
-
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 
 # for language detection
 gem 'http_accept_language', "~> 2.1"

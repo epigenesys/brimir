@@ -1,14 +1,3 @@
-GIT
-  remote: https://github.com/sgruhier/foundation_rails_helper.git
-  revision: 93363ebe3214e291a72f90b9d17cfce0531c324a
-  specs:
-    foundation_rails_helper (3.0.0)
-      actionpack (>= 4.1, < 7.0)
-      activemodel (>= 4.1, < 7.0)
-      activesupport (>= 4.1, < 7.0)
-      railties (>= 4.1, < 7.0)
-      tzinfo (~> 1.2, >= 1.2.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -147,13 +136,6 @@ GEM
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
     faraday-net_http (1.0.1)
-    ffi (1.12.2)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
-    foundation-rails (6.6.2.0)
-      railties (>= 3.1.0)
-      sass (>= 3.3.0)
-      sprockets-es6 (>= 0.9.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (4.1.0)
@@ -244,6 +226,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-proxy (0.7.2)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.1)
@@ -280,9 +264,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     rake (13.0.6)
-    rb-fsevent (0.11.1)
-    rb-inotify (0.10.1)
-      ffi (~> 1.0)
     react-rails (2.6.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
@@ -319,19 +300,6 @@ GEM
     rspec-support (3.9.2)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sassc (2.2.1)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     select2-rails (3.5.10)
       thor (~> 0.14)
     selenium-webdriver (3.142.7)
@@ -347,10 +315,6 @@ GEM
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-es6 (0.9.2)
-      babel-source (>= 5.8.11)
-      babel-transpiler
-      sprockets (>= 3.0.0)
     sprockets-rails (3.4.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
@@ -379,6 +343,10 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
+    webpacker (4.3.0)
+      activesupport (>= 4.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 4.2)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -409,9 +377,6 @@ DEPENDENCIES
   digest-sha3
   factory_bot_rails (>= 5.1.1)
   fancybox2-rails (~> 0.2, >= 0.2.7)
-  font-awesome-rails (~> 4.7, >= 4.7.0.5)
-  foundation-rails (~> 6.0)
-  foundation_rails_helper!
   http_accept_language (~> 2.1)
   jbuilder (~> 2.6)
   jquery-rails (~> 4.3, >= 4.3.5)
@@ -434,7 +399,6 @@ DEPENDENCIES
   recaptcha (~> 4.0)
   rest-client (~> 2.0)
   rspec-rails (>= 3.9.0)
-  sassc-rails (~> 2.1.2)
   select2-rails (~> 3.5)
   selenium-webdriver
   shoulda-matchers
@@ -444,6 +408,7 @@ DEPENDENCIES
   trix-rails (~> 2.2.0)
   uglifier (~> 3.0.0)
   webdrivers (>= 4.1.2)
+  webpacker (~> 4.0)
   will_paginate (~> 3.1)
 
 BUNDLED WITH
