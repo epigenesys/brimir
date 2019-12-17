@@ -63,7 +63,7 @@ gem 'mail', '~> 2.6', '!= 2.7.0'
 gem 'omniauth-google-oauth2', "~> 0.6.0"
 
 # authorization
-gem 'cancancan', '~> 2.1', '>= 2.1.4'
+gem 'cancancan', '~> 3.0.1', '>= 3.0.1'
 
 # pagination
 gem 'will_paginate', "~> 3.1"
