@@ -70,7 +70,7 @@
       </nav>
     <% end %>
 
-    <main class="row">
+    <main class="container">
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
           <div class="new-ticket ptm plxl prxl pbm">
@@ -114,6 +114,5 @@
 
     <%= javascript_pack_tag 'application' %>
     <%= custom_javascript_include_tag %>
-
   </body>
 </html>
