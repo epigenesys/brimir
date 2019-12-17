@@ -22,12 +22,12 @@
     <% end %>
     <li>
       <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true do %>
-        <%= fa_icon 'trash' %>
+        <i class="fas fa-trash"></i>
       <% end %>
     </li>
     <li>
       <%= link_to edit_label_path(label), remote: true do %>
-        <%= fa_icon 'edit' %>
+        <i class="fas fa-edit"></i>
       <% end %>
     </li>
   </ul>

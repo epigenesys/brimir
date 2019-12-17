@@ -18,20 +18,25 @@
           <%= f.input :password, label: false, placeholder: t('activerecord.attributes.user.password'), wrapper: false %>
         </div>
 
-        <% if devise_mapping.rememberable? -%>
-          <%= f.input :remember_me, as: :boolean %>
-        <% end -%>
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <% if devise_mapping.rememberable? -%>
+              <%= f.input :remember_me, as: :boolean, wrapper_html: { class: 'mb-0' } %>
+            <% end -%>
+          </div>
+          <div class="col-md-6">
+            <%= f.submit t(:sign_in), class: 'btn btn-secondary btn-block' %>
+          </div>
+        </div>
 
-        <%= f.submit t(:sign_in), class: 'btn btn-secondary' %>
-
-        <p class="text-center">
+        <p class="text-center mt-4">
           <%= render 'devise/shared/links' %>
           <% if Tenant.current_tenant.ticket_creation_is_open_to_the_world %>
-            <span class="mrs mls">&middot;</span>
+            <span class="mr-1 ml-1">&middot;</span>
             <%= link_to t(:new_ticket), new_ticket_path %>
           <% end %>
-          <span class="mrs mls">&middot;</span>
-          <%= link_to 'GetBrimir.com', 'https://getbrimir.com' %>
+          <span class="mr-1 ml-1">&middot;</span>
+          <%= link_to 'Brimir on GitHub', 'https://github.com/ivaldi/brimir' %>
         </p>
         <p class="text-center">
           <% unless Rails.application.secrets[:google_client_id].blank? %>
@@ -42,7 +47,6 @@
             <% end %>
           <% end %>
         </p>
-
       <% end %>
     </div>
   </div>

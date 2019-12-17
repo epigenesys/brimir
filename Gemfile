@@ -67,7 +67,7 @@ gem 'omniauth-rails_csrf_protection', '< 1.0.0'
 gem 'omniauth-google-oauth2'
 
 # authorization
-gem 'cancancan', '~> 2.1', '>= 2.1.4'
+gem 'cancancan', '~> 3.0.1', '>= 3.0.1'
 
 # pagination
 gem 'will_paginate', "~> 3.1"
