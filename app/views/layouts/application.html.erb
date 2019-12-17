@@ -95,10 +95,10 @@
       <% end %>
 
         <% if notice %>
-          <div data-alert class="notification alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
+          <div data-alert class="alert alert-success" role="alert"><%= notice %><a href="#" class="close"><i class="fa fa-times"></i></a></div>
         <% end %>
         <% if alert %>
-          <div data-alert class="notification alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
+          <div data-alert class="alert alert-warning" role="alert"><%= alert %><a href="#" class="close"><i class="fa fa-times"></i></a></div>
         <% end %>
 
         <%= yield %>

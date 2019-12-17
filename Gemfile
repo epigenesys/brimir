@@ -9,9 +9,6 @@ gem 'coffee-rails', '~> 4.2.2'
 
 gem 'uglifier', "~> 3.0.0"
 
-gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
-gem 'jquery-visibility-rails'
-
 # Testing
 group :development, :test do
   gem 'rspec-rails', '>= 3.9.0'
@@ -48,13 +45,16 @@ group :test do
 end
 
 # Optional PostgreSQL for production
-gem 'pg', group: :postgresql
+gem 'pg', "~> 1.1.4", group: :postgresql
 # Optional MySQL for production
 gem 'mysql2', "~> 0.4", group: :mysql
 
 # authentication
 gem 'devise'
 gem 'devise_ldap_authenticatable'
+
+# forms
+gem 'simple_form'
 
 # 2.7.0 appears to have regressions that are fixed in 2.7.1
 gem 'mail'
