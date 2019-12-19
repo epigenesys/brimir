@@ -6,7 +6,7 @@
     p = permitted_params.merge({ label_id: label.id })
   end
 %>
-<li data-edit-label-row="<%= label.id %>">
+<li data-edit-label-row="<%= label.id %>" class="nav-item">
   <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
     <span class="pas ib mrl" style="background-color: <%= label.color %>"></span>
     <%= label.name %>

@@ -16,7 +16,7 @@
   <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(' ') %>" style="<%= 'direction: rtl' if @rtl %>">
 
     <% if user_signed_in? %>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <%= link_to 'BRIMIR', root_path, class: 'navbar-brand' %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
@@ -59,16 +59,14 @@
         </div>
       </nav>
 
-      <nav class="navbar navbar-light bg-secondary sidebar flex-column">
-        <div class="new-ticket ptm plxl prxl pbm">
-          <%= link_to t(:new_ticket), new_ticket_path, class: 'tiny secondary expand button no-mb no-b', id: 'joyride-tickets' %>
-        </div>
+      <nav class="navbar navbar-dark bg-secondary sidebar">
+        <%= link_to t(:new_ticket), new_ticket_path, class: 'btn btn-primary btn-block mt-2 mb-2', id: 'joyride-tickets' %>
         <ul class="navbar-nav">
           <%= render 'inbox_menu' %>
         </ul>
 
         <ul class="navbar-nav">
-          <li id="joyride-labels"><label><%= t(:labels) %></label></li>
+          <li class="nav-item" id="joyride-labels"><label><%= t(:labels) %></label></li>
           <% @labels.each do |label| %>
             <%= render 'labels/label_li', label: label %>
           <% end %>
