@@ -1,0 +1,19 @@
+.tickets {
+  table {
+    th {
+      vertical-align: middle;
+    }
+  }
+  
+  .ticket {
+    font-size: 0.8rem;
+
+    .priority {
+      color: #fff;
+      &.priority-unknown { display: none; }
+      &.priority-low   { background-color: #ffd700; }
+      &.priority-medium{ background-color: #ff8000; }
+      &.priority-high  { background-color: #da1500; }
+    }
+  }
+}

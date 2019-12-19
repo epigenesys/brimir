@@ -6,14 +6,14 @@
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-fw fa-user"></i></span>
           </div>
           <%= f.input :email, as: :email, label: false, placeholder: t(:email), wrapper: false %>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-fw fa-key"></i></span>
           </div>
           <%= f.input :password, label: false, placeholder: t('activerecord.attributes.user.password'), wrapper: false %>
         </div>
