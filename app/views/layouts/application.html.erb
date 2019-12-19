@@ -19,7 +19,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <%= link_to 'BRIMIR', root_path, class: 'navbar-brand' %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -59,14 +59,14 @@
         </div>
       </nav>
 
-      <nav class="navbar navbar-dark bg-secondary sidebar">
+      <nav class="navbar navbar-dark bg-secondary sidebar d-block">
         <%= link_to t(:new_ticket), new_ticket_path, class: 'btn btn-primary btn-block mt-2 mb-2', id: 'joyride-tickets' %>
         <ul class="navbar-nav">
           <%= render 'inbox_menu' %>
         </ul>
 
-        <ul class="navbar-nav">
-          <li class="nav-item" id="joyride-labels"><label><%= t(:labels) %></label></li>
+        <ul class="list-group mt-4 mb-4">
+          <li class="list-group-item" id="joyride-labels"><%= t(:labels) %></li>
           <% @labels.each do |label| %>
             <%= render 'labels/label_li', label: label %>
           <% end %>
@@ -75,6 +75,9 @@
     <% end %>
 
     <main class="container">
+      <% if user_signed_in? %>
+        <br />
+      <% end %>
       <%= yield %>
     </main>
 

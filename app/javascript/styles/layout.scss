@@ -1,3 +1,7 @@
+body {
+  background-color: #ededed;
+}
+
 .alerts {
   position: fixed;
   top: 8px;
@@ -8,12 +12,27 @@
 .navbar.sidebar {
   position: fixed;
   height: calc(100vh - 56px);
-  width: 300px;
-  margin-top: 56px;
+  width: 260px;
   overflow-x: hidden;
   overflow-y: scroll;
-
   .navbar-nav {
     width: 100%;
+  }
+
+  .label-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+}
+
+main.container {
+  margin-top: 56px;
+
+  .content {
+    background: #fff;
+    border-radius: 0.2rem;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.1);
   }
 }

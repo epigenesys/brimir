@@ -6,29 +6,27 @@
     p = permitted_params.merge({ label_id: label.id })
   end
 %>
-<li data-edit-label-row="<%= label.id %>" class="nav-item">
-  <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
-    <span class="pas ib mrl" style="background-color: <%= label.color %>"></span>
-    <%= label.name %>
-    <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
-  </a>
-  <ul id="label-<%= label.id %>" class="f-dropdown medium-block-grid-3" data-dropdown-content>
-    <% Label::COLORS.each_with_index do |color, index| %>
-      <li>
-        <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
-          <span class="pas ib" style="background-color: <%= color %>"></span>
+<li data-edit-label-row="<%= label.id %>" class="list-group-item">
+  <div class="dropdown">
+    <button class="btn btn-text btn-block dropdown-toggle label-dropdown" type="button" id="label-color-dropdown-<%= label.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= label.name %>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="label-color-dropdown<%= label.id %>">
+      <ul>
+        <% Label::COLORS.each_with_index do |color, index| %>
+          <li>
+            <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
+              <span class="label-color" style="background-color: <%= color %>"></span>
+            <% end %>
+          </li>
         <% end %>
-      </li>
-    <% end %>
-    <li>
+      </ul>
       <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true do %>
-        <i class="fas fa-trash"></i>
+        <i class="fas fa-fw fa-trash"></i>
       <% end %>
-    </li>
-    <li>
       <%= link_to edit_label_path(label), remote: true do %>
-        <i class="fas fa-edit"></i>
+        <i class="fas fa-fw fa-edit"></i>
       <% end %>
-    </li>
-  </ul>
+    </div>
+  </div>
 </li>
