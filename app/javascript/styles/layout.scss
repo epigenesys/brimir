@@ -4,3 +4,16 @@
   right: 8px;
   width: 350px;
 }
+
+.navbar.sidebar {
+  position: fixed;
+  height: calc(100vh - 56px);
+  width: 300px;
+  margin-top: 56px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  .navbar-nav {
+    width: 100%;
+  }
+}
