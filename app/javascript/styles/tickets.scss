@@ -1,10 +1,11 @@
+// Tickets - Index
 .tickets {
   table {
     th {
       vertical-align: middle;
     }
   }
-  
+
   .ticket {
     font-size: 0.8rem;
 
@@ -15,5 +16,12 @@
       &.priority-medium{ background-color: #ff8000; }
       &.priority-high  { background-color: #da1500; }
     }
+  }
+}
+
+// Tickets - Show
+.ticket {
+  .output {
+    font-size: 1.1rem;
   }
 }
