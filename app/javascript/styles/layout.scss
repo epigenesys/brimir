@@ -9,27 +9,34 @@ body {
   width: 350px;
 }
 
-.navbar.sidebar {
-  position: fixed;
-  height: calc(100vh - 56px);
-  width: 260px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  .navbar-nav {
-    width: 100%;
+main {
+  display: flex;
+  margin-top: 56px;
+
+  .navbar.sidebar {
+    width: 300px;
+    flex: 0 0 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    .navbar-nav {
+      width: 100%;
+    }
+  
+    .label-dropdown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
   }
 
-  .label-dropdown {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.8rem;
+  section {
+    flex: 1;
+    margin-top: 12px;
   }
 }
 
-main.container {
-  margin-top: 56px;
-
+main {
   .content {
     background: #fff;
     border-radius: 0.2rem;

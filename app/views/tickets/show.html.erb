@@ -1,179 +1,163 @@
-<div class="content ticket">
-  <% if current_user.agent? %>
-    <% unless @ticket.locked?(current_user) %>
-      <%# execute JS to take/keep the ticket lock %>
-      <span data-lock-path="<%= ticket_lock_path(@ticket) %>"></span>
-    <% end %>
-  <% end %>
-
-  <h3><%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %></h3>
-
-  <% if @ticket.content.blank? %>
-    (<%= t(:no_content) %>)
-  <% else %>
-    <div class="output p-4">
-      <% if @ticket.content_type == 'html' %>
-        <%= sanitize_html(@ticket.content, @ticket.inline_files) %>
-      <% else %>
-        <pre><%= word_wrap(@ticket.content, line_width: 72) %></pre>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<div class="content">
-  <% if current_user.agent? %>
-    <% unless @ticket.locked?(current_user) %>
-      <%# execute JS to take/keep the ticket lock %>
-      <span data-lock-path="<%= ticket_lock_path(@ticket) %>"></span>
-    <% end %>
-  <% end %>
-  <div class="row bb ptm pbm">
-    <div class="medium-1 col pll">
-      <%= user_avatar @ticket.user, class: 'avatar', size: 35 %>
-    </div>
-    <div class="medium-11 cols pll ticket-toolbar">
-      <a class="pull-right mtm text-default mrl" href="#print" onclick="window.print()"><i class="fas fa-fw fa-print"></i></a>
-      <% if @ticket.raw_message_file_size.to_i > 0 %>
-        <a class="pull-right mtm text-default mrl" href="<%= ticket_path(format: :eml) %>"><i class="fas fa-fw fa-save"></i></a>
-      <% end %>
-      <h3 class="no-m text-default">
-        <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
-        <% if can? :update, @ticket %>
-          <small>
-            <a href="#" data-reveal-id="change-subject">
-              <i class="fa fa-fw fa-edit text-default"></i>
-            </a>
-          </small>
-        <% end %>
-      </h3>
-      <h5 class="text-default mb no-mt">
-        <%= t(:ticket_by_at, email: link_to(@ticket.user.email, user_tickets_path(user_id: @ticket.user.id)), at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)).html_safe %>
-        <% unless @ticket.to_email_address.nil? %>
-          <%= t :to_email, email: @ticket.to_email_address.email %>
-        <% end %>
-      </h5>
-
-      <ul class="no-m">
-        <li class="ib no-ml mrl">
-          <span class="fa fa-tag fa-fw ib"></span>
-          <%= t(:ticket_id) %>: <%= @ticket.id %>
-        </li>
-        <li class="ib mrl">
-          <% if can? :update, @ticket %>
-            <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
-              <span class="fa-fw <%= status_icon_class(@ticket.status) %> text-default"></span>
-              <span class="show-for-print hide"><%= t(:status) %>:</span>
-              <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
-            </a>
-            <%= render 'status_dropdown', ticket: @ticket %>
-          <% else %>
-            <span class="fa-fw <%= status_icon_class(@ticket.status) %>"></span>
-            <span class="show-for-print hide"><%= t(:status) %>:</span>
-            <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
-          <% end %>
-        </li>
-        <li class="ib mrl">
-          <% if can? :update, @ticket %>
-            <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
-              <span class="cc-priority-<%= @ticket.priority %> fa fa-fw fa-circle-o"></span>
-              <span class="show-for-print hide"><%= t(:priority) %>:</span>
-              <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
-            </a>
-            <%= render 'priority_dropdown', ticket: @ticket, short: false %>
-          <% else %>
-            <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
-            <span class="show-for-print hide"><%= t(:priority) %>:</span>
-            <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
-          <% end %>
-        </li>
-        <li class="ib mrl">
-          <% if can? :update, @ticket %>
-            <a href="#" data-reveal-id="change-assignee">
-              <span class="fa fa-fw fa-user text-default"></span>
-              <span class="show-for-print hide"><%= t(:assignee) %>:</span>
-              <% if !@ticket.assignee %>
-                <%= t(:unassigned) %>
-              <% else %>
-                <%= @ticket.assignee.email %>
-              <% end %>
-            </a>
-          <% else %>
-            <span class="fa fa-fw fa-user text-default"></span>
-            <span class="show-for-print hide"><%= t(:assignee) %>:</span>
-            <% if !@ticket.assignee %>
-              <%= t(:unassigned) %>
-            <% else %>
-              <%= @ticket.assignee.email %>
-            <% end %>
-          <% end %>
-        </li>
-      </ul>
-      <ul class="no-m">
-        <li class="ib" data-labelings>
-          <% if can?(:create, Labeling.new(labelable: @ticket)) %>
-            <a href="#" data-reveal-id="add-labels" class="radius label secondary mrs text-light">
-              <i class="fa fa-fw fa-plus"></i> <%= t(:add) %>
-            </a>
-          <% end %>
-          <% @ticket.labelings.each do |labeling| %>
-            <span class="ib no-m">
-              <%= render labeling %>
-            </span>
-          <% end %>
-        </li>
-      </ul>
-
-      <% if @ticket.locked?(current_user) && can?(:destroy, Labeling.new(labelable: @ticket)) %>
-        <%= link_to t(:take_ticket_lock_from_user, user: @ticket.locked_by.email),
-            ticket_lock_path(@ticket), class: 'tiny alert button',
-            'data-method' => :delete %>
-      <% end %>
-    </div>
-  </div>
-  <div class="row<% if @ticket.replies.size == 1 %> bb<% end %>">
-    <div class="medium-11 medium-push-1 cols ptxl pbxl">
-      <% if @ticket.content.blank? %>
-        (<%= t(:no_content) %>)
-      <% else %>
-
-        <div class="output">
-          <% if @ticket.content_type == 'html' %>
-            <%= sanitize_html(@ticket.content, @ticket.inline_files) %>
-          <% else %>
-            <pre><%= word_wrap(@ticket.content, line_width: 72) %></pre>
-          <% end %>
-
+<div class="container show-ticket">
+  <div class="content">
+    <div class="ticket-header">
+      <div class="row">
+        <div class="col-lg-1">
+          <%= user_avatar @ticket.user, class: 'avatar', size: 78 %>
         </div>
-      <% end %>
-
-      <hr />
-      <%= render partial: 'shared/notified_users_list', locals: {ticket: @ticket} %>
-
-      <% if @ticket.attached_files.size > 0 %>
-        <hr />
-        <ul class="attachments">
-          <%= render @ticket.attached_files %>
-        </ul>
-      <% end %>
-  </div>
-  </div>
-
-  <% if @ticket.replies.size > 1 %>
-    <div class="row replies">
-      <% @replies.each_with_index do |reply, index| %>
-        <% if @replies.count - 1 == index %>
-          <% div_class = 'active' %>
-        <% else %>
-          <% div_class = '' %>
-        <% end %>
-
-        <%= render reply, div_class: div_class %>
-      <% end %>
+        <div class="col-lg-11">
+          <a class="float-right p-2" href="#print" onclick="window.print()"><i class="fas fa-fw fa-print"></i></a>
+          <% if @ticket.raw_message_file_size.to_i > 0 %>
+            <a class="float-right mtm text-default mrl" href="<%= ticket_path(format: :eml) %>"><i class="fas fa-fw fa-save"></i></a>
+          <% end %>
+          <h3 class="ticket-subject">
+            <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
+            <% if can? :update, @ticket %><small><a href="#" data-reveal-id="change-subject"><i class="fa fa-fw fa-edit"></i></a></small><% end %>
+          </h3>
+          <h4 class="ticket-contact">
+            <%= t(:ticket_by_at, email: link_to(@ticket.user.email, user_tickets_path(user_id: @ticket.user.id)), at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)).html_safe %>
+            <% unless @ticket.to_email_address.nil? %>
+              <%= t :to_email, email: @ticket.to_email_address.email %>
+            <% end %>
+          </h4>
+          <div class="ticket-actions">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <span class="fa fa-tag fa-fw"></span>
+                <%= t(:ticket_id) %>: <%= @ticket.id %>
+              </li>
+              <li class="list-inline-item">
+                <% if can? :update, @ticket %>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="ticketStatuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa-fw <%= status_icon_class(@ticket.status) %>"></i>
+                      <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="ticketStatuses">
+                      <%= render 'status_dropdown', ticket: @ticket %>
+                    </div>
+                  </div>
+                <% else %>
+                  <i class="fa-fw fa <%= status_icon_class(@ticket.status) %>"></i>
+                  <span class="d-print-inline-block d-none"><%= t(:status) %>:</span>
+                  <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
+                <% end %>
+              </li>
+              <li class="list-inline-item">
+                <% if can? :update, @ticket %>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-priority-<%= @ticket.priority %>" type="button" id="ticketPriority" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa-fw far fa-circle"></i>
+                      <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="ticketPriority">
+                      <%= render 'priority_dropdown', ticket: @ticket, short: false %>
+                    </div>
+                  </div>
+                <% else %>
+                  <i class="fa-fw far fa-circle priority-<%= @ticket.priority %>"></i>
+                  <span class="d-print-inline-block d-none"><%= t(:priority) %>:</span>
+                  <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
+                <% end %>
+              </li>
+              <li class="list-inline-item">
+                <% if can? :update, @ticket %>
+                  <a href="#" data-reveal-id="change-assignee">
+                    <span class="fa fa-fw fa-user text-default"></span>
+                    <span class="show-for-print hide"><%= t(:assignee) %>:</span>
+                    <% if !@ticket.assignee %>
+                      <%= t(:unassigned) %>
+                    <% else %>
+                      <%= @ticket.assignee.email %>
+                    <% end %>
+                  </a>
+                <% else %>
+                  <span class="fa fa-fw fa-user text-default"></span>
+                  <span class="show-for-print hide"><%= t(:assignee) %>:</span>
+                  <% if !@ticket.assignee %>
+                    <%= t(:unassigned) %>
+                  <% else %>
+                    <%= @ticket.assignee.email %>
+                  <% end %>
+                <% end %>
+              </li>
+              <li class="list-inline-item" data-labelings>
+                <% if can?(:create, Labeling.new(labelable: @ticket)) %>
+                  <a href="#" data-reveal-id="add-labels" class="btn btn-primary btn-sm">
+                    <i class="fa fa-fw fa-plus"></i> <%= t(:add) %>
+                  </a>
+                <% end %>
+                <% @ticket.labelings.each do |labeling| %>
+                  <span class="ib no-m">
+                    <%= render labeling %>
+                  </span>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
 
-  <% if can? :create, @reply %>
-    <%= render 'replies/form', reply_to: @reply_to %>
-  <% end %>
+    <div class="bb ptm pbm">
+      <div class="medium-11 cols pll ticket-toolbar">
+
+        <% if @ticket.locked?(current_user) && can?(:destroy, Labeling.new(labelable: @ticket)) %>
+          <%= link_to t(:take_ticket_lock_from_user, user: @ticket.locked_by.email),
+              ticket_lock_path(@ticket), class: 'tiny alert button',
+              'data-method' => :delete %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @ticket.content.blank? %>
+      (<%= t(:no_content) %>)
+    <% else %>
+      <div class="output p-4">
+        <% if @ticket.content_type == 'html' %>
+          <%= sanitize_html(@ticket.content, @ticket.inline_files) %>
+        <% else %>
+          <pre><%= word_wrap(@ticket.content, line_width: 72) %></pre>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= render partial: 'shared/notified_users_list', locals: {ticket: @ticket} %>
+    
+    <hr />
+
+    <% if @ticket.attached_files.size > 0 %>
+      <hr />
+      <ul class="attachments">
+        <%= render @ticket.attached_files %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="content">
+    <% if current_user.agent? %>
+      <% unless @ticket.locked?(current_user) %>
+        <%# execute JS to take/keep the ticket lock %>
+        <span data-lock-path="<%= ticket_lock_path(@ticket) %>"></span>
+      <% end %>
+    <% end %>
+
+    <% if @ticket.replies.size > 1 %>
+      <div class="row replies">
+        <% @replies.each_with_index do |reply, index| %>
+          <% if @replies.count - 1 == index %>
+            <% div_class = 'active' %>
+          <% else %>
+            <% div_class = '' %>
+          <% end %>
+
+          <%= render reply, div_class: div_class %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if can? :create, @reply %>
+      <%= render 'replies/form', reply_to: @reply_to %>
+    <% end %>
+  </div>
 </div>

@@ -58,7 +58,9 @@
           </ul>
         </div>
       </nav>
+    <% end %>
 
+    <main>
       <nav class="navbar navbar-dark bg-secondary sidebar d-block">
         <%= link_to t(:new_ticket), new_ticket_path, class: 'btn btn-primary btn-block mt-2 mb-2', id: 'joyride-tickets' %>
         <ul class="navbar-nav">
@@ -72,14 +74,11 @@
           <% end %>
         </ul>
       </nav>
-    <% end %>
 
-    <main class="container">
-      <% if user_signed_in? %>
-        <br />
-      <% end %>
-      <%= yield %>
-    </main>
+      <section>
+        <%= yield %>
+      </section>
+    </div>
 
     <div class="alerts">
       <% flash.each do |name, msg| %>

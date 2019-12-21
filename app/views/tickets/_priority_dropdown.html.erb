@@ -1,11 +1,7 @@
-<ul id="priorities-<%= ticket.id %>" class="f-dropdown" data-dropdown-content>
-  <% Ticket.priorities.keys.each do |value| %>
-    <li>
-      <%= link_to ticket_path(ticket, ticket: { priority: value }, short: short),
-          method: :patch, remote: true do %>
-        <span class="cc-priority-<%= value %> fa fa-fw fa-circle-o"></span>
-        <%= t(value) %>
-      <% end %>
-    </li>
+<% Ticket.priorities.keys.each do |value| %>
+  <%= link_to ticket_path(ticket, ticket: { priority: value }, short: short),
+      method: :patch, remote: true, class: 'dropdown-item' do %>
+    <i class="cc-priority-<%= value %> far fa-fw fa-circle"></i>
+    <%= t(value) %>
   <% end %>
-</ul>
+<% end %>
