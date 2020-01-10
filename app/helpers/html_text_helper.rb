@@ -56,18 +56,19 @@ module HtmlTextHelper
     result = sanitize(
         strip_inline_style(result),
         tags:       %w( a b br code div em i img li ol p pre table td tfoot
-                        thead tr span strong ul font ),
+                        thead tr span strong ul font blockquote ),
         attributes: %w( src href style color )
     )
 
     result.html_safe
   end
 
-  def wrap_and_quote(content)
+  def wrap_and_quote(content, include_line_prefix)
     content = html_to_text(content)
     content = content.gsub(/^.*\n>.*$/, '') # strip off last line before older quotes
     content = content.gsub(/^>.*$/, '') # strip off older quotes
     content = word_wrap(content.strip, line_width: 72)
-    content.gsub(/^/, '> ')
+    content.gsub(/^/, '> ') if include_line_prefix
+    content
   end
 end

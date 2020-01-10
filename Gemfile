@@ -76,14 +76,10 @@ gem 'will_paginate-bootstrap4'
 # attachments, thumbnails etc
 gem 'paperclip', "~> 6.1"
 
-# select2 replacement for selectboxes
-gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
-
 # for language detection
 gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
-# gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
 gem 'rails-i18n', '~> 6.0', '>= 6.0.0'
 gem 'devise-i18n', '~> 1.8', '>= 1.8.2'
 

@@ -1,4 +1,4 @@
-<div class="card accordion <%= div_class %> <%= 'internal-reply' if reply.internal? %> <%= 'status-reply' if reply.kind_of?(StatusReply) %>" id="reply-<%=reply.id%>-accordion">
+<div class="card accordion reply <%= div_class %> <%= 'internal-reply' if reply.internal? %> <%= 'status-reply' if reply.kind_of?(StatusReply) %>" id="reply-<%=reply.id%>-accordion">
   <div class="card-header">
     <a href="#reply-<%=reply.id%>" class="text-default row" data-toggle="collapse" data-target="#reply-<%=reply.id%>">
       <% if reply.is_a? SystemReply %>
@@ -29,7 +29,7 @@
     </a>
   </div>
   <div id="reply-<%=reply.id%>" class="collapse" data-parent="#reply-<%=reply.id%>-accordion">
-    <div class="card-body <%= div_class %>">
+    <div class="card-body reply-content <%= div_class %>">
       <% if reply.raw_message_file_size.to_i > 0 %>
         <a class="pull-right text-default" href="<%= reply_path(reply, format: :eml) %>"><%= fa_icon 'save' %></a>
       <% end %>
@@ -44,10 +44,10 @@
         <% if reply.is_a? SystemReply %>
           <%= render('/shared/content_for_system_reply', reply: reply) %>
         <% else %>
-          <%= sanitize_html(reply.content, reply.inline_files) %>
+          <%= sanitize_html(reply.content.body, reply.inline_files) %>
         <% end %>
       <% else %>
-        <pre><%= word_wrap(html_to_text(reply.content), line_width: 72) %></pre>
+        <pre><%= word_wrap(html_to_text(reply.content.body), line_width: 72) %></pre>
       <% end %>
 
       <% if reply.attached_files.size > 0 %>
