@@ -34,7 +34,7 @@ module ApplicationHelper
       options, collection_or_options = collection_or_options, nil
     end
     unless options[:renderer]
-      options = options.merge renderer: Pagination::PaginationRenderer
+      options = options.merge renderer: WillPaginate::ActionView::BootstrapLinkRenderer
     end
     super(*[collection_or_options, options].compact)
   end
@@ -62,5 +62,42 @@ module ApplicationHelper
         javascript_include_tag url
       end
     end
+  end
+
+  def fa_icon(names, original_options = {})
+    options = original_options.deep_dup
+
+    icon_style = options.has_key?(:style) ? options.delete(:style) : 'fas'
+    icon_size = icon_size(options.delete(:size))
+    fa_five_classes = [icon_style, icon_size].compact
+
+    classes = fa_five_classes
+    classes.concat icon_names(names)
+    classes.concat Array(options.delete(:class))
+    text = options.delete(:text)
+    right_icon = options.delete(:right)
+    icon = content_tag(:i, nil, options.merge(:class => classes))
+    icon_join(icon, text, right_icon)
+  end
+
+  def icon_size(icon_size)
+    if icon_size.present?
+      icon_size.start_with?("fa-") ? icon_size : "fa-#{icon_size}"
+    end
+  end
+
+  def icon_names(names = [])
+    array_value(names).map { |n| "fa-#{n}" }
+  end
+
+  def icon_join(icon, text, reverse_order = false)
+    return icon if text.blank?
+    elements = [icon, ERB::Util.html_escape(text)]
+    elements.reverse! if reverse_order
+    safe_join(elements, " ")
+  end
+
+  def array_value(value = [])
+    value.is_a?(Array) ? value : value.to_s.split(/\s+/)
   end
 end

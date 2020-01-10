@@ -16,6 +16,8 @@
 // const imagePath = (name) => images(name, true)
 
 import Rails from "@rails/ujs";
+require("trix")
+require("@rails/actiontext")
 
 import 'bootstrap';
 
