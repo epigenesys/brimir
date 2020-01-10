@@ -56,6 +56,7 @@
                 </li>
             </ul>
           </th>
+          <th scope="col">Replies</th>
           <th scope="col">Priority</th>
           <th scope="col">Labels</th>
           <th scope="col">
@@ -97,6 +98,11 @@
                 <em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
               <% end %>
             </td>
+            <td>
+              <div class="badge badge-info">
+                <%= fa_icon 'comments', text: ticket.replies.count %>
+              </div>
+            </td>
             <td><span class="badge badge-primary priority priority-<%= ticket.priority %>"><%= ticket.priority.capitalize %></span></td>
             <td>
               <% ticket.labels.viewable_by(current_user).each do |label| %>
@@ -125,6 +131,9 @@
         <% end %>
       </tbody>
     </table>
+    <div class="pb-2 px-3">
+      <%= will_paginate @tickets %>
+    </div>
   </div>
 </div>
 

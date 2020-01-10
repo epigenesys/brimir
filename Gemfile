@@ -71,6 +71,7 @@ gem 'cancancan', '~> 3.0.1', '>= 3.0.1'
 
 # pagination
 gem 'will_paginate', "~> 3.1"
+gem 'will_paginate-bootstrap4'
 
 # attachments, thumbnails etc
 gem 'paperclip', "~> 6.1"

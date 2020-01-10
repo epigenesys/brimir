@@ -48,6 +48,8 @@
 
 # replies to tickets, made by a user, possibly with attachments
 class Reply < ApplicationRecord
+  has_rich_text :content
+  
   include CreateFromUser
   include EmailMessage
   include ReplyNotifications

@@ -1,6 +1,6 @@
 <div class="container show-ticket">
-  <div class="content">
-    <div class="ticket-header">
+  <div class="card">
+    <div class="card-header">
       <div class="row">
         <div class="col-lg-1">
           <%= user_avatar @ticket.user, class: 'avatar', size: 78 %>
@@ -122,10 +122,10 @@
       </div>
     <% end %>
 
-    <%= render partial: 'shared/notified_users_list', locals: {ticket: @ticket} %>
+    <div class="card-footer">
+      <%= render partial: 'shared/notified_users_list', locals: {ticket: @ticket} %>
+    </div>
     
-    <hr />
-
     <% if @ticket.attached_files.size > 0 %>
       <hr />
       <ul class="attachments">
@@ -134,30 +134,28 @@
     <% end %>
   </div>
 
-  <div class="content">
-    <% if current_user.agent? %>
-      <% unless @ticket.locked?(current_user) %>
-        <%# execute JS to take/keep the ticket lock %>
-        <span data-lock-path="<%= ticket_lock_path(@ticket) %>"></span>
-      <% end %>
+  <% if current_user.agent? %>
+    <% unless @ticket.locked?(current_user) %>
+      <%# execute JS to take/keep the ticket lock %>
+      <span data-lock-path="<%= ticket_lock_path(@ticket) %>"></span>
     <% end %>
+  <% end %>
 
-    <% if @ticket.replies.size > 1 %>
-      <div class="row replies">
-        <% @replies.each_with_index do |reply, index| %>
-          <% if @replies.count - 1 == index %>
-            <% div_class = 'active' %>
-          <% else %>
-            <% div_class = '' %>
-          <% end %>
-
-          <%= render reply, div_class: div_class %>
+  <% if @ticket.replies.size > 1 %>
+    <div class="replies">
+      <% @replies.each_with_index do |reply, index| %>
+        <% if @replies.count - 1 == index %>
+          <% div_class = 'active' %>
+        <% else %>
+          <% div_class = '' %>
         <% end %>
-      </div>
-    <% end %>
 
-    <% if can? :create, @reply %>
-      <%= render 'replies/form', reply_to: @reply_to %>
-    <% end %>
-  </div>
+        <%= render reply, div_class: div_class %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if can? :create, @reply %>
+    <%= render 'replies/form', reply_to: @reply_to %>
+  <% end %>
 </div>
