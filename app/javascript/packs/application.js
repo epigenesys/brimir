@@ -16,9 +16,31 @@
 // const imagePath = (name) => images(name, true)
 
 import Rails from "@rails/ujs";
-require("trix")
-require("@rails/actiontext")
+
+window.jQuery = jQuery
+window.$ = $
+
+require("trix");
+require("@rails/actiontext");
+require("select2");
 
 import 'bootstrap';
 
 Rails.start();
+$('.select2').select2({ width: '100%' });
+
+$('.reply-content blockquote').addClass('d-none');
+$('.reply-content blockquote').each((i, element) => {
+  var quoteButton = $("<button class='btn btn-secondary'>Open Quote</button>"); 
+  quoteButton.on('click', function(e) {
+    if($(element).hasClass('d-none')) {
+      $(element).removeClass('d-none');
+      quoteButton.text('Hide quote');
+    } else {
+      $(element).addClass('d-none');
+      quoteButton.text('Open quote');
+    }
+  });
+
+  $(element).after(quoteButton);
+});

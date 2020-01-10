@@ -10,63 +10,71 @@
     <div class="card-body">
       <h3 class="text-default"><%= t(:reply) %></h3>
       <% if current_user.agent? %>
-        <%= r.radio_button :internal, false, label: t(:reply), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" } %>
-        <%= r.radio_button :internal, true, label: t(:internal_note), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" } %>
+        <div class="form-check form-check-inline">
+          <%= r.radio_button :internal, false, label: t(:reply), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" }, class: 'form-check-input' %>
+          <%= r.label :internal_false, t(:reply), class: 'form-check-label' %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= r.radio_button :internal, true, data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" }, class: 'form-check-input' %>
+          <%= r.label :internal_true, t(:internal_note), class: 'form-check-label' %>
+        </div>
       <% end %>
       <% if can? :update, @reply.ticket %>
-        <div class="row">
+        <div class="row mb-2">
           <%= r.fields_for :ticket do |f| %>
-            <div class="medium-4 columns">
-              <%= f.label :to_email_address_id, t('activerecord.attributes.reply.from'), class: 'ptm' %>
+            <div class="col-md-4">
+              <%= f.label :to_email_address_id, t('activerecord.attributes.reply.from') %>
             </div>
-            <div class="medium-8 columns">
+            <div class="col-md-8">
               <% blank = @outgoing_addresses.count == 0 ? EmailAddress.default_email : '' %>
               <%= f.collection_select :to_email_address_id, @outgoing_addresses, :id, :formatted,
-                  include_blank: blank, label: false %>
+                  { include_blank: blank, label: false }, { class: 'custom-select' } %>
             </div>
           <% end %>
         </div>
       <% end %>
 
-      <div class="row mbl">
-        <div class="medium-4 columns">
+      <div class="row mb-2">
+        <div class="col-md-4">
           <label><%= t(:notification_will_be_sent_to) %></label>
         </div>
-        <div class="medium-8 columns">
+        <div class="col-md-8">
           <%= render 'replies/notified_users', r: r %>
         </div>
       </div>
 
       <% if (@canned_replies = EmailTemplate.canned_replies.order(:name)).any? %>
-        <div class="row mbl">
-          <div class="medium-4 columns">
+        <div class="row mb-2">
+          <div class="col-md-4">
             <label><%= t(:canned_reply) %></label>
           </div>
-          <div class="medium-8 columns">
+          <div class="col-md-8">
             <%= render 'replies/canned_replies' %>
           </div>
         </div>
       <% end %>
-
       <%
-        if @reply.content.blank? && @reply.errors.count == 0 # not on reply error view
+        if @reply.content.body.blank? && @reply.errors.count == 0
+          prefilled_body = ''
 
           if current_user.prefer_plain_text?
-            @reply.content = "\n#{html_to_text current_user.signature}\n"
+            prefilled_body = "\n#{html_to_text current_user.signature}\n"
           else
-            @reply.content = "<p></p>#{current_user.signature}<br />"
+            prefilled_body = "<p></p>#{current_user.signature}<br />"
           end
 
           if current_user.include_quote_in_reply?
-            @reply.content += t(:on_date_author_wrote, author: @reply.reply_to.user.email,
+            prefilled_body += t(:on_date_author_wrote, author: @reply.reply_to.user.email,
                 date: l(@reply.reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
 
             if current_user.prefer_plain_text?
-              @reply.content += "\n#{wrap_and_quote(@reply.reply_to.content)}"
+              prefilled_body += "\n#{wrap_and_quote(@reply.reply_to.content, true)}"
             else
-              @reply.content += "<div class='replyQuote'><br />#{text_to_html(wrap_and_quote(@reply.reply_to.content))}</div>"
+              prefilled_body += "<blockquote class='original_message'>#{text_to_html(wrap_and_quote(@reply.reply_to.content, false))}</blockquote>"
             end
           end
+
+          @reply.content.body = prefilled_body
         end
       %>
 
@@ -74,7 +82,7 @@
       <% if current_user.prefer_plain_text? %>
         <%= r.text_area :content, label: false %>
       <% else %>
-        <%= form.rich_text_area :content, label: false %>
+        <%= r.rich_text_area :content, label: false %>
       <% end %>
       </p>
 
@@ -83,24 +91,22 @@
       <% if can? :update, @reply.ticket %>
         <div class="row">
           <%= r.fields_for :ticket do |f| %>
-            <div class="medium-4 columns">
-              <%= f.label :status, t(:change_status), class: 'ptm' %>
+            <div class="col-md-4">
+              <%= f.label :status, t(:change_status) %>
             </div>
-            <div class="medium-8 columns">
+            <div class="col-md-8">
               <%= f.collection_select(:status,
                   t('activerecord.attributes.ticket.statuses'), :first, :last,
-                  label: false) %>
+                  { label: false }, { class: 'custom-select' }) %>
             </div>
           <% end %>
         </div>
       <% end %>
 
       <p>
-        <%= r.button t(:save_as_draft), name: 'reply[draft]', value: true, class: 'button regular radius primary' %>
-
-        <%= r.button @reply.internal? ? t(:attach_note) : t(:send_reply), name: 'reply[draft]', value: false, type: :submit, class: 'reply-submit button regular radius secondary' %>
+        <%= r.button t(:save_as_draft), name: 'reply[draft]', value: true, class: 'btn btn-primary' %>
+        <%= r.button @reply.internal? ? t(:attach_note) : t(:send_reply), name: 'reply[draft]', value: false, type: :submit, class: 'reply-submit btn btn-secondary' %>
       </p>
-
     </div>
   </div>
 <% end %>

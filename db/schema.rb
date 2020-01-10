@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_140158) do
+ActiveRecord::Schema.define(version: 2020_01_10_150531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "attachments", id: :serial, force: :cascade do |t|
     t.integer "attachable_id"
@@ -22,7 +53,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
     t.datetime "updated_at"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.bigint "file_file_size"
+    t.integer "file_file_size"
     t.datetime "file_updated_at"
     t.string "content_id"
     t.index ["attachable_id"], name: "index_attachments_on_attachable_id"
@@ -55,8 +86,8 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
 
   create_table "labelings", id: :serial, force: :cascade do |t|
     t.integer "label_id"
-    t.string "labelable_type"
     t.integer "labelable_id"
+    t.string "labelable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
@@ -72,8 +103,8 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
   end
 
   create_table "notifications", id: :serial, force: :cascade do |t|
-    t.string "notifiable_type"
     t.integer "notifiable_id"
+    t.string "notifiable_type"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -83,7 +114,6 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
   end
 
   create_table "replies", id: :serial, force: :cascade do |t|
-    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "ticket_id"
@@ -93,7 +123,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
     t.boolean "draft", default: false, null: false
     t.string "raw_message_file_name"
     t.string "raw_message_content_type"
-    t.bigint "raw_message_file_size"
+    t.integer "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.boolean "internal", default: false, null: false
     t.string "type"
@@ -172,7 +202,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
     t.datetime "locked_at"
     t.string "raw_message_file_name"
     t.string "raw_message_content_type"
-    t.bigint "raw_message_file_size"
+    t.integer "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.string "orig_to"
     t.string "orig_cc"
@@ -221,6 +251,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_140158) do
     t.index ["schedule_id"], name: "index_users_on_schedule_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "identities", "users"
   add_foreign_key "labelings", "labels"
   add_foreign_key "notifications", "users"

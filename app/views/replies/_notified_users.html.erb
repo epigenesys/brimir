@@ -1,3 +1,1 @@
-<div data-notified-users>
-  <%= r.collection_select :notified_user_ids, @users.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
-</div>
+<%= r.collection_select :notified_user_ids, @users.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
