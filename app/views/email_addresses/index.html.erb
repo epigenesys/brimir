@@ -12,7 +12,21 @@
 <div class="row collapse">
   <div class="large-12 columns">
 
-    <table class="full">
+    
+
+    <div class="pagination-centered">
+      <%= will_paginate @email_address %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <%= link_to t(:new_email_address), new_email_address_path, class: 'btn btn-primary float-right' %>
+      <h2 class="mb-0"><%= t(:email_addresses) %></h2>
+    </div>
+    <table class="card-body table">
       <thead>
         <tr>
           <th><%= t('activerecord.attributes.email_address.email') %></th>
@@ -30,11 +44,11 @@
             <td><%= fa_icon 'check' if email_address.default? %></td>
             <td><%= fa_icon 'check' if email_address.verification_token.nil? %></td>
             <td>
-              <%= link_to edit_email_address_path(email_address), class: 'mrl' do %>
-                <%= fa_icon 'pencil' %>
+              <%= link_to edit_email_address_path(email_address), class: 'btn btn-sm btn-primary' do %>
+                <%= fa_icon 'edit' %>
               <% end %>
               <%= link_to email_address_path(email_address), method: :delete,
-                  'data-confirm' => t(:are_you_sure) do %>
+                  'data-confirm' => t(:are_you_sure), class: 'btn btn-sm btn-danger' do %>
                 <%= fa_icon 'trash' %>
               <% end %>
             </td>
@@ -42,10 +56,8 @@
         <% end %>
       </tbody>
     </table>
-
-    <div class="pagination-centered">
+    <div class="card-footer text-center">
       <%= will_paginate @email_address %>
     </div>
   </div>
 </div>
-
