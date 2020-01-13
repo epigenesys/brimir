@@ -1,18 +1,10 @@
-<div class="panel no-bt">
-  <div class="row collapse">
-    <div class="medium-6 columns">
-      <h4 class="no-m pts pbs"><%= t(:rules) %></h4>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <%= link_to t(:new_rule), new_rule_path, class: 'btn btn-primary float-right' %>
+      <h2 class="mb-0"><%= t(:rules) %></h2>
     </div>
-    <div class="medium-6 columns">
-      <%= link_to t(:new_rule), new_rule_path, class: 'no-m tiny button right radius' %>
-    </div>
-  </div>
-</div>
-
-<div class="row collapse">
-  <div class="large-12 columns">
-
-    <table class="full">
+    <table class="card-body table">
       <thead>
         <tr>
           <th><%= t('activerecord.attributes.rule.filter_field') %></th>
@@ -34,8 +26,7 @@
         <% end %>
       </tbody>
     </table>
-
-    <div class="pagination-centered">
+    <div class="card-footer text-center">
       <%= will_paginate @rules %>
     </div>
   </div>

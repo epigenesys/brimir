@@ -1,17 +1,15 @@
-<%= form_for @rule do |f| %>
-  <div class="row mt mb">
-    <div class="large-6 columns">
+<%= simple_form_for @rule do |f| %>
       <%
         fields = []
         [:from, :subject, :content, :orig_to, :orig_cc, :to].each do |key|
           fields << [t(key, scope: 'activerecord.attributes.ticket'), key]
         end
       %>
-      <%= f.select(:filter_field, fields) %>
+      <%= f.input(:filter_field, collection: fields) %>
 
-      <%= f.collection_select(:filter_operation, t('activerecord.attributes.rule.filter_operations'), :first, :last) %>
+      <%= f.input(:filter_operation, collection: t('activerecord.attributes.rule.filter_operations')) %>
 
-      <%= f.text_field :filter_value %>
+      <%= f.input :filter_value %>
 
       <%= react_component('RuleFields', {
           actions: {
@@ -40,12 +38,6 @@
           action_operation: f.object.action_operation,
           action_value: f.object.action_value
       }) %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="medium-12 columns bt">
-      <%= f.submit t(:save), class: 'success button radius mtl' %>
-    </div>
-  </div>
+  
+  <%= f.submit t(:save), class: 'btn btn-primary mt-3' %>
 <% end %>

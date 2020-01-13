@@ -1,14 +1,14 @@
-<div class="panel no-bt mbl">
-  <div class="row collapse">
-    <div class="medium-6 columns">
-      <h4 class="no-m pts pbs"><%= t(:edit_rule) %></h4>
-    </div>
-    <div class="medium-6 columns">
+<div class="container">
+  <div class="card">
+    <div class="card-header">
       <%= link_to t(:delete_rule), rule_path(@rule), 
-          method: :delete, 
-          data: { confirm: t(:are_you_sure) },
-          class: 'no-m radius right tiny button' %>
+            method: :delete, 
+            data: { confirm: t(:are_you_sure) },
+            class: 'btn btn-danger float-right' %>
+      <h2 class="mb-0"><%= t(:new_rule) %></h2>
+    </div>
+    <div class="card-body">
+      <%= render 'form' %>
     </div>
   </div>
 </div>
-<%= render 'form' %>
