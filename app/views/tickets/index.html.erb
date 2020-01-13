@@ -16,7 +16,7 @@
           <% params.delete(:action) %>
 
           <% if params[:status] == 'deleted' %>
-            <%= link_to tickets_deleted_path, data: { remote: true, method: :delete, confirm: t(:are_you_sure_empty_trash) }, class: 'btn btn-danger' do %>
+            <%= link_to tickets_deleted_path, data: { remote: true, method: :delete, confirm: t(:are_you_sure_empty_trash) }, class: 'btn btn-danger mr-2' do %>
               <i class="fa fa-bomb"></i>
             <% end %>
           <% end %>

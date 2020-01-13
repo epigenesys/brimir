@@ -1,11 +1,14 @@
-<div class="row">
-  <% if can? :create, :email_imports %>
-    <%= link_to t(:import_emails), new_email_import_path, class: 'button pull-right'%>
-  <% end %>
+<div class="container new-ticket">
+  <div class="card" style="background: #fff <%# for unauthenticated form %>">
+    <div class="card-header">
+      <% if can? :create, :email_imports %>
+        <%= link_to t(:import_emails), new_email_import_path, class: 'btn btn-primary float-right'%>
+      <% end %>
+      <h2 class="mb-0"><%= t(:new_ticket) %></h2>
+    </div>
 
-  <div class="medium-9 columns" style="background: #fff <%# for unauthenticated form %>">
-
-    <%= render 'form' %>
-
+    <div class="card-body">
+      <%= render 'form' %>
+    </div>
   </div>
 </div>
