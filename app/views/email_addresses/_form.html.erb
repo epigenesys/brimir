@@ -1,29 +1,14 @@
-<%= form_for @email_address do |f| %>
-  <div class="row mt">
-    <div class="large-6 columns">
-      <%= f.text_field :email if f.object.new_record? %>
+<%= simple_form_for @email_address do |f| %>
+  <%= f.input :email if f.object.new_record? %>
+  <%= f.input :name %>
+  <%= f.input :default, as: :boolean %>
 
-      <%= f.text_field :name %>
+  <p><%= t(:verification_mail_will_be_sent) %></p>
 
-      <%= f.check_box :default %>
+  <p>
+    <strong><%= t(:mark_spam_spf) %></strong>
+  </p>
 
-      <p>
-        <%= t(:verification_mail_will_be_sent) %>
-      </p>
-
-      <p>
-        <strong>
-          <%= t(:mark_spam_spf) %>
-        </strong>
-      </p>
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="medium-12 columns bt">
-      <%= f.submit t(:save), class: 'success button radius mtl' %>
-    </div>
-  </div>
+  <%= f.submit t(:save), class: 'btn btn-primary' %>
 <% end %>
 
