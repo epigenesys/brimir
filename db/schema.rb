@@ -25,27 +25,6 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
   create_table "attachments", id: :serial, force: :cascade do |t|
     t.integer "attachable_id"
     t.string "attachable_type"
@@ -53,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
     t.datetime "updated_at"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.string "content_id"
     t.index ["attachable_id"], name: "index_attachments_on_attachable_id"
@@ -86,8 +65,8 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
 
   create_table "labelings", id: :serial, force: :cascade do |t|
     t.integer "label_id"
-    t.integer "labelable_id"
     t.string "labelable_type"
+    t.integer "labelable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
@@ -103,8 +82,8 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
   end
 
   create_table "notifications", id: :serial, force: :cascade do |t|
-    t.integer "notifiable_id"
     t.string "notifiable_type"
+    t.integer "notifiable_id"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -123,7 +102,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
     t.boolean "draft", default: false, null: false
     t.string "raw_message_file_name"
     t.string "raw_message_content_type"
-    t.integer "raw_message_file_size"
+    t.bigint "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.boolean "internal", default: false, null: false
     t.string "type"
@@ -202,7 +181,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
     t.datetime "locked_at"
     t.string "raw_message_file_name"
     t.string "raw_message_content_type"
-    t.integer "raw_message_file_size"
+    t.bigint "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.string "orig_to"
     t.string "orig_cc"
@@ -251,7 +230,6 @@ ActiveRecord::Schema.define(version: 2020_01_10_150531) do
     t.index ["schedule_id"], name: "index_users_on_schedule_id"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "identities", "users"
   add_foreign_key "labelings", "labels"
   add_foreign_key "notifications", "users"
