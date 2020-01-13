@@ -12,6 +12,7 @@
 #
 
 class EmailTemplate < ApplicationRecord
+  has_rich_text :message
 
   enum kind: [:user_welcome, :ticket_received, :canned_reply]
 

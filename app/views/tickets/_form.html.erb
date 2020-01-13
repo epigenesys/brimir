@@ -43,7 +43,7 @@
     %>
 
     <% if type == 'html' %>
-      <%= f.trix_editor :content,
+      <%= f.rich_text_area :content,
         value: (f.object.content.nil? ? content : f.object.content), tabindex: tabindex %>
     <% else %>
       <%= f.text_area :content,
