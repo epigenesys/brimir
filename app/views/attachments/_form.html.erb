@@ -1,9 +1,11 @@
 <div class="panel mb ptl pbl mbxl">
   <h5><%= fa_icon('paperclip', size: 'faw', text: t(:attach_files)) %></h5>
 
-  <%= f.fields_for :attachments do |ff| %>
-    <%= render 'attachments/form_row', f: ff %>
-  <% end %>
+  <div data-attachments>
+    <%= f.fields_for :attachments do |ff| %>
+      <%= render 'attachments/form_row', f: ff %>
+    <% end %>
+  </div>
 
   <% params = { reply: true } if f.object.is_a?(Reply) %>
   <%= link_to t(:attach_files), new_attachment_path(params), remote: true, class: 'btn btn-sm' %>

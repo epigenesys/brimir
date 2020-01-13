@@ -1,8 +1,15 @@
 <% if f.object.file_file_size.to_i == 0 %>
-  <%= f.file_field :file, label: false %>
+  <div class="input-group mb-2">
+    <div class="custom-file">
+      <%= f.file_field :file, label: false %>
+      <%# TODO translate this %>
+      <%= f.label :file, 'Choose file', class: 'custom-file-label' %>
+    </div>
+  </div>
+
 <% else %>
   <strong style="display: block"><%= f.object.file_file_name %></strong>
-  <span style="margi-bottom: 10px"><%= number_to_human_size(f.object.file.size) %> &middot; <%= link_to t(:download), f.object.file.url %></span>
+  <span><%= number_to_human_size(f.object.file.size) %> &middot; <%= link_to t(:download), f.object.file.url %></span>
   <label style="display: inline-block; float: right">
     <%= f.check_box :_destroy, label: false %>
     <%= t :delete %>
