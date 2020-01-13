@@ -22,8 +22,6 @@ class EmailTemplatesController < ApplicationController
   end
 
   def edit
-    # safely output the html
-    @email_template.message = @email_template.message.html_safe
   end
 
   def update

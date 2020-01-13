@@ -1,18 +1,10 @@
-<div class="panel no-bt">
-  <div class="row collapse">
-    <div class="medium-6 columns">
-      <h4 class="no-m pts pbs"><%= t(:email_templates) %></h4>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <%= link_to t(:new_email_template), new_email_template_path, class: 'btn btn-primary float-right' %>
+      <h2 class="mb-0"><%= t(:email_templates) %></h2>
     </div>
-    <div class="medium-6 columns">
-      <%= link_to t(:new_email_template), new_email_template_path, class: 'no-m tiny button right radius' %>
-    </div>
-  </div>
-</div>
-
-<div class="row collapse">
-  <div class="large-12 columns">
-
-    <table class="full">
+    <table class="table card-body">
       <thead>
         <tr>
           <th><%= EmailTemplate.human_attribute_name(:name) %></th>
@@ -37,19 +29,20 @@
               <% end %>
             </td>
             <td>
-              <%= link_to edit_email_template_path(email_template), class: 'mrl' do %>
-                <%= fa_icon 'pencil' %>
+              <%= link_to edit_email_template_path(email_template),
+                class: 'btn btn-sm btn-primary' do %>
+                <%= fa_icon 'edit' %>
               <% end %>
               <%= link_to email_template_path(email_template), method: :delete,
-                  'data-confirm' => check_settings(@tenant, email_template) do %>
+                  'data-confirm' => check_settings(@tenant, email_template),
+                  class: 'btn btn-sm btn-danger' do %>
                 <%= fa_icon 'trash' %>
               <% end %>
             </td>
         <% end %>
       </tbody>
     </table>
-
-    <div class="pagination-centered">
+    <div class="card-footer">
       <%= will_paginate @email_template %>
     </div>
   </div>
