@@ -98,9 +98,6 @@ gem 'rest-client', '~> 2.0'
 # secure digest
 gem 'digest-sha3'
 
-# Trix WYSIWYG editor
-gem 'trix-rails', '~> 2.2.0', require: 'trix'
-
 # React support
 gem 'react-rails', '~> 2.6.0'
 
