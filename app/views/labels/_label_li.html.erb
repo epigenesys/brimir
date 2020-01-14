@@ -6,13 +6,17 @@
     p = permitted_params.merge({ label_id: label.id })
   end
 %>
-<li data-edit-label-row="<%= label.id %>" class="list-group-item">
-  <div class="dropdown">
-    <button class="btn btn-text btn-block dropdown-toggle label-dropdown" type="button" id="label-color-dropdown-<%= label.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<li data-edit-label-row="<%= label.id %>" class="label-list-group">
+  <div class="btn-group">
+    <a href="<%= tickets_url(p) %>" class="btn btn-secondary label-link <%= 'active ' if params[:label_id].to_i == label.id %>" style="border-color: <%= label.color %>">
+      <span class="color-preview" style="background-color: <%= label.color %>"></span>
       <%= label.name %>
+    </a>
+    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" style="border-color: <%= label.color %>; background-color: <%= label.color %>;" id="label-color-dropdown<%= label.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+      <span class="sr-only">Open Color Dropdown</span>
     </button>
     <div class="dropdown-menu" aria-labelledby="label-color-dropdown<%= label.id %>">
-      <ul>
+      <ul class="label-color-list">
         <% Label::COLORS.each_with_index do |color, index| %>
           <li>
             <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
@@ -21,12 +25,14 @@
           </li>
         <% end %>
       </ul>
-      <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true do %>
-        <i class="fas fa-fw fa-trash"></i>
-      <% end %>
-      <%= link_to edit_label_path(label), remote: true do %>
-        <i class="fas fa-fw fa-edit"></i>
-      <% end %>
+      <div class="btn-group label-actions">
+        <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true, class: 'btn btn-sm btn-danger rounded-0' do %>
+          <%= fa_icon 'trash', style: 'fas', size: 'fw' %>
+        <% end %>
+        <%= link_to edit_label_path(label), remote: true, class: 'btn btn-sm btn-primary rounded-0' do %>
+          <%= fa_icon 'edit', style: 'fas', size: 'fw' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </li>
