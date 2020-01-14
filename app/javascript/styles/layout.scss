@@ -1,6 +1,14 @@
+html {
+  display: flex;
+  min-height: 100%;
+}
+
 body {
   background-color: #ededed;
+  flex: 1 0;
+  display: flex;
 }
+
 
 .alerts {
   position: fixed;
@@ -11,6 +19,7 @@ body {
 
 main {
   display: flex;
+  flex: 1;
   margin-top: 56px;
 
   .navbar.sidebar {
