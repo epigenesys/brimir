@@ -1,3 +1,5 @@
+@import 'variables';
+
 // Tickets - Index
 .tickets {
   table {
@@ -11,6 +13,7 @@
 
   .ticket {
     font-size: 0.8rem;
+    transition: background 0.3s;
 
     .priority {
       color: #fff;
@@ -18,6 +21,10 @@
       &.priority-low   { background-color: #ffd700; }
       &.priority-medium{ background-color: #ff8000; }
       &.priority-high  { background-color: #da1500; }
+    }
+
+    &.highlight {
+      background: rgba($primary, 0.1);
     }
   }
 }
