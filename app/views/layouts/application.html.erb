@@ -44,7 +44,7 @@
             <% end %>
             <li class="nav-item dropdown" id="joyride-settings">
               <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-                <%= user_avatar current_user, class: 'avatar mrm', size: 20 %><%= current_user.email %>
+                <%= user_avatar current_user, class: 'avatar', size: 20 %><%= current_user.email %>
               </a>
               <div class="dropdown-menu">
                 <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>

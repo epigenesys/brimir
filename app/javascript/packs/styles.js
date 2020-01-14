@@ -6,5 +6,7 @@ import 'select2/dist/css/select2';
 // Custom CSS imports
 import 'styles/actiontext';
 import 'styles/layout';
+import 'styles/forms';
 import 'styles/tickets';
 import 'styles/replies';
+import 'styles/users';
