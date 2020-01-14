@@ -53,6 +53,56 @@ main {
   }
 }
 
+nav {
+  ul {
+    padding-left: 0px;
+  }
+  .label-list-group {
+    list-style: none;
+    margin-bottom: 0.4rem;
+
+    > .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 30px;
+    }
+
+    .label-link {
+      border-width: 2px;
+    }
+    .dropdown-menu {
+      padding: 0;
+      right: 0px;
+      left: auto;
+    }
+
+    .label-actions {
+      display: flex;
+    }
+  }
+  .label-color-list {
+    display: grid;
+    grid-template-columns: 54px 54px 54px;
+    list-style: none;
+    li {
+      margin-bottom: 0.2rem;
+      a {
+        display: inline-block;
+        width: 54px;
+        height: 54px;
+        padding: 13px;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+      .label-color {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+}
+
 // Override for Trix editors attachment button
 .trix-button-group--file-tools {
   display: none !important;

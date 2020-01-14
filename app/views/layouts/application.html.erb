@@ -68,12 +68,14 @@
             <%= render 'inbox_menu' %>
           </ul>
 
-          <ul class="list-group mt-4 mb-4">
-            <li class="list-group-item" id="joyride-labels"><%= t(:labels) %></li>
-            <% @labels.each do |label| %>
-              <%= render 'labels/label_li', label: label %>
-            <% end %>
-          </ul>
+          <div class="labels pt-4">
+            <h3 class="text-white"><small><%= t(:labels) %></small></h3>
+            <ul>
+              <% @labels.each do |label| %>
+                <%= render 'labels/label_li', label: label %>
+              <% end %>
+            </ul>
+          </div>
         </nav>
       <% end %>
 
