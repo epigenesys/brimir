@@ -33,6 +33,12 @@
         </div>
       </div>
     <% end %>
+    <% if params[:user_id] %>
+      <strong><%= t :filter %>:</strong>
+      <%= link_to root_path, class: 'badge badge-primary' do %>
+        <%= fa_icon 'times-circle', text: User.find(params[:user_id]).email %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="content tickets">
