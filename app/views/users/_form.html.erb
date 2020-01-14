@@ -33,110 +33,71 @@
 
     <div data-work-can-wait style="<%= @user.schedule_enabled? ?
         'display: block;' : 'display: none;' %>">
-      <%= f.fields_for :schedule, build_schedule_for_user do |ff|  %>
-        <div class="row">
-          <div class="small-5 medium-4 large-3 columns">
-            <%
-              selected = '8:00'
-              unless ff.object.start.nil?
-                selected = "#{ff.object.start.hour}:00"
-              end
-            %>
-            <%= ff.select :start,
-                options_for_select((0..23).map { |n| "#{n}:00" }, selected),
-                label: false %>
+      <%= f.simple_fields_for :schedule, build_schedule_for_user do |ff|  %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <%= ff.label :start, t(:from), class: 'input-group-text' %>
           </div>
-          <div class="small-2 medium-2 large-1 column">
-            <label class="inline text-center">
-              <%= t(:until) %>
-            </label>
+          <%
+            selected = '8:00'
+            unless ff.object.start.nil?
+              selected = "#{ff.object.start.hour}:00"
+            end
+          %>
+          <%= ff.input :start, collection: (0..23).map { |n| "#{n}:00" }, value: selected, label: false, wrapper: false %>
+          <div class="input-group-prepend">
+            <%= ff.label :end, t(:until), class: 'input-group-text border-left-0' %>
           </div>
-          <div class="small-5 medium-4 large-3 columns end">
-            <%
-              selected = '18:00'
-              unless ff.object.end.nil?
-                selected = "#{ff.object.end.hour}:00"
-              end
-            %>
-            <%= ff.select :end,
-                options_for_select((0..23).map { |n| "#{n}:00" }, selected),
-                label: false %>
-          </div>
+          <%
+            selected = '18:00'
+            unless ff.object.end.nil?
+              selected = "#{ff.object.end.hour}:00"
+            end
+          %>
+          <%= ff.input :end, collection: (0..23).map { |n| "#{n}:00" }, value: selected, label: false, wrapper: false %>
         </div>
-        <label class="checkbox-helper">
-          <%= ff.check_box :sunday, label: false %>
-          <span><%= localize_day_name(0).first(2) %></span>
-        </label>
-        <label class="checkbox-helper">
-          <%= ff.check_box :monday, label: false %>
-          <span><%= localize_day_name(1).first(2) %></span>
-        </label>
-        <label class="checkbox-helper">
-          <%= ff.check_box :tuesday, label: false %>
-          <span><%= localize_day_name(2).first(2) %></span>
-        </label>
-        <label class="checkbox-helper">
-          <%= ff.check_box :wednesday, label: false %>
-          <span><%= localize_day_name(3).first(2) %></span>
-        </label>
-        <label class="checkbox-helper">
-          <%= ff.check_box :thursday, label: false %>
-          <span><%= localize_day_name(4).first(2) %></span>
-        </label>
-        <label class="checkbox-helper">
-          <%= ff.check_box :friday, label: false %>
-          <span><%= localize_day_name(5).first(2) %></span>
-        </label>
-        <label class="checkbox-helper">
-          <%= ff.check_box :saturday, label: false %>
-          <span><%= localize_day_name(6).first(2) %></span>
-        </label>
+        
+        <%= ff.input :sunday, as: :boolean, label: localize_day_name(0).capitalize, wrapper: :custom_boolean %>
+        <%= ff.input :monday, as: :boolean, label: localize_day_name(1).capitalize, wrapper: :custom_boolean %>
+        <%= ff.input :tuesday, as: :boolean, label: localize_day_name(2).capitalize, wrapper: :custom_boolean %>
+        <%= ff.input :wednesday, as: :boolean, label: localize_day_name(3).capitalize, wrapper: :custom_boolean %>
+        <%= ff.input :thursday, as: :boolean, label: localize_day_name(4).capitalize, wrapper: :custom_boolean %>
+        <%= ff.input :friday, as: :boolean, label: localize_day_name(5).capitalize, wrapper: :custom_boolean %>
+        <%= ff.input :saturday, as: :boolean, label: localize_day_name(6).capitalize, wrapper: :custom_boolean %>
       <% end %>
     </div>
   <% end %>
 
-        <h5><%= t(:email_settings) %></h5>
+  <h5><%= t(:email_settings) %></h5>
 
-        <%= f.check_box :prefer_plain_text, tabindex: tabindex %>
-        <%= f.check_box :include_quote_in_reply, tabindex: tabindex %>
+  <%= f.input :prefer_plain_text, wrapper: :custom_boolean, tabindex: tabindex %>
+  <%= f.input :include_quote_in_reply, wrapper: :custom_boolean, tabindex: tabindex %>
 
-        <% if @user.agent? %>
+  <% if @user.agent? %>
+    <%= f.input :notify,
+        label: t(:receive_new_ticket_notifications), wrapper: :custom_boolean, tabindex: tabindex %>
 
-          <%= f.check_box :notify,
-              label: t(:receive_new_ticket_notifications), tabindex: tabindex %>
+    <h5><%= t(:signature) %></h5>
+    <%= f.rich_text_area :signature, tabindex: tabindex %>
+  <% end %>
 
-          <h5><%= t(:signature) %></h5>
-          <%= f.trix_editor :signature, class: 'mbl', tabindex: tabindex %>
-        <% end %>
+  <% if can? :create, Labeling.new(labelable: @user) %>
+    <h5><%= t(:access_control) %></h5>
+    <p><%= t(:have_access_to_label) %></p>
+    <%= f.input :label_ids, collection: @labels, value_method: :id, label_method: :name, input_html: {
+        multiple: true, class: 'select2', tabindex: tabindex } %>
+  <% end %>
 
-        <% if can? :create, Labeling.new(labelable: @user) %>
-          <h5><%= t(:access_control) %></h5>
+  <% unless Rails.application.secrets[:google_client_id].blank? %>
+    <div>
+      <h5><%= t(:omniauth_connect_title) %></h5>
+      <p><%= t(:omniauth_connect_text) %></p>
 
-          <p><%= t(:have_access_to_label) %></p>
-
-          <%= f.collection_select :label_ids, @labels, :id, :name, {}, {
-              multiple: true, class: 'select2 mbl', tabindex: tabindex } %>
-        <% end %>
-
-        <% unless Rails.application.secrets[:google_client_id].blank? %>
-
-          <h5><%= t(:omniauth_connect_title) %></h5>
-
-          <p><%= t(:omniauth_connect_text) %></p>
-
-          <%= link_to user_google_oauth2_omniauth_authorize_path do %>
-            <i class="fa fa-google-plus-square"></i>
-            <%= t(:omniauth_connect_google_text) %>
-          <% end %>
-
-        <% end %>
-
-      </div>
+      <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+        <%= fa_icon 'google', style: 'fab', text: t(:omniauth_connect_google_text) %>
+      <% end %>
     </div>
-    <div class="row">
-      <div class="medium-12 columns bt">
-        <%= f.submit t(:save), class: 'success button radius mtl' %>
-      </div>
-    </div>
+  <% end %>
 
+  <%= f.submit t(:save), class: 'btn btn-primary mt-3' %>
 <% end %>

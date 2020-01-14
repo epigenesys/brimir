@@ -42,8 +42,7 @@
           <% unless Rails.application.secrets[:google_client_id].blank? %>
           <%= t(:omniauth_sign_in_title) %>:
             <%= link_to user_google_oauth2_omniauth_authorize_path do %>
-              <i class="fab fa-google"></i>
-              <%= t(:omniauth_sign_in_google) %>
+              <%= fa_icon 'google', style: 'fab', text: t(:omniauth_sign_in_google) %>
             <% end %>
           <% end %>
         </p>
