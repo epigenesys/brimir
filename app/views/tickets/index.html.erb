@@ -39,7 +39,12 @@
     <table class="table">
       <thead>
         <tr>
-          <th><input type="checkbox" value="" name="" class="no-mb mts left" data-toggle-all /></th>
+          <th>
+            <div class="custom-control custom-checkbox single-checkbox">
+              <input type="checkbox" class="custom-control-input" id="check-all-checkbox" data-toggle-all>
+              <label class="custom-control-label" for="check-all-checkbox"></label>
+            </div>
+          </th>
           <th scope="col" colspan="2" class="py-0">
             <ul class="list-inline mb-0">
               <% { close: :closed, delete: :deleted, wait: :waiting }.each do |label, status| %>
@@ -77,7 +82,12 @@
       <tbody>
         <% @tickets.each do |ticket| %>
           <tr id="ticket_<%= ticket.id%>" class="ticket">
-            <td><input type="checkbox" value="<%= ticket.id %>" name="id[]" class="" data-toggle-check /></td>
+            <td>
+              <div class="custom-control custom-checkbox single-checkbox">
+                <input type="checkbox" value="<%= ticket.id %>" name="id[]" id="ticket_<%= ticket.id %>_checkbox" class="custom-control-input" data-toggle-check />
+                <label class="custom-control-label" for="ticket_<%= ticket.id %>_checkbox"></label>
+              </div>
+            </td>
             <td class="px-0"><%= user_avatar ticket.user, size: 30 %></td>
             <td>
               <% unless ticket.subject.blank? %>
