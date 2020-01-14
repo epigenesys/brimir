@@ -1,6 +1,9 @@
 // Tickets - Index
 .tickets {
   table {
+    #select-all-checkbox-header {
+      min-width: 2.4rem;
+    }
     th {
       vertical-align: middle;
     }
