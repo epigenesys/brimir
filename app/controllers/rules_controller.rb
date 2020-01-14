@@ -41,7 +41,7 @@ class RulesController < ApplicationController
   end
 
   def update
-    if @rule.update_attributes(rule_params)
+    if @rule.update(rule_params)
       redirect_to rules_url, notice: t(:rule_modified)
     else
       render 'edit'

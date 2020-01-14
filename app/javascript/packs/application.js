@@ -31,6 +31,8 @@ ReactRailsUJS.useContext(componentRequireContext);
 
 import 'bootstrap';
 
+import 'tickets';
+
 Rails.start();
 $('.select2').select2({ width: '100%' });
 

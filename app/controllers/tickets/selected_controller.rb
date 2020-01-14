@@ -28,7 +28,7 @@ module Tickets
 
       @tickets.each do |ticket|
         authorize! :update, ticket
-        ticket.update_attributes(ticket_params)
+        ticket.update(ticket_params)
       end
 
       redirect_back fallback_location: tickets_url, notice: t(:tickets_status_modified)
