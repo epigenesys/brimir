@@ -52,11 +52,9 @@ class Labeling < ApplicationRecord
       label = Label.where(name: attributes[:label][:name]).first_or_create!
 
       attributes[:label_id] = label.id
-    else
-      attributes[:label_id] = nil
-    end
 
-    attributes.delete(:label)
+      attributes.delete(:label)
+    end
 
     super(attributes)
   end
