@@ -11,7 +11,7 @@ gem 'uglifier', "~> 3.0.0"
 
 # Testing
 group :development, :test do
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails', '4.0.0.beta4'
   gem 'byebug', '~> 10.0'
   gem 'pry', "~> 0.11"
 end

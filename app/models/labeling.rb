@@ -40,17 +40,15 @@ class Labeling < ApplicationRecord
   validates :label_id, presence: true
 
   def initialize(attributes={})
-    unless attributes[:label].blank? ||
+    unless attributes.nil? || attributes[:label].blank? ||
         attributes[:label][:name].blank?
 
       label = Label.where(name: attributes[:label][:name]).first_or_create!
 
       attributes[:label_id] = label.id
-    else
-      attributes[:label_id] = nil
-    end
 
-    attributes.delete(:label)
+      attributes.delete(:label)
+    end
 
     super(attributes)
   end
