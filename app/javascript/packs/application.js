@@ -30,24 +30,8 @@ var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
 import 'bootstrap';
-
-import 'tickets';
+import 'scripts/tickets';
+import 'scripts/replies';
 
 Rails.start();
 $('.select2').select2({ width: '100%' });
-
-$('.reply-content blockquote').addClass('d-none');
-$('.reply-content blockquote').each((i, element) => {
-  var quoteButton = $("<button class='btn btn-secondary'>Open Quote</button>"); 
-  quoteButton.on('click', function(e) {
-    if($(element).hasClass('d-none')) {
-      $(element).removeClass('d-none');
-      quoteButton.text('Hide quote');
-    } else {
-      $(element).addClass('d-none');
-      quoteButton.text('Open quote');
-    }
-  });
-
-  $(element).after(quoteButton);
-});

@@ -36,7 +36,7 @@
 
       <% if can?(:split_off, reply) && !reply.kind_of?(StatusReply) %>
         <%= link_to reply_split_off_path(reply_id: reply.id), method: 'post', class: 'float-right text-default split-off-ticket' do %>
-          <%= fa_icon 'code-fork', style: 'far', text: t(:split_off_ticket) %>
+          <%= fa_icon 'code-branch', style: 'fas', text: t(:split_off_ticket) %>
         <% end %>
       <% end %>
 
