@@ -5,7 +5,7 @@
   raise('no reply or ticket given') 
 %>
 
-<ul class="list-inline text-secondary">
+<ul class="list-inline mb-0 text-secondary">
   <% if reply_or_ticket.notified_users.count > 0 %>
     <li class="list-inline-item"><%= t(:notification_sent_to) %></li>
 
