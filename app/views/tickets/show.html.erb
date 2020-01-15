@@ -48,7 +48,7 @@
                   <div class="dropdown">
                     <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-priority-<%= @ticket.priority %>" type="button" id="ticketPriority" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fa-fw far fa-circle"></i>
-                      <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
+                      <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities').capitalize %>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="ticketPriority">
                       <%= render 'priority_dropdown', ticket: @ticket, short: false %>

@@ -35,7 +35,7 @@
     font-size: 1.1rem;
   }
 
-  .ticket-header {
+  .card-header {
     padding: 0.4rem;
     border-bottom: 1px solid #d2d2d2;
     .ticket-subject {
@@ -48,6 +48,32 @@
   
     .ticket-actions {
       display: block;
+
+      #ticketPriority {
+        border: none;
+      }
+
+      .dropdown-priority-low {
+        background-color: $priority_low_bg;
+        color: $priority_low_text;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($priority_low_bg, 0.5);
+        }
+      }
+      .dropdown-priority-medium {
+        background-color: $priority_medium_bg;
+        color: $priority_medium_text;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($priority_medium_bg, 0.5);
+        }
+      }
+      .dropdown-priority-high {
+        background-color: $priority_high_bg;
+        color: $priority_high_text;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($priority_high_bg, 0.5);
+        }
+      }
     }
   }
 }
