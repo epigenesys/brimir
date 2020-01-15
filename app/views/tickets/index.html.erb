@@ -132,6 +132,7 @@
                 </span>
                 <% if can? :update, ticket %>
                   <% if ticket.assignee %>
+                    <%# TODO #1 - Make ajax modal style %>
                     <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
                   <% else %>
                     <a data-assignee-id="" href="#" class="text-default"><em><%= t(:unassigned) %></em></a>

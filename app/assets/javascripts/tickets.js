@@ -16,6 +16,7 @@
 
 jQuery(function() {
 
+  // TODO #1 - Make ajax modal style
   jQuery('[data-assignee-id]').click(function(e) {
     e.preventDefault();
 
@@ -36,7 +37,7 @@ jQuery(function() {
 
   });
 
-
+  // TODO #2 - Do we need the add label button to be a modal anymore?
   jQuery('.select2-create').select2({
     width: 'resolve',
     createSearchChoicePosition: 'bottom',
@@ -57,6 +58,7 @@ jQuery(function() {
     }
   });
 
+  // TODO #3 - Explore this, how do canned replies work
   jQuery('#canned-reply').on('change', function(){
     var editor = jQuery(this).parents('form#new_reply').find('trix-editor')[0].editor;
     var url = this.value;
@@ -71,6 +73,8 @@ jQuery(function() {
     }
   });
 
+  // TODO #4 - Update locking, maybe move it to a websocket connection. Has a
+  //           higher upfront cost, but no need for re-hitting endpoint)
   if(jQuery('[data-lock-path]').length > 0) {
 
     function keepLock() {
