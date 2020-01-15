@@ -579,30 +579,37 @@ RSpec.describe(TicketsController, :type => :controller) do
   end
 
   context 'order tickets' do
-    let!(:high_priority) { FactoryBot.create(:ticket, priority: :high, user: charlie, assignee: alice, updated_at: 4.days.ago,  created_at: 4.days.ago) }
-    let!(:medium_priority) { FactoryBot.create(:ticket, priority: :medium, user: charlie, assignee: alice, updated_at: 2.days.ago,  created_at: 3.days.ago) }
-    let!(:low_priority) { FactoryBot.create(:ticket, priority: :low, user: charlie, assignee: alice, updated_at: 3.days.ago, created_at: 1.days.ago ) }
-    let!(:no_priority) { FactoryBot.create(:ticket, priority: :unknown, user: charlie, assignee: alice, updated_at: 1.day.ago, created_at: 2.days.ago ) }
+    let!(:high_priority) { FactoryBot.create(:ticket, priority: :high, user: charlie, assignee: alice,  created_at: 8.days.ago) }
+    let!(:medium_priority) { FactoryBot.create(:ticket, priority: :medium, user: charlie, assignee: alice,  created_at: 7.days.ago) }
+    let!(:low_priority) { FactoryBot.create(:ticket, priority: :low, user: charlie, assignee: alice, created_at: 5.days.ago ) }
+    let!(:no_priority) { FactoryBot.create(:ticket, priority: :unknown, user: charlie, assignee: alice, created_at: 6.days.ago ) }
+
+    before do
+      high_priority.update_attribute(:updated_at, 4.days.ago)
+      low_priority.update_attribute(:updated_at, 3.days.ago)
+      medium_priority.update_attribute(:updated_at, 2.days.ago)
+      no_priority.update_attribute(:updated_at, 1.day.ago)
+    end
 
     it("should allow ordering of tickets") do
       sign_in(alice)
       ticket.destroy
       get(:index, :params => ({ :order => :priority }))
-      expect(assigns(:tickets)).to match_array([high_priority, medium_priority, low_priority, no_priority])
+      expect(assigns(:tickets)).to eq([high_priority, medium_priority, low_priority, no_priority])
     end
 
     it("should creation date ordering of tickets") do
       sign_in(alice)
       ticket.destroy
       get(:index, :params => ({ :order => :created_at }))
-      expect(assigns(:tickets)).to match_array([low_priority, no_priority, medium_priority, high_priority])
+      expect(assigns(:tickets)).to eq([low_priority, no_priority, medium_priority, high_priority])
     end
 
     it("should respond with a default ordering of the last updated at if no order param is provided") do
       sign_in(alice)
       ticket.destroy
       get(:index)
-      expect(assigns(:tickets)).to match_array([no_priority, medium_priority, low_priority, high_priority])
+      expect(assigns(:tickets)).to eq([no_priority, medium_priority, low_priority, high_priority])
     end
   end
 
