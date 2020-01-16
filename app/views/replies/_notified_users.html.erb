@@ -1,1 +1,1 @@
-<%= r.collection_select :notified_user_ids, @users.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
+<%= f.input :notified_user_ids, collection: @users.ordered, value_method: :id, label_method: :email, label: t(:notification_will_be_sent_to), input_html: { multiple: true, class: 'select2' } %>

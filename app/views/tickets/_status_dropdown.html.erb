@@ -1,7 +1,7 @@
 <% Ticket.statuses.except(:merged).keys.each do |value| %>
   <%= link_to ticket_path(ticket, ticket: { status: value }),
       method: :patch, remote: true, class: 'dropdown-item' do %>
-    <i class="fa-fw <%= status_icon_class(value) %>"></i>
-    <%= t(value, scope: 'activerecord.attributes.ticket.statuses') %>
+    <%= fa_icon status_icon_class(value), width: 'fw', text: t(value, scope: 'activerecord.attributes.ticket.statuses').capitalize %>
+    <%=  %>
   <% end %>
 <% end %>

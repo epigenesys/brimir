@@ -1,19 +1,14 @@
 <% if !params[:ticket][:status].blank? %>
-  jQuery('[data-dropdown="statuses-<%= @ticket.id %>"]')
-      .empty()
-      .append('<span class="<%= status_icon_class(@ticket.status) %>"></span> ' +
-          '<%= j(t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses')) %>');
+  $('#ticketStatuses')
+    .html('<%= fa_icon status_icon_class(@ticket.status), text:  t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses').capitalize %>')
+    .removeClass()
+    .addClass('btn btn-secondary btn-sm dropdown-toggle dropdown-status-<%= @ticket.status %>')
 
 <% elsif !params[:ticket][:priority].blank? %>
-  jQuery('[data-dropdown="priorities-<%= @ticket.id %>"]')
-      .empty()
-      .append('<span class="cc-priority-<%= @ticket.priority %> fa fa-circle-o"></span> ' +
-          '<%= j(t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities')) unless params[:short] == 'true' %>');
-
+  $('#ticketPriority')
+    .html('<%= fa_icon 'circle', style: 'far', text: t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities').capitalize %>')
+    .removeClass()
+    .addClass('btn btn-secondary btn-sm dropdown-toggle dropdown-priority-<%= @ticket.priority %>')
 <% else %>
   window.location.reload();
 <% end %>
-
-<%# close all dropdowns %>
-var dropdowns = jQuery('.f-dropdown');
-dropdowns.foundation('dropdown', 'close', dropdowns);
