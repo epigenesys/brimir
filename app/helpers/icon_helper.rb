@@ -8,16 +8,16 @@ module IconHelper
     case status
     when 'open'
       if options[:assigned_to_me]
-        "fa fa-fw fa-user"
+        "user"
       else
-        "fa fa-fw fa-inbox"
+        "envelope-open"
       end
     when 'waiting'
-      "fa fa-fw fa-clock"
+      "clock"
     when 'closed'
-      "fa fa-fw fa-check"
+      "check"
     when 'deleted'
-      "fa fa-fw fa-trash"
+      "trash"
     end
   end
   

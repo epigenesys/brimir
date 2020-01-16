@@ -49,10 +49,10 @@
     .ticket-actions {
       display: block;
 
+      // Ticket Priority
       #ticketPriority {
         border: none;
       }
-
       .dropdown-priority-low {
         background-color: $priority_low_bg;
         color: $priority_low_text;
@@ -72,6 +72,35 @@
         color: $priority_high_text;
         &:focus {
           box-shadow: 0 0 0 0.2rem rgba($priority_high_bg, 0.5);
+        }
+      }
+
+      // Ticket Status
+      #ticketStatuses {
+        border: none;
+      }
+      .dropdown-status-open {
+        background-color: $primary;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($primary, 0.5);
+        }
+      }
+      .dropdown-status-closed {
+        background-color: $success;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($success, 0.5);
+        }
+      }
+      .dropdown-status-deleted {
+        background-color: $secondary;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($secondary, 0.5);
+        }
+      }
+      .dropdown-status-waiting {
+        background-color: $info;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($info, 0.5);
         }
       }
     }

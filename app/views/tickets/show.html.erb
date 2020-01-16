@@ -29,26 +29,25 @@
               <li class="list-inline-item">
                 <% if can? :update, @ticket %>
                   <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="ticketStatuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa-fw <%= status_icon_class(@ticket.status) %>"></i>
-                      <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
+                    <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-status-<%= @ticket.status %>" type="button" id="ticketStatuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <%= fa_icon status_icon_class(@ticket.status), text:  t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses').capitalize %>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="ticketStatuses">
                       <%= render 'status_dropdown', ticket: @ticket %>
                     </div>
                   </div>
                 <% else %>
+
                   <i class="fa-fw fa <%= status_icon_class(@ticket.status) %>"></i>
                   <span class="d-print-inline-block d-none"><%= t(:status) %>:</span>
-                  <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
+                  <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses').capitalize %>
                 <% end %>
               </li>
               <li class="list-inline-item">
                 <% if can? :update, @ticket %>
                   <div class="dropdown">
                     <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-priority-<%= @ticket.priority %>" type="button" id="ticketPriority" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa-fw far fa-circle"></i>
-                      <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities').capitalize %>
+                      <%= fa_icon 'circle', style: 'far', text: t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities').capitalize %>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="ticketPriority">
                       <%= render 'priority_dropdown', ticket: @ticket, short: false %>

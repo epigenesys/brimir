@@ -1,7 +1,6 @@
-<%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
-  <%= r.hidden_field :content_type, value: current_user.prefer_plain_text? ? 'text' : 'html' %>
-
-  <%= r.hidden_field :ticket_id %>
+<%= simple_form_for @reply, html: { multipart: true, class: 'new_reply' } do |f| %>
+  <%= f.input :content_type, as: :hidden, value: current_user.prefer_plain_text? ? 'text' : 'html' %>
+  <%= f.input :ticket_id, as: :hidden %>
 
   <div class="card bb">
     <div class="card-header">
@@ -10,37 +9,24 @@
     <div class="card-body">
       <h3 class="text-default"><%= t(:reply) %></h3>
       <% if current_user.agent? %>
-        <div class="form-check form-check-inline">
-          <%= r.radio_button :internal, false, label: t(:reply), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" }, class: 'form-check-input' %>
-          <%= r.label :internal_false, t(:reply), class: 'form-check-label' %>
+        <div class="custom-control custom-radio">
+          <%= f.radio_button :internal, false, label: t(:reply), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" }, class: 'custom-control-input' %>
+          <%= f.label :internal_false, t(:reply), class: 'custom-control-label' %>
         </div>
-        <div class="form-check form-check-inline">
-          <%= r.radio_button :internal, true, data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" }, class: 'form-check-input' %>
-          <%= r.label :internal_true, t(:internal_note), class: 'form-check-label' %>
+        <div class="custom-control custom-radio">
+          <%= f.radio_button :internal, true, data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" }, class: 'custom-control-input' %>
+          <%= f.label :internal_true, t(:internal_note), class: 'custom-control-label' %>
         </div>
       <% end %>
       <% if can? :update, @reply.ticket %>
-        <div class="row mb-2">
-          <%= r.fields_for :ticket do |f| %>
-            <div class="col-md-4">
-              <%= f.label :to_email_address_id, t('activerecord.attributes.reply.from') %>
-            </div>
-            <div class="col-md-8">
-              <% blank = @outgoing_addresses.count == 0 ? EmailAddress.default_email : '' %>
-              <%= f.collection_select :to_email_address_id, @outgoing_addresses, :id, :formatted,
-                  { include_blank: blank, label: false }, { class: 'custom-select' } %>
-            </div>
-          <% end %>
-        </div>
+        <%= f.simple_fields_for :ticket do |ff| %>
+          <% blank = @outgoing_addresses.count == 0 ? EmailAddress.default_email : '' %>
+          <%= ff.input :to_email_address_id, collection: @outgoing_addresses, value_method: :id, label_method: :formatted, include_blank: blank %>
+        <% end %>
       <% end %>
 
-      <div class="row mb-2">
-        <div class="col-md-4">
-          <label><%= t(:notification_will_be_sent_to) %></label>
-        </div>
-        <div class="col-md-8">
-          <%= render 'replies/notified_users', r: r %>
-        </div>
+      <div data-notified-users>
+        <%= render 'replies/notified_users', f: f %>
       </div>
 
       <% if (@canned_replies = EmailTemplate.canned_replies.order(:name)).any? %>
@@ -78,35 +64,22 @@
         end
       %>
 
-      <p>
       <% if current_user.prefer_plain_text? %>
-        <%= r.text_area :content, label: false %>
+        <%= f.text_area :content, label: false %>
       <% else %>
-        <%= r.rich_text_area :content, label: false %>
+        <%= f.rich_text_area :content, label: false %>
       <% end %>
-      </p>
 
-      <%= render 'attachments/form', f: r %>
+      <%= render 'attachments/form', f: f %>
 
       <% if can? :update, @reply.ticket %>
-        <div class="row">
-          <%= r.fields_for :ticket do |f| %>
-            <div class="col-md-4">
-              <%= f.label :status, t(:change_status) %>
-            </div>
-            <div class="col-md-8">
-              <%= f.collection_select(:status,
-                  t('activerecord.attributes.ticket.statuses'), :first, :last,
-                  { label: false }, { class: 'custom-select' }) %>
-            </div>
-          <% end %>
-        </div>
+        <%= f.simple_fields_for :ticket do |ff| %>
+          <%= ff.input :status, collection: t('activerecord.attributes.ticket.statuses'), label_method: :last, value_method: :first, label: t(:change_status) %>
+        <% end %>
       <% end %>
 
-      <p>
-        <%= r.button t(:save_as_draft), name: 'reply[draft]', value: true, class: 'btn btn-primary' %>
-        <%= r.button @reply.internal? ? t(:attach_note) : t(:send_reply), name: 'reply[draft]', value: false, type: :submit, class: 'reply-submit btn btn-secondary' %>
-      </p>
+      <%= button_tag t(:save_as_draft), type: :submit, name: 'reply[draft]', value: true, class: 'btn btn-secondary' %>
+      <%= button_tag (@reply.internal? ? t(:attach_note) : t(:send_reply)), type: :submit, value: false, name: 'reply[draft]', class: 'reply-submit btn btn-primary' %>
     </div>
   </div>
 <% end %>
