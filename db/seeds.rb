@@ -32,6 +32,7 @@ customers = [
     'frank@example.com',
     'gerry@example.com',
     'harry@example.com',
+    'agent@example.com'
 ]
 subjects = [
     'Lorem ipsum dolor sit amet',
@@ -51,7 +52,7 @@ content = [
     'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In euismod ultrices facilisis. Vestibulum porta sapien adipiscing augue congue id pretium lectus molestie. Proin quis dictum nisl. Morbi id quam sapien, sed vestibulum sem. Duis elementum rutrum mauris sed convallis. Proin vestibulum magna mi. Aenean tristique hendrerit magna, ac facilisis nulla hendrerit ut. Sed non tortor sodales quam auctor elementum. Donec hendrerit nunc eget elit pharetra pulvinar. Suspendisse id tempus tortor. Aenean luctus, elit commodo laoreet commodo, justo nisi consequat massa, sed vulputate quam urna quis eros. Donec vel.',
 ]
 
-100.times do |n|
+300.times do |n|
   assignee = nil
   if Random.rand() > 0.8
     assignee = agent
