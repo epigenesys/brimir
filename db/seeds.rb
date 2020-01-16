@@ -31,8 +31,7 @@ customers = [
     'edward@example.com',
     'frank@example.com',
     'gerry@example.com',
-    'harry@example.com',
-    'agent@example.com'
+    'harry@example.com'
 ]
 subjects = [
     'Lorem ipsum dolor sit amet',
