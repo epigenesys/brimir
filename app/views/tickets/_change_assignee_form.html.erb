@@ -1,14 +1,19 @@
-<div id="change-assignee" class="reveal-modal small" data-reveal>
-  <h3><%= t(:change_assignee) %></h3>
-
-  <%= form_for ticket, remote: true, method: :patch do |f| %>
-    <p>
-      <%= f.select :assignee_id, options_from_collection_for_select(@agents.ordered, 'id', 'email', ticket.assignee_id), { include_blank: t(:unassigned) }, { class: 'select2' } %>
-    </p>
-    <%= f.submit t(:assign), class: 'small success no-m button' %>
-    <%= f.submit t(:assign_to_me), name: 'assign_to_me', class: 'small secondary no-m button' %>
-  <% end %>
-
-  <a class="close-reveal-modal">&#215;</a>
+<div class="modal fade" id="changeAssigneeModal" tabindex="-1" role="dialog" aria-labelledby="changeAssigneeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= simple_form_for ticket, remote: true, method: :patch, html: { class: "modal-content"} do |f| %>
+      <div class="modal-header">
+        <h5 class="modal-title" id="changeAssigneeModalLabel"><%= t(:change_assignee) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= f.input :assignee_id, collection: @agents.ordered, value_method: :id, label_method: :email, include_blank: t(:unassigned), class: 'select2' %>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit t(:assign), class: 'btn btn-primary' %>
+        <%= f.submit t(:assign_to_me), name: 'assign_to_me', class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
 </div>
-

@@ -12,7 +12,7 @@
           <% end %>
           <h3 class="ticket-subject">
             <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
-            <% if can? :update, @ticket %><small><a href="#" data-reveal-id="change-subject"><i class="fa fa-fw fa-edit"></i></a></small><% end %>
+            <% if can? :update, @ticket %><%= link_to fa_icon('edit', size: 'fw'), edit_subject_ticket_path(@ticket), remote: true %><% end %>
           </h3>
           <h4 class="ticket-contact">
             <%= t(:ticket_by_at, email: link_to(@ticket.user.email, user_tickets_path(user_id: @ticket.user.id)), at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)).html_safe %>
@@ -61,7 +61,7 @@
               </li>
               <li class="list-inline-item">
                 <% if can? :update, @ticket %>
-                  <a href="#" data-reveal-id="change-assignee">
+                  <%= link_to edit_assignee_ticket_path(@ticket), remote: true do %>
                     <span class="fa fa-fw fa-user text-default"></span>
                     <span class="show-for-print hide"><%= t(:assignee) %>:</span>
                     <% if !@ticket.assignee %>
@@ -69,7 +69,7 @@
                     <% else %>
                       <%= @ticket.assignee.email %>
                     <% end %>
-                  </a>
+                  <% end %>
                 <% else %>
                   <span class="fa fa-fw fa-user text-default"></span>
                   <span class="show-for-print hide"><%= t(:assignee) %>:</span>
@@ -82,9 +82,7 @@
               </li>
               <li class="list-inline-item" data-labelings>
                 <% if can?(:create, Labeling.new(labelable: @ticket)) %>
-                  <a href="#" data-reveal-id="add-labels" class="btn btn-primary btn-sm">
-                    <i class="fa fa-fw fa-plus"></i> <%= t(:add) %>
-                  </a>
+                  <%= link_to fa_icon('plus', size: 'fw', text: t(:add)), new_ticket_labeling_path(@ticket), remote: true, class: 'btn btn-primary btn-sm' %>
                 <% end %>
                 <% @ticket.labelings.each do |labeling| %>
                   <span class="ib no-m">

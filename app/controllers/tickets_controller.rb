@@ -31,6 +31,9 @@ class TicketsController < ApplicationController
   # allow ticket creation using json posts
   skip_before_action :verify_authenticity_token, only: :create, if: -> { request.format.json? }
 
+  respond_to :html, except: [:change_assignee]
+  respond_to :js,     only: [:change_assignee]
+
   def show
     @users = User.actives
 
@@ -237,6 +240,14 @@ class TicketsController < ApplicationController
         }
       end
     end
+  end
+
+  def edit_assignee
+    @agents = User.agents.actives
+  end
+
+  def edit_subject
+
   end
 
   protected

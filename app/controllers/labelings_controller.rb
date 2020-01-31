@@ -15,13 +15,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class LabelingsController < ApplicationController
+  load_and_authorize_resource :labeling, only: [:destroy]
+  authorize_resource :labeling, only: [:create]
 
-  load_and_authorize_resource :labeling
+  respond_to :js
 
   def create
-    @labeling = Labeling.create(labeling_params)
+    label = Label.find_or_create_by(name: labeling_params[:label][:name])
+    @labeling = Labeling.new(labeling_params.merge(label: label))
 
-    respond_to :js
+    if @labeling.save
+      render 'labelings/create_success'
+    else
+      render 'labelings/create_failure'
+    end
   end
 
   def destroy
@@ -35,11 +42,10 @@ class LabelingsController < ApplicationController
   protected
     def labeling_params
       params.require(:labeling).permit(
-          :label_id,
           :labelable_id,
           :labelable_type,
           label: [
-              :name
+            :name
           ]
       )
     end

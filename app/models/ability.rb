@@ -114,7 +114,7 @@ class Ability
 
     can [:read], Ticket
     # agents can manage all tickets that are locked by themselves or unlocked
-    can [:update, :destroy], Ticket, Ticket.unlocked_for(user) do |ticket|
+    can [:update, :destroy, :edit_assignee, :edit_subject], Ticket, Ticket.unlocked_for(user) do |ticket|
       !ticket.locked?(user)
     end
 

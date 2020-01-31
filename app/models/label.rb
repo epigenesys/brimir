@@ -33,6 +33,8 @@ class Label < ApplicationRecord
 
   after_initialize :assign_random_color
 
+  validates :name, presence: true
+
   COLORS = [
     '#de6262',
     '#65a8dd',

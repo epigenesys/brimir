@@ -1,13 +1,18 @@
-<div id="change-subject" class="reveal-modal small" data-reveal>
-  <h3><%= t(:change_subject) %></h3>
-
-  <%= form_for ticket, remote: true, method: :patch do |f| %>
-    <p>
-      <%= f.text_field :subject %>
-    </p>
-    <%= f.submit t(:change_subject), class: 'small success no-m button' %>
-  <% end %>
-
-  <a class="close-reveal-modal">&#215;</a>
+<div class="modal fade" id="changeSubjectModal" tabindex="-1" role="dialog" aria-labelledby="changeSubjectModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= simple_form_for ticket, remote: true, method: :patch, html: { class: "modal-content"} do |f| %>
+      <div class="modal-header">
+        <h5 class="modal-title" id="changeSubjectModalLabel"><%= t(:change_subject) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= f.input :subject %>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit t(:change_subject), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
