@@ -1,0 +1,5 @@
+$('body').append("<%= j render('labelings/add_label_modal', labeling: @labeling) %>")
+$('.modal').modal('show')
+$('.modal').on('hidden.bs.modal', function (e) {
+  $('.modal').remove()
+})

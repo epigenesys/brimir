@@ -42,20 +42,4 @@ class Labeling < ApplicationRecord
 
   validates_uniqueness_of :label_id, scope: [:labelable_id, :labelable_type]
   validates :label_id, presence: true
-
-  def initialize(attributes = nil)
-    attributes ||= {}
-
-    unless attributes[:label].blank? ||
-        attributes[:label][:name].blank?
-
-      label = Label.where(name: attributes[:label][:name]).first_or_create!
-
-      attributes[:label_id] = label.id
-
-      attributes.delete(:label)
-    end
-
-    super(attributes)
-  end
 end

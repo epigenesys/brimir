@@ -35,3 +35,9 @@ import 'scripts/replies';
 
 Rails.start();
 $('.select2').select2({ width: '100%' });
+
+$(document).on('show.bs.modal	', function(e) {
+  console.log("hello :)")
+  $(e.target).find('select.select2:not(.select2-container)').select2({ width: '100%' })
+  $(e.target).find('select.select2-tags:not(.select2-container)').select2({ tags: true, width: '100%', placeholder: 'Select or enter your own item' })
+});
