@@ -7,7 +7,10 @@ rvm:
   - 2.5.7
   - 2.6.5
 
-cache: bundler
+cache:
+  bundler: true
+  yarn: true
+
 bundler_args: --without development --jobs 4
 
 addons:
@@ -28,6 +31,7 @@ env:
 before_install:
   - yes | gem update --system --force
   - gem install bundler
+  - yarn install
 
 before_script:
   - psql -c 'CREATE DATABASE brimir_test;' -U postgres
