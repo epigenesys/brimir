@@ -1,6 +1,6 @@
 <%= simple_form_for @label, html: { class: 'clearfix' }, remote: true do |f| %>
   <div class="input-group mb-2">
-    <%= f.input :name, label: false, class: 'no-m', wrapper: false %>
+    <%= f.input :name, label: false, wrapper: false %>
     <div class="input-group-append">
       <%= link_to label_path(@label), data: { method: :put, remote: true }, class: 'btn btn-dark' do %>
         <%= fa_icon 'times' %>

@@ -88,7 +88,7 @@
         </thead>
         <tbody>
           <% @tickets.each do |ticket| %>
-            <tr id="ticket_<%= ticket.id%>" class="ticket">
+            <tr id="ticket_<%= ticket.id%>" class="ticket <%= ticket.locked?(current_user) ? 'locked' : '' %>">
               <td>
                 <div class="custom-control custom-checkbox single-checkbox">
                   <input type="checkbox" value="<%= ticket.id %>" name="id[]" id="ticket_<%= ticket.id %>_checkbox" class="custom-control-input" data-toggle-check />

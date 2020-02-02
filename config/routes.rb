@@ -13,12 +13,10 @@ Rails.application.routes.draw do
 
   resources :tickets, except: [:destroy, :edit] do
     resource :lock, only: [:destroy, :create], module: :tickets
+    resource :labelings, only: [:new], module: :tickets
     member do
       get :edit_assignee
       get :edit_subject
-    end
-    scope module: 'tickets' do
-      resources :labelings, only: [:new]
     end
   end
 

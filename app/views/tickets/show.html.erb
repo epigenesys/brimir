@@ -82,12 +82,10 @@
               </li>
               <li class="list-inline-item" data-labelings>
                 <% if can?(:create, Labeling.new(labelable: @ticket)) %>
-                  <%= link_to fa_icon('plus', size: 'fw', text: t(:add)), new_ticket_labeling_path(@ticket), remote: true, class: 'btn btn-primary btn-sm' %>
+                  <%= link_to fa_icon('plus', size: 'fw', text: t(:add)), new_ticket_labelings_path(@ticket), remote: true, class: 'btn btn-primary btn-sm' %>
                 <% end %>
                 <% @ticket.labelings.each do |labeling| %>
-                  <span class="ib no-m">
-                    <%= render labeling %>
-                  </span>
+                  <%= render labeling %>
                 <% end %>
               </li>
             </ul>
@@ -96,16 +94,15 @@
       </div>
     </div>
 
-    <div class="bb ptm pbm">
-      <div class="medium-11 cols pll ticket-toolbar">
-
-        <% if @ticket.locked?(current_user) && can?(:destroy, Labeling.new(labelable: @ticket)) %>
+    <% if @ticket.locked?(current_user) && can?(:destroy, Labeling.new(labelable: @ticket)) %>
+      <div class="btn-toolbar pt-2 pl-4" role="toolbar">
+        <div class="btn-group">
           <%= link_to t(:take_ticket_lock_from_user, user: @ticket.locked_by.email),
-              ticket_lock_path(@ticket), class: 'tiny alert button',
-              'data-method' => :delete %>
-        <% end %>
+              ticket_lock_path(@ticket), class: 'btn btn-danger',
+              method: :delete %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <% if @ticket.content.blank? %>
       (<%= t(:no_content) %>)
