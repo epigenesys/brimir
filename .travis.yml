@@ -1,9 +1,12 @@
 dist: trusty
 
 language: ruby
+rvm:
+  - 2.5.7
+  - 2.6.5
+
 cache: bundler
 bundler_args: --without development --jobs 4
-sudo: false
 
 addons:
   chrome: stable
@@ -12,16 +15,16 @@ addons:
       - imagemagick
       - ghostscript
 
+services:
+  - postgresql
+  - mysql
+
 env:
   - DB=postgresql
   - DB=mysql
 
-rvm:
-  - 2.5.7
-  - 2.6.5
-
 before_install:
-  - gem update --system
+  - yes | gem update --system --force
   - gem install bundler
 
 before_script:
