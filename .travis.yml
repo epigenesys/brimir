@@ -1,4 +1,6 @@
-dist: trusty
+os:
+  - linux
+dist: bionic
 
 language: ruby
 rvm:
@@ -29,6 +31,6 @@ before_install:
 
 before_script:
   - psql -c 'CREATE DATABASE brimir_test;' -U postgres
-  - mysql -e 'create database brimir_test;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS brimir_test;'
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:migrate
