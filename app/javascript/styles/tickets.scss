@@ -26,6 +26,10 @@
     &.highlight {
       background: rgba($primary, 0.1);
     }
+
+    &.locked {
+      background: rgba($danger, 0.1);
+    }
   }
 }
 

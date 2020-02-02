@@ -68,7 +68,7 @@ module HtmlTextHelper
     content = content.gsub(/^.*\n>.*$/, '') # strip off last line before older quotes
     content = content.gsub(/^>.*$/, '') # strip off older quotes
     content = word_wrap(content.strip, line_width: 72)
-    content.gsub(/^/, '> ') if include_line_prefix
+    content.gsub!(/^/, '> ') if include_line_prefix
     content
   end
 end

@@ -6,8 +6,8 @@
   end
 
   output = ''
-  form_for entity do |f|
-    f.fields_for :attachments, Attachment.new, child_index: Time.now.to_i do |ap|
+  simple_form_for entity do |f|
+    f.simple_fields_for :attachments, Attachment.new, child_index: Time.now.to_i do |ap|
       output = render 'attachments/form_row', f: ap
     end
   end

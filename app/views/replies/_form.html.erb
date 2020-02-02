@@ -56,7 +56,8 @@
             if current_user.prefer_plain_text?
               prefilled_body += "\n#{wrap_and_quote(@reply.reply_to.content, true)}"
             else
-              prefilled_body += "<blockquote class='original_message'>#{text_to_html(wrap_and_quote(@reply.reply_to.content, false))}</blockquote>"
+              # prefilled_body += "<blockquote class='original_message'>#{text_to_html(wrap_and_quote(@reply.reply_to.content, false))}</blockquote>"
+              prefilled_body += "<div class='replyQuote'><br />#{text_to_html(wrap_and_quote(@reply.reply_to.content, true))}</div>"
             end
           end
 
