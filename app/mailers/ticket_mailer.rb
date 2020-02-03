@@ -15,7 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketMailer < ActionMailer::Base
-  include BounceHelper
 
   def receive(email)
 
