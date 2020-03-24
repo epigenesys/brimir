@@ -34,7 +34,7 @@ group :development do
 end
 
 group :test do
-  gem 'puma', '>= 4.3.1'
+  gem 'puma'
 
   gem 'timecop'
   gem 'simplecov'
@@ -52,19 +52,19 @@ group :test do
 end
 
 # Optional PostgreSQL for production
-gem 'pg', "~> 0.19", group: :postgresql
+gem 'pg', group: :postgresql
 # Optional MySQL for production
 gem 'mysql2', "~> 0.4", group: :mysql
 
 # authentication
-gem 'devise', '~> 4.7', '>= 4.7.1'
-gem 'devise_ldap_authenticatable', '~> 0.8', '>= 0.8.6'
+gem 'devise'
+gem 'devise_ldap_authenticatable'
 
 # 2.7.0 appears to have regressions that are fixed in 2.7.1
-gem 'mail', '~> 2.6', '!= 2.7.0'
+gem 'mail'
 
 # omniauth
-gem 'omniauth-google-oauth2', "~> 0.6.0"
+gem 'omniauth-google-oauth2'
 
 # authorization
 gem 'cancancan', '~> 2.1', '>= 2.1.4'
