@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.7'
+gem 'rails', '5.2.4.2'
 
 gem 'sass-rails', '~> 5.0.7'
 gem 'coffee-rails', '~> 4.2.2'
@@ -106,7 +106,7 @@ gem 'rest-client', '~> 2.0'
 gem 'digest-sha3'
 
 # Trix WYSIWYG editor
-gem 'trix-rails', '~> 0.11', '>= 0.11.1', require: 'trix'
+gem 'trix-rails', '0.11.4.1'
 
 # React support
 gem 'react-rails', '~> 1.11', '>= 1.11.0'
