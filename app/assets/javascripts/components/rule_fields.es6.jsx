@@ -20,7 +20,7 @@ class RuleFields extends React.Component {
 
   render () {
     let action_value = <select name="rule[action_value]"
-            value={this.props.action_value}>
+            defaultValue={this.props.action_value}>
       {this.options(this.state.operation)}
     </select>;
 
