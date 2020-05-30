@@ -50,3 +50,4 @@ coverage
 .rspec-examples
 
 config/database.yml
+node_modules
