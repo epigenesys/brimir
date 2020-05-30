@@ -42,15 +42,18 @@ Capfile
 # rcov files
 coverage
 
-# ignore rubymine
+# IDE/Tooling specific
 .idea
 .byebug_history
-
 .vscode
 .rspec-examples
 
+# Custom configs
 config/database.yml
+config/secrets.yml
+config/settings.yml
 
+# Javascript
 /public/packs
 /public/packs-test
 /node_modules
@@ -58,4 +61,5 @@ config/database.yml
 yarn-debug.log*
 .yarn-integrity
 
+# Activestorage
 storage
