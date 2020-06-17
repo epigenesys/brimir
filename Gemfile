@@ -10,7 +10,7 @@ gem 'uglifier', "~> 3.0.0"
 gem 'compass-rails', '~> 3.0.2'
 gem 'foundation-rails', '~> 5.5.3', '>= 5.5.3.2'
 
-gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
+gem 'jquery-rails', '~> 4.4', '>= 4.4.0'
 gem 'jquery-visibility-rails'
 
 # foundation form errors
@@ -18,7 +18,7 @@ gem 'foundation_rails_helper', '~> 2.0', '>= 2.0.0'
 
 # Testing
 group :development, :test do
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails', '>= 3.9.1'
   gem 'byebug', '~> 10.0'
   gem 'pry', "~> 0.11"
 end
@@ -44,7 +44,7 @@ group :test do
   gem 'factory_bot_rails', '>= 5.1.1'
 
   gem 'shoulda-matchers'
-  gem 'capybara', '>= 3.28.0'
+  gem 'capybara', '>= 3.31.0'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'webdrivers', '>= 4.1.2'
@@ -57,14 +57,14 @@ gem 'pg', group: :postgresql
 gem 'mysql2', "~> 0.4", group: :mysql
 
 # authentication
-gem 'devise'
-gem 'devise_ldap_authenticatable'
+gem 'devise', '>= 4.7.1'
+gem 'devise_ldap_authenticatable', '>= 0.8.6'
 
 # 2.7.0 appears to have regressions that are fixed in 2.7.1
 gem 'mail'
 
 # omniauth
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '>= 0.8.0'
 
 # authorization
 gem 'cancancan', '~> 2.1', '>= 2.1.4'
@@ -85,7 +85,7 @@ gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
 gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
-gem 'devise-i18n', '~> 1.8', '>= 1.8.2'
+gem 'devise-i18n', '~> 1.9', '>= 1.9.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.6'
@@ -106,7 +106,7 @@ gem 'rest-client', '~> 2.0'
 gem 'digest-sha3'
 
 # Trix WYSIWYG editor
-gem 'trix-rails', '~> 0.11', '>= 0.11.1', require: 'trix'
+gem 'trix-rails', '~> 0.11', '>= 0.11.4.1', require: 'trix'
 
 # React support
 gem 'react-rails', '~> 1.11', '>= 1.11.0'
