@@ -120,4 +120,6 @@ group :development do
   gem 'capistrano', '~> 3.8'
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
+
+  gem 'bundler-audit', '>= 0.9.0.1'
 end
