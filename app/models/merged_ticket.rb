@@ -55,14 +55,14 @@
 #
 class MergedTicket < Ticket
 
-  def initialize(separate_tickets, options = {})
-    @original_tickets = separate_tickets
-    @current_user = options[:current_user]
-    return self
-  end
+  attr_writer :original_tickets
+  attr_accessor :current_user
 
   def self.from(separate_tickets, options = {})
-    self.new(separate_tickets, options).merge
+    merged_ticket = new
+    merged_ticket.original_tickets = separate_tickets
+    merged_ticket.current_user = options[:current_user]
+    merged_ticket.merge
   end
 
   def merge
@@ -71,10 +71,6 @@ class MergedTicket < Ticket
     younger_tickets.each { |ticket| ticket.create_merge_notice(oldest_original_ticket, current_user) } if current_user
     younger_tickets.each { |ticket| ticket.status = :merged; ticket.save }
     return oldest_original_ticket
-  end
-
-  def current_user
-    @current_user
   end
 
   def original_tickets
@@ -104,4 +100,3 @@ class MergedTicket < Ticket
   end
 
 end
-
