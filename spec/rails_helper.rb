@@ -10,8 +10,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-require 'webdrivers'
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -111,6 +109,10 @@ Capybara.configure do |config|
   config.match  = :prefer_exact
 end
 
+Webdrivers.install_dir = Rails.root.join('vendor', 'webdrivers')
+Webdrivers.cache_time = 86_400
+
+require 'selenium/webdriver'
 Capybara.register_driver :headless_chrome do |app|
   chrome_options = Selenium::WebDriver::Chrome::Options.new
   chrome_options.add_argument('--headless') unless ENV['SHOW_CHROME']
