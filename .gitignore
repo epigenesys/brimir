@@ -51,3 +51,5 @@ coverage
 
 config/database.yml
 node_modules
+
+vendor/webdrivers

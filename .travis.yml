@@ -1,9 +1,13 @@
-dist: trusty
+dist: bionic
 
 language: ruby
 cache: bundler
 bundler_args: --without development --jobs 4
 sudo: false
+
+services:
+  - mysql
+  - postgresql
 
 addons:
   chrome: stable
