@@ -30,3 +30,4 @@ before_script:
   - mysql -e 'create database brimir_test;'
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:migrate
+  - bundle exec rails runner -e test 'Webdrivers.install_dir = Rails.root.join("vendor", "webdrivers"); Webdrivers::Chromedriver.update'
