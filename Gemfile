@@ -97,9 +97,6 @@ gem 'jbuilder', '~> 2.6'
 # fancybox for showing image in lightbox
 gem 'fancybox2-rails', '~> 0.2', '>= 0.2.7'
 
-# gravatar for user avatar images
-gem 'gravatar_image_tag', "~> 1.2"
-
 # Captcha for brimir
 gem 'recaptcha', "~> 4.0", require: 'recaptcha/rails'
 
