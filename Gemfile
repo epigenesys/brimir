@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.4.4'
+gem 'rails', '5.2.4.5'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'sass-rails', '~> 5.0.7'
 gem 'coffee-rails', '~> 4.2.2'
