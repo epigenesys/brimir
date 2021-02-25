@@ -36,9 +36,9 @@ group :development do
   gem 'annotate'
 end
 
-group :test do
-  gem 'puma'
+gem 'puma'
 
+group :test do
   gem 'timecop'
   gem 'simplecov'
 
