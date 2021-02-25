@@ -108,7 +108,7 @@ module AvatarHelper
     size = gravatar_options[:size]
 
     hash = Digest::MD5.hexdigest(email)
-    url = "https://secure.gravatar.com/avatar/#{hash}.png?s=#{size}"
+    url = "https://secure.gravatar.com/avatar/#{hash}.png?s=#{size}&default=identicon"
     options[:src] = url
     options[:alt] ||= 'Gravatar'
 
