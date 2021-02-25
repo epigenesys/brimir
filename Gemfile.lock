@@ -167,7 +167,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     jquery-visibility-rails (1.0.8)
-    json (2.3.0)
+    json (2.5.1)
     jwt (2.2.2)
     launchy (2.5.0)
       addressable (~> 2.7)
