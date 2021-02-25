@@ -25,4 +25,4 @@ namespace :brimir do
 
 end
 
-Rake::Task['db:migrate'].enhance(['brimir:migrate'])
+# Rake::Task['db:migrate'].enhance(['brimir:migrate'])
