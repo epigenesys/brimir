@@ -1,0 +1,4 @@
+---
+ignore:
+  # Mitigated by 'omniauth-rails_csrf_protection' gem
+  - CVE-2015-9284
