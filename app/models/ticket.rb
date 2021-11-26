@@ -81,7 +81,7 @@ class Ticket < ApplicationRecord
   has_and_belongs_to_many :unread_users, class_name: 'User'
 
   enum status: [:open, :closed, :deleted, :waiting, :merged]
-  enum priority: [:unknown, :low, :medium, :high]
+  enum priority: { idea: -1, unknown: 0, low: 1, medium: 2, high: 3, critical: 4 }
 
   after_update :log_status_change
   after_create :create_status_change, :create_message_id_if_blank

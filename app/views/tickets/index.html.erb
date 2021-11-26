@@ -85,7 +85,7 @@
           <%= user_avatar ticket.user, class: 'avatar left mrl mts mlm', size: 30 %>
           <p class="no-mb text-overflow">
             <% unless ticket.subject.blank? %>
-              <a href="<%= ticket_url(ticket) %>">
+              <a href="<%= ticket_url(ticket) %>" class='ticket-index-title'>
                 <strong><%= ticket.subject %></strong>
               </a>
             <% else %>
