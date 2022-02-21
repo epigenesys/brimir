@@ -326,9 +326,11 @@ en:
           waiting: waiting
         priorities:
           unknown: unknown
+          idea: idea
           low: low
           medium: medium
           high: high
+          critical: critical
         priority: Priority
         assignee_id: Assignee
         created_at: Created at
