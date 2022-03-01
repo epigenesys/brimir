@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '6.0.2.1'
+gem 'rails', '>= 6.0.4.6', '< 6.1'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.4.2', require: false
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
