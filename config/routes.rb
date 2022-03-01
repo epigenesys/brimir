@@ -1,4 +1,4 @@
-Brimir::Application.routes.draw do
+Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
 
@@ -13,6 +13,11 @@ Brimir::Application.routes.draw do
 
   resources :tickets, except: [:destroy, :edit] do
     resource :lock, only: [:destroy, :create], module: :tickets
+    resource :labelings, only: [:new], module: :tickets
+    member do
+      get :edit_assignee
+      get :edit_subject
+    end
   end
 
   post "/:hook/:mail_key/tickets",

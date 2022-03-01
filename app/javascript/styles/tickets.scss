@@ -1,0 +1,112 @@
+@import 'variables';
+
+// Tickets - Index
+.tickets {
+  table {
+    #select-all-checkbox-header {
+      min-width: 2.4rem;
+    }
+    th {
+      vertical-align: middle;
+    }
+  }
+
+  .ticket {
+    font-size: 0.8rem;
+    transition: background 0.3s;
+
+    .priority {
+      color: #fff;
+      &.priority-unknown { display: none; }
+      &.priority-low   { background-color: #ffd700; }
+      &.priority-medium{ background-color: #ff8000; }
+      &.priority-high  { background-color: #da1500; }
+    }
+
+    &.highlight {
+      background: rgba($primary, 0.1);
+    }
+
+    &.locked {
+      background: rgba($danger, 0.1);
+    }
+  }
+}
+
+// Tickets - Show
+.show-ticket {
+  .output {
+    font-size: 1.1rem;
+  }
+
+  .card-header {
+    padding: 0.4rem;
+    border-bottom: 1px solid #d2d2d2;
+    .ticket-subject {
+      font-size: 1.3rem;
+    }
+  
+    .ticket-contact {
+      font-size: 1.1rem;
+    }
+  
+    .ticket-actions {
+      display: block;
+
+      // Ticket Priority
+      #ticketPriority {
+        border: none;
+      }
+      .dropdown-priority-low {
+        background-color: $priority_low_bg;
+        color: $priority_low_text;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($priority_low_bg, 0.5);
+        }
+      }
+      .dropdown-priority-medium {
+        background-color: $priority_medium_bg;
+        color: $priority_medium_text;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($priority_medium_bg, 0.5);
+        }
+      }
+      .dropdown-priority-high {
+        background-color: $priority_high_bg;
+        color: $priority_high_text;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($priority_high_bg, 0.5);
+        }
+      }
+
+      // Ticket Status
+      #ticketStatuses {
+        border: none;
+      }
+      .dropdown-status-open {
+        background-color: $primary;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($primary, 0.5);
+        }
+      }
+      .dropdown-status-closed {
+        background-color: $success;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($success, 0.5);
+        }
+      }
+      .dropdown-status-deleted {
+        background-color: $secondary;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($secondary, 0.5);
+        }
+      }
+      .dropdown-status-waiting {
+        background-color: $info;
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($info, 0.5);
+        }
+      }
+    }
+  }
+}

@@ -1,52 +1,33 @@
-<%= form_for @ticket, url: tickets_url, html: { multipart: true } do |f| %>
+<%= simple_form_for @ticket, url: tickets_url, html: { multipart: true } do |f| %>
   <% type = (!current_user.nil? && current_user.prefer_plain_text?) ? 'text' : 'html' %>
 
-  <%= f.hidden_field :content_type, value: type %>
-
-  <h3><%= t(:new_ticket) %></h3>
-
-  <p>
-    <%= f.text_field :from, tabindex: tabindex %>
-  </p>
+  <%= f.input :content_type, as: :hidden, value: type %>
+  <%= f.input :from, tabindex: tabindex %>
 
   <% if Tenant.current_tenant.ask_for_name %>
-    <p>
-      <%= f.text_field :name, tabindex: tabindex %>
-    </p>
+    <%= f.input :name, tabindex: tabindex %>
   <% end %>
 
   <% if !current_user.nil? && current_user.agent? %>
-    <p>
-      <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>
-      <%= f.label :to_email_address_id, t('activerecord.attributes.ticket.to'), class: 'ptm' %>
-      <%= f.collection_select :to_email_address_id, @email_addresses, :id, :formatted,
-        {include_blank: blank, label: false}, tabindex: tabindex %>
-    </p>
+    <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>
+    <%= f.input :to_email_address_id, collection: @email_addresses, label_method: :formatted, label: t('activerecord.attributes.ticket.to'), input_html: { tabindex: tabindex }, include_blank: false %>
   <% end %>
 
   <% if params[:label] %>
     <input name="label" type="hidden" value="<%= params[:label] %>"
   <% end %>
 
-  <p>
-    <%= f.text_field :subject, tabindex: tabindex %>
-  </p>
+  <%= f.input :subject, tabindex: tabindex %>
 
   <% if can? :update, @ticket %>
-    <p>
-      <%
-        options = [ [t(:unassigned), nil] ]
-        @agents.ordered.map.each {|u| options << [u.email, u.id]}
-      %>
-    <%= f.select :assignee_id, options_for_select(options), {}, tabindex: tabindex %>
-    </p>
+    <%
+      options = [ [t(:unassigned), nil] ]
+      @agents.ordered.map.each {|u| options << [u.email, u.id]}
+    %>
+    <%= f.input :assignee, collection: options, input_html: { tabindex: tabindex, class: 'select2' }, include_blank: false %>
 
-    <p>
-      <%
-        options = Ticket.priorities.keys.map { |k| [t(k, scope: 'activerecord.attributes.ticket.priorities'), k] }
-      %>
-      <%= f.select :priority, options_for_select(options, f.object.priority), {}, tabindex: tabindex %>
-    </p>
+    <% options = Ticket.priorities.keys.map { |k| [t(k, scope: 'activerecord.attributes.ticket.priorities'), k] } %>
+    <%= f.input :priority, collection: options, tabindex: tabindex %>
   <% end %>
 
   <p>
@@ -62,7 +43,7 @@
     %>
 
     <% if type == 'html' %>
-      <%= f.trix_editor :content,
+      <%= f.rich_text_area :content,
         value: (f.object.content.nil? ? content : f.object.content), tabindex: tabindex %>
     <% else %>
       <%= f.text_area :content,
@@ -73,13 +54,8 @@
   <%= render 'attachments/form', f: f %>
 
   <% if Ticket.recaptcha_keys_present? && !user_signed_in? %>
-    <p>
-      <%= recaptcha_tags hl: I18n.locale %>
-    </p>
+    <%= recaptcha_tags hl: I18n.locale %>
   <% end %>
 
-  <p>
-    <%= f.submit t(:create_ticket), class: 'button regular radius' %>
-  </p>
-
+  <%= f.submit t(:create_ticket), class: 'btn btn-primary' %>
 <% end %>

@@ -1,27 +1,20 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2', '>= 5.2.4.6'
+gem 'rails', '>= 6.0.4.6', '< 6.1'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'sass-rails', '~> 5.0.7'
-gem 'coffee-rails', '~> 4.2.2'
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'webpacker', '~> 4.0'
+
+gem 'coffee-rails', '~> 5.0.0'
 
 gem 'uglifier', "~> 3.0.0"
 
-gem 'compass-rails', '~> 3.0.2'
-gem 'foundation-rails', '~> 5.5.3', '>= 5.5.3.2'
-
-gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
-gem 'jquery-visibility-rails'
-
-# foundation form errors
-gem 'foundation_rails_helper', '~> 2.0', '>= 2.0.0'
-
 # Testing
 group :development, :test do
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails', '4.0.0.beta4'
   gem 'byebug', '~> 10.0'
   gem 'pry', "~> 0.11"
 end
@@ -55,13 +48,16 @@ group :test do
 end
 
 # Optional PostgreSQL for production
-gem 'pg', group: :postgresql
+gem 'pg', "~> 1.1.4", group: :postgresql
 # Optional MySQL for production
 gem 'mysql2', "~> 0.4", group: :mysql
 
 # authentication
 gem 'devise'
 gem 'devise_ldap_authenticatable'
+
+# forms
+gem 'simple_form'
 
 # 2.7.0 appears to have regressions that are fixed in 2.7.1
 gem 'mail'
@@ -74,24 +70,20 @@ gem 'omniauth-rails_csrf_protection', '< 1.0.0'
 gem 'omniauth-google-oauth2'
 
 # authorization
-gem 'cancancan', '~> 2.1', '>= 2.1.4'
+gem 'cancancan', '~> 3.0.1', '>= 3.0.1'
 
 # pagination
 gem 'will_paginate', "~> 3.1"
+gem 'will_paginate-bootstrap4'
 
 # attachments, thumbnails etc
 gem 'paperclip', "~> 6.1"
-
-# select2 replacement for selectboxes
-gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
-
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 
 # for language detection
 gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
-gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
+gem 'rails-i18n', '~> 6.0', '>= 6.0.0'
 gem 'devise-i18n', '~> 1.8', '>= 1.8.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -109,11 +101,8 @@ gem 'rest-client', '~> 2.0'
 # secure digest
 gem 'digest-sha3'
 
-# Trix WYSIWYG editor
-gem 'trix-rails', '~> 0.11', '>= 0.11.4.1', require: 'trix'
-
 # React support
-gem 'react-rails', '~> 1.11', '>= 1.11.0'
+gem 'react-rails', '~> 2.6.0'
 
 # Capistrano for deployment
 group :development do

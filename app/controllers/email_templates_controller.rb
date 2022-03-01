@@ -22,8 +22,6 @@ class EmailTemplatesController < ApplicationController
   end
 
   def edit
-    # safely output the html
-    @email_template.message = @email_template.message.html_safe
   end
 
   def update
@@ -37,7 +35,7 @@ class EmailTemplatesController < ApplicationController
       return redirect_to email_templates_url, notice: I18n.t(:email_template_modified)
     end
 
-    if @email_template.update_attributes(email_template_params)
+    if @email_template.update(email_template_params)
       redirect_to email_templates_url, notice: I18n.t(:email_template_modified)
     else
       render :edit

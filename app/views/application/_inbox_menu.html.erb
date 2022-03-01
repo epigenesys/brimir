@@ -1,55 +1,58 @@
-<li>
+<li class="nav-item">
   <%= active_elem_if :a, params[:status] == 'open' &&
       params[:assignee_id].nil?,
-      href: root_path do %>
+      href: root_path, class: 'nav-link' do %>
     <%= status_icon 'open' %>
     <%= t(:inbox) %>
-    <span class="right heading-six bubble pls prs">
+    <span class="badge badge-light float-right">
       <%= Ticket.viewable_by(current_user).open.count %>
     </span>
   <% end %>
 </li>
 <% if current_user.agent? %>
-  <li>
+  <li class="nav-item pl-4">
     <%= active_elem_if :a, params[:status] == 'open' &&
         params[:assignee_id].to_i == current_user.id,
-        href: tickets_path(assignee_id: current_user.id), class: 'plxxl' do %>
+        href: tickets_path(assignee_id: current_user.id), class: 'nav-link' do %>
       <%= status_icon 'open', assigned_to_me: true %>
       <%= t(:my_tickets) %>
-      <span class="right heading-six bubble pls prs">
+      <span class="badge badge-light float-right">
         <%= Ticket.viewable_by(current_user).open.filter_by_assignee_id( current_user.id).count %>
       </span>
     <% end %>
   </li>
-  <li class='unassigned-tickets-item'>
+  <li class='unassigned-tickets-item pl-4'>
     <%= active_elem_if :a, params[:assignee_id] == "0",
-        href: tickets_path(assignee_id: 0), class: 'plxxl' do %>
-      <%= fa_icon 'user-times', assigned_to_me: true %>
+        href: tickets_path(assignee_id: 0), class: 'nav-link' do %>
+      <i class="fas fa-fw fa-user-times"></i>
       <%= t(:unassigned) %>
-      <span class="right heading-six bubble pls prs">
+      <span class="badge badge-light float-right">
         <%= Ticket.viewable_by(current_user).open.filter_by_assignee_id(0).count %>
       </span>
     <% end %>
   </li>
 <% end %>
-<li>
+<li class="nav-item">
   <%= active_elem_if :a, params[:status] == 'waiting',
-      href: tickets_path(status: 'waiting') do %>
-    <%= status_icon 'waiting' %><%= t(:waiting_tickets) %>
-    <span class="right heading-six bubble pls prs">
+      href: tickets_path(status: 'waiting'), class: 'nav-link' do %>
+    <%= status_icon 'waiting' %>
+    <%= t(:waiting_tickets) %>
+    <span class="badge badge-light float-right">
       <%= Ticket.viewable_by(current_user).waiting.count %>
     </span>
   <% end %>
 </li>
-<li>
+<li class="nav-item">
   <%= active_elem_if :a, params[:status] == 'closed',
-       href: tickets_path(status: 'closed') do %>
-    <%= status_icon 'closed' %><%= t(:closed_tickets) %>
+      href: tickets_path(status: 'closed'), class: 'nav-link' do %>
+    <%= status_icon 'closed' %>
+    <%= t(:closed_tickets) %>
   <% end %>
 </li>
-<li>
+<li class="nav-item">
   <%= active_elem_if :a, params[:status] == 'deleted',
-      href: tickets_path(status: 'deleted') do %>
-    <%= status_icon 'deleted' %><%= t(:trashed_tickets) %>
+      href: tickets_path(status: 'deleted'), class: 'nav-link' do %>
+    <%= status_icon 'deleted' %>
+    <%= t(:trashed_tickets) %>
   <% end %>
 </li>

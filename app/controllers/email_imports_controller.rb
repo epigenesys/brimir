@@ -9,7 +9,7 @@ class EmailImportsController < ApplicationController
 
     params[:files].each do |uploaded_file|
       message = uploaded_file.tempfile.read
-      ticket = TicketMailer.receive(message)
+      ticket = TicketsMailbox.new(message).process
       NotificationMailer.incoming_message(ticket, message)
     end
 

@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@babel/preset-react": "^7.8.0",
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@rails/actiontext": "^6.0.1",
+    "@rails/ujs": "^6.0.2",
+    "@rails/webpacker": "4.2.2",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react_ujs": "^2.6.1",
+    "select2": "^4.0.12",
+    "trix": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.9.0"
+  }
+}

@@ -1,0 +1,40 @@
+// $primary: #277b80;
+// $link-hover-color: #872c64;
+
+// $navbar-toggler-padding-y:          .3125rem;
+// $navbar-toggler-padding-x:          1.25rem;
+// $navbar-light-toggler-border-color:  trasparent;
+
+// $navbar-light-active-color: #009589;
+// $navbar-light-hover-color: $link-hover-color;
+// $navbar-light-color: #000;
+
+// $link-hover-decoration: none;
+// $font-family-sans-serif: 'Open Sans', sans-serif;
+
+// $btn-border-radius: 0;
+// $btn-border-radius-sm: 0;
+// $btn-font-size: 0.875rem;
+// $btn-font-weight: 600;
+
+// $nav-tabs-border-radius: 0;
+// $list-group-border-radius: 0;
+
+// $alert-border-radius: 0;
+
+// $container-max-widths: (
+//   xl: 1440px,
+//   lg: 1440px,
+//   md: 1440px,
+//   sm: 1440px
+// );
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$priority_low_bg:      #fcec03;
+$priority_low_text:    #474400;
+$priority_medium_bg:   #fcad03;
+$priority_medium_text: #593c00;
+$priority_high_bg:     #fc2403;
+$priority_high_text:   #fff;

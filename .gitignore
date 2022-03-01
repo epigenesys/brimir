@@ -48,8 +48,15 @@ coverage
 
 .vscode
 .rspec-examples
+vendor/webdrivers
+/public/packs-test
 
 config/database.yml
-node_modules
 
-vendor/webdrivers
+/public/packs
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+storage

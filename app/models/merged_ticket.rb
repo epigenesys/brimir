@@ -55,13 +55,13 @@
 #
 class MergedTicket < Ticket
 
-  attr_writer :original_tickets
-  attr_accessor :current_user
+  attr_accessor :original_tickets, :current_user
 
   def self.from(separate_tickets, options = {})
-    merged_ticket = new
+    merged_ticket = MergedTicket.new
     merged_ticket.original_tickets = separate_tickets
     merged_ticket.current_user = options[:current_user]
+
     merged_ticket.merge
   end
 

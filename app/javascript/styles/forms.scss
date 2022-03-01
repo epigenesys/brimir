@@ -1,0 +1,12 @@
+.custom-checkbox.single-checkbox {
+  padding-left: 0rem;
+
+  .custom-control-label {
+    &:before {
+      left: 0px;
+    }
+    &:after {
+      left: 0px;
+    }
+  }
+}

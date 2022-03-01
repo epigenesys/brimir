@@ -47,7 +47,7 @@ describe Reply, :type => :model do
 
   it("should notify label users") do
     ticket = Ticket.new(:from => "test@test.com", :content => "test")
-    (ticket.labels << label)
+    ticket.labels << label
     reply = ticket.replies.new
     reply.set_default_notifications!
     expect(reply.notified_users.include?(dave)).to(eq(true))
