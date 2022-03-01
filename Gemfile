@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2', '>= 5.2.4.6'
+gem 'rails', '>= 6.0.4.6', '< 6.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -48,7 +48,7 @@ group :test do
 
   gem 'shoulda-matchers'
   gem 'capybara', '>= 3.28.0'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '< 2.0'
   gem 'selenium-webdriver'
   gem 'webdrivers', '>= 4.1.2'
   gem 'launchy'
@@ -74,7 +74,7 @@ gem 'omniauth-rails_csrf_protection', '< 1.0.0'
 gem 'omniauth-google-oauth2'
 
 # authorization
-gem 'cancancan', '~> 2.1', '>= 2.1.4'
+gem 'cancancan'
 
 # pagination
 gem 'will_paginate', "~> 3.1"
@@ -91,7 +91,7 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
-gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
+gem 'rails-i18n'
 gem 'devise-i18n', '~> 1.8', '>= 1.8.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -110,7 +110,7 @@ gem 'rest-client', '~> 2.0'
 gem 'digest-sha3'
 
 # Trix WYSIWYG editor
-gem 'trix-rails', '~> 0.11', '>= 0.11.4.1', require: 'trix'
+gem 'trix-rails', require: 'trix'
 
 # React support
 gem 'react-rails', '~> 1.11', '>= 1.11.0'
