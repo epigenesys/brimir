@@ -58,4 +58,6 @@ Rails.application.configure do
 
   # Set default host for URL helpers in mailer previews to work
   config.action_mailer.default_url_options = { host: 'localhost' }
+
+  config.action_controller.action_on_unpermitted_parameters = :raise
 end

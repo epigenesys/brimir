@@ -5,13 +5,12 @@ gem 'rails', '>= 6.0.4.6', '< 6.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'sass-rails', '~> 5.0.7'
-gem 'coffee-rails', '~> 4.2.2'
+gem 'sass-rails'
+gem 'coffee-rails'
 
 gem 'uglifier', "~> 3.0.0"
 
-gem 'compass-rails', '~> 3.0.2'
-gem 'foundation-rails', '~> 5.5.3', '>= 5.5.3.2'
+gem 'foundation-rails', '< 6.0'
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'jquery-visibility-rails'
@@ -48,7 +47,7 @@ group :test do
 
   gem 'shoulda-matchers'
   gem 'capybara', '>= 3.28.0'
-  gem 'database_cleaner', '< 2.0'
+  gem 'database_cleaner', '< 1.99.0'
   gem 'selenium-webdriver'
   gem 'webdrivers', '>= 4.1.2'
   gem 'launchy'

@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       params[:user].delete(:agent) # prevent removing own agent permissions
     end
 
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
 
       if current_user.agent? && current_user.labelings.count == 0
         redirect_to users_url, notice: I18n.translate(:settings_saved)

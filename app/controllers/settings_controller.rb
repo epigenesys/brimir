@@ -25,7 +25,7 @@ class SettingsController < ApplicationController
     @tenant = Tenant.current_tenant
     authorize! :update, @tenant
 
-    if @tenant.update_attributes(tenant_params)
+    if @tenant.update(tenant_params)
       redirect_to tickets_url, notice: I18n.t(:settings_saved)
     else
       render 'edit'
