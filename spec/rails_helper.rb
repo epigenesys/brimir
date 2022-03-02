@@ -113,20 +113,20 @@ Webdrivers.install_dir = Rails.root.join('vendor', 'webdrivers')
 Webdrivers.cache_time = 86_400
 
 require 'selenium/webdriver'
-Capybara.register_driver :headless_chrome do |app|
-  chrome_options = Selenium::WebDriver::Chrome::Options.new
-  chrome_options.add_argument('--headless') unless ENV['SHOW_CHROME']
-  chrome_options.add_argument('--no-sandbox')
-  chrome_options.add_argument('--disable-gpu')
-  chrome_options.add_argument('--disable-dev-shm-usage')
-  chrome_options.add_argument('--disable-infobars')
-  chrome_options.add_argument('--disable-extensions')
-  chrome_options.add_argument('--disable-popup-blocking')
-  chrome_options.add_argument('--window-size=1920,1080')
-
-  Capybara::Selenium::Driver.new app, browser: :chrome, options: chrome_options
+Capybara.register_driver :chrome do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
+    opts.args << '--headless' unless ENV['SHOW_CHROME']
+    opts.args << '--no-sandbox'
+    opts.args << '--disable-gpu'
+    opts.args << '--disable-dev-shm-usage'
+    opts.args << '--disable-infobars'
+    opts.args << '--disable-extensions'
+    opts.args << '--disable-popup-blocking'
+    opts.args << '--window-size=1920,4320'
+  end
+  Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: [options])
 end
-Capybara.javascript_driver = :headless_chrome
+Capybara.javascript_driver = :chrome
 
 Capybara.asset_host = 'http://localhost:3000'
 
