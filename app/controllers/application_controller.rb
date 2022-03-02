@@ -41,7 +41,13 @@ class ApplicationController < ActionController::Base
   end
 
   def permitted_params
-    params.permit(:q, :status, :label_id)
+    # Delete params we don't want allowed
+    params.delete(:utf8)
+    params.delete(:button)
+    params.delete(:assignee_id)
+
+    # Permit params (primarily for CSV export)
+    params.permit(:q, :status, :label_id, :order)
   end
 
   helper_method :permitted_params
