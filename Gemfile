@@ -7,6 +7,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'sass-rails'
 gem 'coffee-rails'
+gem 'sprockets', '< 4.0'
 
 gem 'uglifier', "~> 3.0.0"
 
