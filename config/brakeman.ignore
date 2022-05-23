@@ -1,0 +1,106 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 23,
+      "fingerprint": "4cdde749cecdba53c9ea94ebdf2bfb04f976426959ef53819d6aa2a267bdc9ac",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/controllers/tickets_controller.rb",
+      "line": 196,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": "send(\"raw_#{params[:hook].underscore}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "TicketsController",
+        "method": "create"
+      },
+      "user_input": "params[:hook].underscore",
+      "confidence": "High",
+      "note": "Hooks are restricted by routing"
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "5a3bb1b1c2c0cad9fc8ef29455083ff512795f614d4e9706df7af4a80344c676",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/tickets/split_off_controller.rb",
+      "line": 26,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Reply.find(params[:reply_id]).to_ticket)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Tickets::SplitOffController",
+        "method": "create"
+      },
+      "user_input": "Reply.find(params[:reply_id]).to_ticket",
+      "confidence": "High",
+      "note": "Redirects user to ticket as expected"
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "da6e262635709ffe3e3c82de5e95dcb62c3cf24cd3fa26a649fab87a87a44cd9",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/attachments_controller.rb",
+      "line": 33,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(Attachment.find(params[:id]).file.path(:thumb), :type => \"image/jpeg\", :disposition => :inline)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AttachmentsController",
+        "method": "show"
+      },
+      "user_input": "Attachment.find(params[:id]).file.path(:thumb)",
+      "confidence": "Medium",
+      "note": "Used to render thumbnails for attachments"
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "e37f2fc581ac406fd5dba090c4e6693e5511f9e0086d4d9ff24d0e9d921102f2",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/attachments_controller.rb",
+      "line": 37,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(Attachment.find(params[:id]).file.path, :filename => Attachment.find(params[:id]).file_file_name, :type => Attachment.find(params[:id]).file_content_type, :disposition => :attachment)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AttachmentsController",
+        "method": "show"
+      },
+      "user_input": "Attachment.find(params[:id]).file.path",
+      "confidence": "Medium",
+      "note": "Used to render attachments"
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "ee782bcf6286b74c2440234f77e818a3708dbaf8efcf6dabda3b0f4c965245e1",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/tickets/selected_controller.rb",
+      "line": 54,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Ticket.merge(@tickets, :current_user => current_user), :notice => t(:tickets_have_been_merged))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Tickets::SelectedController",
+        "method": "perform_merge"
+      },
+      "user_input": "Ticket.merge(@tickets, :current_user => current_user)",
+      "confidence": "High",
+      "note": "Redirects user to ticket as expected"
+    }
+  ],
+  "updated": "2022-05-23 12:10:20 +0100",
+  "brakeman_version": "5.2.3"
+}

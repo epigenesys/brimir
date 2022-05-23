@@ -121,5 +121,6 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
 
+  gem 'brakeman'
   gem 'bundler-audit', '>= 0.9.0.1'
 end
