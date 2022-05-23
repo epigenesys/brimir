@@ -44,10 +44,10 @@ class ApplicationController < ActionController::Base
     # Delete params we don't want allowed
     params.delete(:utf8)
     params.delete(:button)
-    params.delete(:assignee_id)
+    params.delete(:id)
 
-    # Permit params (primarily for CSV export)
-    params.permit(:q, :status, :label_id, :order)
+    # Permit params (used by the 'labels' in the sidebar and the CSV export)
+    params.permit(:assignee_id, :q, :status, :label_id, :order)
   end
 
   helper_method :permitted_params
