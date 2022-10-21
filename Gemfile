@@ -107,7 +107,7 @@ gem 'recaptcha', "~> 4.0", require: 'recaptcha/rails'
 gem 'rest-client', '~> 2.0'
 
 # secure digest
-gem 'digest-sha3'
+gem 'digest-sha3', '>= 1.1.0'
 
 # Trix WYSIWYG editor
 gem 'trix-rails', require: 'trix'

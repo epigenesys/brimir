@@ -122,7 +122,7 @@ GEM
       devise (>= 3.4.1)
       net-ldap (>= 0.16.0)
     diff-lcs (1.5.0)
-    digest-sha3 (1.0.2)
+    digest-sha3 (1.1.0)
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -396,7 +396,7 @@ DEPENDENCIES
   devise
   devise-i18n (~> 1.8, >= 1.8.2)
   devise_ldap_authenticatable
-  digest-sha3
+  digest-sha3 (>= 1.1.0)
   factory_bot_rails (>= 5.1.1)
   fancybox2-rails (~> 0.2, >= 0.2.7)
   font-awesome-rails (~> 4.7, >= 4.7.0.5)
