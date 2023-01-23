@@ -20,7 +20,7 @@ class TicketsController < ApplicationController
   include TicketsStrongParams
   include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper
 
-  MAIL_KEY = Digest::SHA3.hexdigest(Rails.application.secrets.secret_key_base, 256).freeze
+  MAIL_KEY = Digest::Keccak.hexdigest(Rails.application.secrets.secret_key_base, 256).freeze
   MAIL_HOOKS = %w(post-mail mailgun).freeze
 
   before_action :authenticate_user!, except: [:create, :new]
