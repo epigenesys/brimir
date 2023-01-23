@@ -8,6 +8,8 @@ name: "CI"
 
 on: push
 
+env:
+  BUNDLE_DEPLOYMENT: 0
 
 jobs:
   test:
@@ -31,9 +33,9 @@ jobs:
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Ruby ${{ matrix.ruby-version }} and gems
-        uses: ruby/setup-ruby@v1.99.0
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
@@ -50,9 +52,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Ruby ${{ matrix.ruby-version }} and gems
-        uses: ruby/setup-ruby@v1.99.0
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true

@@ -64,7 +64,11 @@ gem 'devise'
 gem 'devise_ldap_authenticatable'
 
 # This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
-gem 'mail', '< 2.8.0'
+if RUBY_VERSION.split('.').first.to_i < 3
+  gem 'mail', '< 2.8.0'
+else
+  gem 'mail', '>= 2.8.0'
+end
 
 # omniauth
 # TODO: 2.0.0 is not supported in Devise yet
