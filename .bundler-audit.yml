@@ -2,3 +2,9 @@
 ignore:
   # Mitigated by 'omniauth-rails_csrf_protection' gem
   - CVE-2015-9284
+
+  # Waiting on Rails 6.1+ upgrade
+  - GHSA-p84v-45xj-wwqj
+  - GHSA-8xww-x3g3-6jcv
+  - GHSA-579w-22j4-4749
+  - GHSA-j6gc-792m-qgm2

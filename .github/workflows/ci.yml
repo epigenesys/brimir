@@ -12,7 +12,7 @@ jobs:
   test:
     strategy:
       matrix:
-        ruby-version: [2.6, 2.7]
+        ruby-version: [2.7, 3.0, 3.1]
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -45,10 +45,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install Ruby and gems
+      - name: Install Ruby ${{ matrix.ruby-version }} and gems
         uses: ruby/setup-ruby@v1.99.0
         with:
-          ruby-version: 2.7
+          ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
