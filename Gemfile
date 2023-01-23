@@ -63,8 +63,10 @@ gem 'mysql2', "~> 0.4", group: :mysql
 gem 'devise'
 gem 'devise_ldap_authenticatable'
 
-# 2.7.0 appears to have regressions that are fixed in 2.7.1
-gem 'mail'
+# This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
+if RUBY_VERSION.split('.').first.to_i < 3
+  gem 'mail', '< 2.8.0'
+end
 
 # omniauth
 # TODO: 2.0.0 is not supported in Devise yet
