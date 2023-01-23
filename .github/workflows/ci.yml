@@ -8,9 +8,6 @@ name: "CI"
 
 on: push
 
-env:
-  BUNDLE_DEPLOYMENT: 0
-
 jobs:
   test:
     strategy:
@@ -34,6 +31,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Remove Bundler lockfile
+        run: rm Gemfile.lock
       - name: Install Ruby ${{ matrix.ruby-version }} and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -53,6 +52,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Remove Bundler lockfile
+        run: rm Gemfile.lock
       - name: Install Ruby ${{ matrix.ruby-version }} and gems
         uses: ruby/setup-ruby@v1
         with:
