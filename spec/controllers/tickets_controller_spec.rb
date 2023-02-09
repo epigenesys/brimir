@@ -16,6 +16,10 @@ RSpec.describe(TicketsController, :type => :controller) do
     I18n.locale = :en
   end
 
+  it("should have a valid MAIL_KEY") do
+    expect(TicketsController::MAIL_KEY).to eq "2151c7369c7318fc1cc298dcd69e51a3848b0b7024c7799f431566315c898664"
+  end
+
   it("should get new as customer") do
     sign_in(bob)
     get(:new)
