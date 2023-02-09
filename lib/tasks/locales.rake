@@ -8,7 +8,7 @@ namespace :locales do
     Dir.glob("**/#{base_file}").each do |file_1|
       (I18n.available_locales - [I18n.default_locale]).each do |locale_2|
         file_2 = file_1.sub(/#{base_file}$/, "#{locale_2}.yml")
-        unless File.exists? file_1
+        unless File.exist? file_1
           warn "WARNING: `#{file_1}' does not exist"
           next
         end
@@ -16,7 +16,7 @@ namespace :locales do
           warn "WARNING: `#{file_1}' does not contain valid YAML"
           next
         end
-        unless File.exists? file_2
+        unless File.exist? file_2
           warn "WARNING: `#{file_2}' does not exist"
           next
         end
