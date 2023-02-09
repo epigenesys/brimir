@@ -128,3 +128,6 @@ group :development do
   gem 'brakeman'
   gem 'bundler-audit', '>= 0.9.0.1'
 end
+
+# Psych (4.0+ is broken re: aliases)
+gem 'psych', '~> 3.0'
