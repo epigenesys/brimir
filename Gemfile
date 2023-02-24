@@ -72,7 +72,7 @@ end
 
 # omniauth
 # TODO: 2.0.0 is not supported in Devise yet
-gem 'omniauth', '< 2.0.0'
+gem 'omniauth', '< 3.0.0'
 gem 'omniauth-rails_csrf_protection', '< 1.0.0'
 
 gem 'omniauth-google-oauth2'
