@@ -1,5 +1,7 @@
 Brimir::Application.routes.draw do
 
+  resource :health_check, only: :show
+
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
 
   resources :users do
