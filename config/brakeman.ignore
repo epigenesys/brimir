@@ -1,6 +1,22 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 122,
+      "fingerprint": "21ab0fe00fdd5899ffc405cff75aadb91b805ee996a614f7e27b08a287e9062d",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 6.0.6.1 ends on 2023-06-01",
+      "file": "Gemfile.lock",
+      "line": 246,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "Weak",
+      "note": "Upgrade process being handled separately"
+    },
+    {
       "warning_type": "Dangerous Send",
       "warning_code": 23,
       "fingerprint": "4cdde749cecdba53c9ea94ebdf2bfb04f976426959ef53819d6aa2a267bdc9ac",
@@ -101,6 +117,6 @@
       "note": "Redirects user to ticket as expected"
     }
   ],
-  "updated": "2022-05-23 12:10:20 +0100",
+  "updated": "2023-04-05 13:29:10 +0100",
   "brakeman_version": "5.2.3"
 }
