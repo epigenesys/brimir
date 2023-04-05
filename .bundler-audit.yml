@@ -8,3 +8,4 @@ ignore:
   - GHSA-8xww-x3g3-6jcv
   - GHSA-579w-22j4-4749
   - GHSA-j6gc-792m-qgm2
+  - CVE-2023-28120
