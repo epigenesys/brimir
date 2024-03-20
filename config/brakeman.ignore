@@ -1,6 +1,28 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Cross-Site Request Forgery",
+      "warning_code": 86,
+      "fingerprint": "108b511c30dd04b89bb7f85ddf0c0603f46405bcc7d8dec11a864eff909ed1b7",
+      "check_name": "ForgerySetting",
+      "message": "`protect_from_forgery` should be configured with `with: :exception`",
+      "file": "app/controllers/api/v1/application_controller.rb",
+      "line": 20,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
+      "code": "protect_from_forgery(:with => :null_session)",
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "Api::V1::ApplicationController"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        352
+      ],
+      "note": "API should use null session, instead of exception"
+    },
+    {
       "warning_type": "Dangerous Send",
       "warning_code": 23,
       "fingerprint": "4cdde749cecdba53c9ea94ebdf2bfb04f976426959ef53819d6aa2a267bdc9ac",
@@ -45,6 +67,28 @@
         601
       ],
       "note": "Redirects user to ticket as expected"
+    },
+    {
+      "warning_type": "Cross-Site Request Forgery",
+      "warning_code": 7,
+      "fingerprint": "b7a55629ee3eb81dee9f636b4c8011033311dfc2e6d36ab7c6fa6f9abcf8247e",
+      "check_name": "ForgerySetting",
+      "message": "`protect_from_forgery` should be called in `Api::V1::SessionsController`",
+      "file": "app/controllers/api/v1/sessions_controller.rb",
+      "line": 1,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross-site_request_forgery/",
+      "code": null,
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "Api::V1::SessionsController"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        352
+      ],
+      "note": "API should use null session, instead of exception"
     },
     {
       "warning_type": "Unmaintained Dependency",
@@ -135,6 +179,6 @@
       "note": "Redirects user to ticket as expected"
     }
   ],
-  "updated": "2024-03-20 17:39:09 +0000",
-  "brakeman_version": "5.4.1"
+  "updated": "2024-03-20 18:06:56 +0000",
+  "brakeman_version": "6.1.2"
 }
