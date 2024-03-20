@@ -1,22 +1,6 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 122,
-      "fingerprint": "98b26f60d776fd41ee6f088c833725145be9aac2d7c5b33780241c273622db42",
-      "check_name": "EOLRails",
-      "message": "Support for Rails 6.0.6.1 ends on 2023-06-01",
-      "file": "Gemfile.lock",
-      "line": 246,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "note": "Upgrade process being handled separately"
-    },
-    {
       "warning_type": "Dangerous Send",
       "warning_code": 23,
       "fingerprint": "4cdde749cecdba53c9ea94ebdf2bfb04f976426959ef53819d6aa2a267bdc9ac",
@@ -34,6 +18,9 @@
       },
       "user_input": "params[:hook].underscore",
       "confidence": "High",
+      "cwe_id": [
+        77
+      ],
       "note": "Hooks are restricted by routing"
     },
     {
@@ -54,7 +41,29 @@
       },
       "user_input": "Reply.find(params[:reply_id]).to_ticket",
       "confidence": "High",
+      "cwe_id": [
+        601
+      ],
       "note": "Redirects user to ticket as expected"
+    },
+    {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 120,
+      "fingerprint": "d84924377155b41e094acae7404ec2e521629d86f97b0ff628e3d1b263f8101c",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 6.0.6.1 ended on 2023-06-01",
+      "file": "Gemfile.lock",
+      "line": 246,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        1104
+      ],
+      "note": "Upgrade process being handled separately"
     },
     {
       "warning_type": "File Access",
@@ -74,6 +83,9 @@
       },
       "user_input": "Attachment.find(params[:id]).file.path(:thumb)",
       "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
       "note": "Used to render thumbnails for attachments"
     },
     {
@@ -94,6 +106,9 @@
       },
       "user_input": "Attachment.find(params[:id]).file.path",
       "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
       "note": "Used to render attachments"
     },
     {
@@ -114,9 +129,12 @@
       },
       "user_input": "Ticket.merge(@tickets, :current_user => current_user)",
       "confidence": "High",
+      "cwe_id": [
+        601
+      ],
       "note": "Redirects user to ticket as expected"
     }
   ],
-  "updated": "2023-05-19 16:56:14 +0100",
-  "brakeman_version": "5.2.3"
+  "updated": "2024-03-20 17:39:09 +0000",
+  "brakeman_version": "5.4.1"
 }
