@@ -72,6 +72,13 @@ end
 
 gem 'concurrent-ruby', '1.3.4'
 
+ruby_major, ruby_minor, _ = RUBY_VERSION.split('.').map { |part| Integer(part) }
+if ruby_major.to_i >= 3 && ruby_minor.to_i >= 4
+  gem 'base64',     '>= 0.2.0'
+  gem 'bigdecimal', '>= 3.1.8'
+  gem 'mutex_m',    '>= 0.3.0'
+end
+
 # omniauth
 # TODO: 2.0.0 is not supported in Devise yet
 gem 'omniauth', '< 2.0.0'
