@@ -70,21 +70,7 @@ else
   gem 'mail', '>= 2.8.0'
 end
 
-# This is required by Ruby 2.x to fix rexml DoS vulnerability
-# ruby_major, ruby_minor, _ = RUBY_VERSION.split('.').map { |part| Integer(part) }
-# strscan_version = if ruby_major == 2 && ruby_minor == 7
-#   '1.0.3'
-# elsif ruby_major == 3 && ruby_minor < 2
-#   '3.0.1'
-# elsif ruby_major == 3 && ruby_minor == 2
-#   '3.0.5'
-# elsif ruby_major == 3 && ruby_minor == 3
-#   '3.0.7'
-# else
-#   raise "strscan check doesn't support Ruby #{ruby_major}.#{ruby_minor}"
-# end
-
-# gem 'strscan', strscan_version
+gem 'concurrent-ruby', '1.3.4'
 
 # omniauth
 # TODO: 2.0.0 is not supported in Devise yet
