@@ -29,10 +29,12 @@ class TicketMailer < ActionMailer::Base
 
   def receive(email)
 
-    # is this an address verification mail?
-    if VerificationMailer.receive(email)
-      return
+    verifying_address = false
+    ActiveSupport::Deprecation.silence do
+      # is this an address verification mail?
+      verifying_address = VerificationMailer.receive(email)
     end
+    return if verifying_address
 
     content = ''
 

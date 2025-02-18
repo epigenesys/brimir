@@ -124,7 +124,7 @@ Capybara.register_driver :chrome do |app|
     opts.args << '--disable-popup-blocking'
     opts.args << '--window-size=1920,4320'
   end
-  Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: [options])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 Capybara.javascript_driver = :chrome
 
