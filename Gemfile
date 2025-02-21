@@ -76,7 +76,10 @@ if ruby_major < 3
   gem 'mail', '< 2.8.0'
 else
   gem 'mail', '>= 2.8.0'
-  gem 'nokogiri', '>= 1.18.3'
+
+  if ruby_minor >= 1
+    gem 'nokogiri', '>= 1.18.3'
+  end
 
   if ruby_minor >= 4
     gem 'base64',     '>= 0.2.0'
