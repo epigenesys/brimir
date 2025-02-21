@@ -433,7 +433,7 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   spring (~> 2.0)
-  sprockets (< 4.0)
+  sprockets (<= 3.7.2)
   timecop
   trix-rails
   uglifier (~> 3.0.0)

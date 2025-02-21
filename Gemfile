@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby_major, ruby_minor, _ = RUBY_VERSION.split('.').map { |part| Integer(part) }
 
 gem 'rails', '>= 6.0.4.6', '< 6.1'
 
@@ -7,7 +8,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'sass-rails'
 gem 'coffee-rails'
-gem 'sprockets', '< 4.0'
+if ruby_major < 3
+  # Stop sprockets importing base64
+  gem 'sprockets', '<= 3.7.2'
+else
+  gem 'sprockets', '< 4.0'
+end
 
 gem 'uglifier', "~> 3.0.0"
 
@@ -63,20 +69,22 @@ gem 'mysql2', "~> 0.4", group: :mysql
 gem 'devise'
 gem 'devise_ldap_authenticatable'
 
-# This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
-if RUBY_VERSION.split('.').first.to_i < 3
+gem 'concurrent-ruby', '1.3.4'
+
+if ruby_major < 3
+  # This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
   gem 'mail', '< 2.8.0'
 else
   gem 'mail', '>= 2.8.0'
-end
+  gem 'nokogiri', '>= 1.18.3'
 
-gem 'concurrent-ruby', '1.3.4'
-
-ruby_major, ruby_minor, _ = RUBY_VERSION.split('.').map { |part| Integer(part) }
-if ruby_major.to_i >= 3 && ruby_minor.to_i >= 4
-  gem 'base64',     '>= 0.2.0'
-  gem 'bigdecimal', '>= 3.1.8'
-  gem 'mutex_m',    '>= 0.3.0'
+  if ruby_minor >= 4
+    gem 'base64',     '>= 0.2.0'
+    gem 'bigdecimal', '>= 3.1.8'
+    gem 'drb',        '>= 2.2.1'
+    gem 'mutex_m',    '>= 0.3.0'
+    gem 'observer',   '>= 0.1.2'
+  end
 end
 
 # omniauth
