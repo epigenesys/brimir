@@ -53,3 +53,4 @@ config/database.yml
 node_modules
 
 vendor/webdrivers
+mise.toml
