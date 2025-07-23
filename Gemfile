@@ -78,7 +78,7 @@ else
   gem 'mail', '>= 2.8.0'
 
   if ruby_minor >= 1
-    gem 'nokogiri', '>= 1.18.5'
+    gem 'nokogiri', '>= 1.18.9'
   end
 
   if ruby_minor >= 4
