@@ -81,7 +81,11 @@ else
     gem 'nokogiri', '>= 1.18.9'
   end
 
-  if ruby_minor >= 4
+  if ruby_minor == 3
+    gem 'base64',     '0.2.0'
+    gem 'bigdecimal', '3.1.5'
+    gem 'mutex_m',    '0.2.0'
+  elsif ruby_minor >= 4
     gem 'base64',     '>= 0.2.0'
     gem 'bigdecimal', '>= 3.1.8'
     gem 'drb',        '>= 2.2.1'
