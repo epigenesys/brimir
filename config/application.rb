@@ -1,3 +1,6 @@
+# This is required as Bootsnap does not work properly with Ruby 3.3.1
+require_relative '../lib/monkey_patches/rubygems_bundled_gems_warning'
+
 require_relative 'boot'
 
 require 'rails/all'
