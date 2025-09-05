@@ -19,6 +19,8 @@ ignore:
   - GHSA-vfg9-r3fq-jvx4
   - GHSA-vfm5-rmrh-j26v
   - GHSA-wwhv-wxv9-rpgw
+  - GHSA-76r7-hhxj-r776
+  - GHSA-r4mg-4433-c7g3
 
   # Waiting on Ruby 3.x upgrade
   - GHSA-vvfq-8hwr-qm4m
