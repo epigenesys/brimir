@@ -23,8 +23,11 @@ class TicketMailer < ActionMailer::Base
 
   def normalize_body(part, charset)
     # some mail clients apparently send wrong charsets
-    charset = 'utf-8' if charset == 'utf8'
-    encode(part.body.decoded.force_encoding(charset))
+    charset = 'utf-8' if charset == 'utf8' || charset.nil?
+
+    # Force the encoding specified, but also clean up any null bytes found
+    # Based on: https://joshfrankel.me/blog/don-t-let-the-null-bytes-bite/
+    encode(part.body.decoded.force_encoding(charset)).gsub("\u0000", ' ')
   end
 
   def receive(email)
