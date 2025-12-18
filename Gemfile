@@ -69,7 +69,11 @@ gem 'mysql2', "~> 0.4", group: :mysql
 gem 'devise'
 gem 'devise_ldap_authenticatable'
 
+# concurrent-ruby >= 1.3.5 is not compatible with Rails 6.0
 gem 'concurrent-ruby', '1.3.4'
+
+# This is required as connection_pool >= 3.0 is not compatible with Rails 6.0
+gem 'connection_pool', '< 3.0'
 
 if ruby_major < 3
   # This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
