@@ -56,7 +56,6 @@ group :test do
   gem 'capybara', '>= 3.28.0'
   gem 'database_cleaner', '< 1.99.0'
   gem 'selenium-webdriver'
-  gem 'webdrivers', '>= 4.1.2'
   gem 'launchy'
 end
 

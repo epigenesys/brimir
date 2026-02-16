@@ -109,9 +109,6 @@ Capybara.configure do |config|
   config.match  = :prefer_exact
 end
 
-Webdrivers.install_dir = Rails.root.join('vendor', 'webdrivers')
-Webdrivers.cache_time = 86_400
-
 require 'selenium/webdriver'
 Capybara.register_driver :chrome do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
