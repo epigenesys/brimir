@@ -9,7 +9,8 @@
 # https://bugs.ruby-lang.org/issues/20450
 # https://github.com/ruby/ruby/pull/10619#issuecomment-2075896240
 
-if Gem.const_defined?(:BUNDLED_GEMS)
+ruby_major, _, _ = RUBY_VERSION.split('.').map { |part| Integer(part) }
+if Gem.const_defined?(:BUNDLED_GEMS) && ruby_major < 4
   mod = Gem.send(:remove_const, :BUNDLED_GEMS).dup
   Gem::BUNDLED_GEMS = mod
   def mod.warning?(name, specs: nil)
