@@ -13,11 +13,11 @@ jobs:
     strategy:
       matrix:
         # Ensure these stay in sync!
-        ruby-version: ['2.7', '3.0', '3.1', '3.2', '3.3', '3.4']
+        ruby-version: ['3.3', '3.4', '4.0']
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:13-alpine
+        image: postgres:14-alpine
         ports:
           - "5432:5432"
         env:
@@ -47,7 +47,7 @@ jobs:
     strategy:
       matrix:
         # Ensure these stay in sync!
-        ruby-version: ['2.7', '3.0', '3.1', '3.2', '3.3', '3.4']
+        ruby-version: ['3.3', '3.4', '4.0']
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
