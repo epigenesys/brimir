@@ -77,7 +77,7 @@ gem 'connection_pool', '< 3.0'
 if ruby_major < 3
   # This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
   gem 'mail', '< 2.8.0'
-else
+elsif ruby_major == 3
   gem 'mail', '>= 2.8.0'
 
   if ruby_minor >= 1
@@ -97,6 +97,15 @@ else
     gem 'mutex_m',    '>= 0.3.0'
     gem 'observer',   '>= 0.1.2'
   end
+elsif ruby_major == 4
+  gem 'base64',     '>= 0.2.0'
+  gem 'benchmark'
+  gem 'bigdecimal', '>= 3.1.8'
+  gem 'drb',        '>= 2.2.1'
+  gem 'jwt',        '>= 2.10.2'
+  gem 'mutex_m',    '>= 0.3.0'
+  gem 'observer',   '>= 0.1.2'
+  gem 'ostruct'
 end
 
 # omniauth
