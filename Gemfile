@@ -106,6 +106,7 @@ elsif ruby_major == 4
   gem 'mutex_m',    '>= 0.3.0'
   gem 'observer',   '>= 0.1.2'
   gem 'ostruct'
+  gem 'tsort'
 end
 
 # omniauth
