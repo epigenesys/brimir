@@ -4,26 +4,19 @@ ignore:
   - CVE-2015-9284
 
   # Waiting on Rails 6.1+ upgrade
+  - GHSA-h47h-mwp9-c6q6
   - GHSA-p84v-45xj-wwqj
   - GHSA-8xww-x3g3-6jcv
-  - GHSA-579w-22j4-4749
-  - GHSA-j6gc-792m-qgm2
-  - CVE-2023-28120
   - GHSA-4g8v-vg43-wpgf
-  - GHSA-xp5h-f8jf-rc8q
-  - GHSA-8h22-8cf7-hq6g
-  - GHSA-cr5q-6q9f-rq6q
-  - GHSA-r95h-9x8f-r3f7
-  - GHSA-h47h-mwp9-c6q6
   - GHSA-x76w-6vjr-8xgj
   - GHSA-vfg9-r3fq-jvx4
   - GHSA-vfm5-rmrh-j26v
   - GHSA-wwhv-wxv9-rpgw
+  - GHSA-xp5h-f8jf-rc8q
+  - GHSA-579w-22j4-4749
   - GHSA-76r7-hhxj-r776
+  - GHSA-8h22-8cf7-hq6g
   - GHSA-r4mg-4433-c7g3
-
-  # Waiting on Ruby 3.x upgrade
-  - GHSA-vvfq-8hwr-qm4m
-  - GHSA-mrxw-mxhj-p664
-  - GHSA-5w6v-399v-w3cc
-  - GHSA-353f-x4gh-cqq8
+  - GHSA-j6gc-792m-qgm2
+  - GHSA-pj73-v5mw-pm9j
+  - GHSA-cr5q-6q9f-rq6q
