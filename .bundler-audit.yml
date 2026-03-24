@@ -20,3 +20,6 @@ ignore:
   - GHSA-j6gc-792m-qgm2
   - GHSA-pj73-v5mw-pm9j
   - GHSA-cr5q-6q9f-rq6q
+
+  # Mitigated in user model
+  - GHSA-57hq-95w6-v4fc

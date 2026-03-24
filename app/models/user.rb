@@ -181,4 +181,11 @@ class User < ApplicationRecord
   def active_for_authentication?
       super and self.active
   end
+
+  protected
+
+  def postpone_email_change_until_confirmation_and_regenerate_confirmation_token
+    unconfirmed_email_will_change!
+    super
+  end
 end
