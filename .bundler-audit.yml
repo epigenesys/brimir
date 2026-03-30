@@ -3,6 +3,9 @@ ignore:
   # Mitigated by 'omniauth-rails_csrf_protection' gem
   - CVE-2015-9284
 
+  # Mitigated in user model
+  - GHSA-57hq-95w6-v4fc
+
   # Waiting on Rails 6.1+ upgrade
   - GHSA-h47h-mwp9-c6q6
   - GHSA-p84v-45xj-wwqj
@@ -21,5 +24,13 @@ ignore:
   - GHSA-pj73-v5mw-pm9j
   - GHSA-cr5q-6q9f-rq6q
 
-  # Mitigated in user model
-  - GHSA-57hq-95w6-v4fc
+  # Waiting on Rails 7.2+ upgrade
+  - GHSA-v55j-83pf-r9cq
+  - GHSA-qcfx-2mfw-w4cg
+  - GHSA-r46p-8f7g-vvvg
+  - GHSA-9xrj-h377-fr87
+  - GHSA-73f9-jhhh-hr5m
+  - GHSA-p9fm-f462-ggrg
+  - GHSA-cg4j-q9v8-6v38
+  - GHSA-89vf-4333-qx8v
+  - GHSA-2j26-frm8-cmj9
