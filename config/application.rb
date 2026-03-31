@@ -28,7 +28,7 @@ module Brimir
     Rack::Utils.default_query_parser = Rack::QueryParser.make_default(
       Rack::Utils.key_space_limit,
       Rack::Utils.param_depth_limit,
-      bytesize_limit: 1024 * 1024 * 10, # 10 MB
+      bytesize_limit: 1024 * 1024 * 25, # 25 MB
     )
   end
 end
