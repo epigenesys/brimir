@@ -1,8 +1,5 @@
 ---
 ignore:
-  # Mitigated by 'omniauth-rails_csrf_protection' gem
-  - CVE-2015-9284
-
   # Mitigated in user model
   - GHSA-57hq-95w6-v4fc
 
@@ -37,6 +34,3 @@ ignore:
   - GHSA-cg4j-q9v8-6v38
   - GHSA-89vf-4333-qx8v
   - GHSA-2j26-frm8-cmj9
-
-  # Waiting on OmniAuth upgrade
-  - GHSA-c32j-vqhx-rx3x
