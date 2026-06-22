@@ -75,8 +75,7 @@ gem 'concurrent-ruby', '1.3.4'
 gem 'connection_pool', '< 3.0'
 
 if ruby_major < 3
-  # This is required in Ruby 2.x to fix mail 2.8.x requiring new net-* gems
-  gem 'mail', '< 2.8.0'
+  raise "Ruby < 3.0 is no longer supported"
 elsif ruby_major == 3
   gem 'mail', '>= 2.8.0'
 
