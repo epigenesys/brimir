@@ -82,6 +82,7 @@ elsif ruby_major == 3
     gem 'bigdecimal', '3.1.5'
     gem 'drb'
     gem 'mutex_m',    '0.2.0'
+    gem 'observer',   '0.1.2'
   elsif ruby_minor >= 4
     gem 'base64',     '>= 0.2.0'
     gem 'benchmark'
