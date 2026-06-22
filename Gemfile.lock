@@ -230,7 +230,7 @@ GEM
     net-ssh (6.1.0)
     netrc (0.11.0)
     nio4r (2.7.0)
-    nokogiri (1.19.3)
+    nokogiri (1.19.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     oauth2 (1.4.11)
@@ -441,7 +441,7 @@ DEPENDENCIES
   mail (>= 2.8.0)
   mutex_m (= 0.2.0)
   mysql2 (~> 0.4)
-  nokogiri (>= 1.18.9)
+  nokogiri (>= 1.19.4)
   omniauth (< 2.0.0)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection (< 1.0.0)

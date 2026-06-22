@@ -78,10 +78,7 @@ if ruby_major < 3
   raise "Ruby < 3.0 is no longer supported"
 elsif ruby_major == 3
   gem 'mail', '>= 2.8.0'
-
-  if ruby_minor >= 1
-    gem 'nokogiri', '>= 1.18.9'
-  end
+  gem 'nokogiri', '>= 1.19.4'
 
   if ruby_minor == 3
     gem 'base64',     '0.2.0'
