@@ -42,7 +42,7 @@ group :development do
   gem 'annotate'
 end
 
-gem 'puma'
+gem 'puma', '~> 7.0'
 
 group :test do
   gem 'timecop'

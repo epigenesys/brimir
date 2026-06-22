@@ -260,7 +260,7 @@ GEM
       method_source (~> 1.0)
     psych (3.3.4)
     public_suffix (4.0.6)
-    puma (6.6.0)
+    puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.23)
@@ -448,7 +448,7 @@ DEPENDENCIES
   pg
   pry (~> 0.11)
   psych (~> 3.0)
-  puma
+  puma (~> 7.0)
   rails (>= 6.0.4.6, < 6.1)
   rails-controller-testing (>= 1.0.4)
   rails-i18n
