@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 ruby_major, ruby_minor, _ = RUBY_VERSION.split('.').map { |part| Integer(part) }
+if ruby_major < 3
+  raise "Ruby < 3.0 is no longer supported"
+end
 
 gem 'rails', '>= 6.0.4.6', '< 6.1'
 
@@ -66,9 +69,7 @@ gem 'devise_ldap_authenticatable'
 # This is required as connection_pool >= 3.0 is not compatible with Rails 6.0
 gem 'connection_pool', '< 3.0'
 
-if ruby_major < 3
-  raise "Ruby < 3.0 is no longer supported"
-elsif ruby_major == 3
+if ruby_major == 3
   gem 'mail', '>= 2.8.0'
   gem 'nokogiri', '>= 1.19.4'
 
