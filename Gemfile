@@ -8,12 +8,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'sass-rails'
 gem 'coffee-rails'
-if ruby_major < 3
-  # Stop sprockets importing base64
-  gem 'sprockets', '<= 3.7.2'
-else
-  gem 'sprockets', '< 4.0'
-end
+gem 'sprockets', '< 4.0'
 
 gem 'uglifier', "~> 3.0.0"
 
