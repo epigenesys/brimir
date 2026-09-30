@@ -455,6 +455,7 @@ DEPENDENCIES
   jbuilder (~> 2.6)
   jquery-rails (~> 4.3, >= 4.3.5)
   jquery-visibility-rails
+  json (< 3.0)
   keccak
   kt-paperclip (< 7.0)
   launchy

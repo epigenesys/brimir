@@ -158,3 +158,6 @@ end
 
 # Psych (4.0+ is broken re: aliases)
 gem 'psych', '~> 3.0'
+
+# JSON >= 3.0 has a different unsupported interface
+gem 'json', '< 3.0'
